@@ -10,6 +10,11 @@ dependencies:
   cupertino_icons: ^0.1.2
   cloud_firestore: "^0.7.3"
   flutter_staggered_grid_view: "^0.2.1"
+  image: "^2.0.4"
+  image_picker: "^0.4.5"
+  zoomable_image: "^1.2.0"
+  path_provider: "^0.4.1"
+  simple_permissions: "^0.1.5"
 
 
 dev_dependencies:
@@ -29,9 +34,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
+  assets:
+    - assets/picture.png
+    - assets/3.0x/picture.png
+    - assets/2.0x/picture.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.

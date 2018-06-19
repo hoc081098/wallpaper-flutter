@@ -1,18 +1,23 @@
-import 'dart:async';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:wallpaper/category_page.dart';
+import 'package:wallpaper/image_detail.dart';
+import 'package:wallpaper/models.dart';
 
 void main() => runApp(MyApp());
+
+const String channel = "my_flutter_wallpaper";
+const String setWallpaper = "setWallpaper";
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Wallpaper',
-      theme: ThemeData.light(),
+      theme: ThemeData.dark(),
       home: MyHomePage(),
     );
   }
@@ -106,17 +111,6 @@ class AllPage extends StatefulWidget {
   _AllPageState createState() => _AllPageState();
 }
 
-class ImageModel {
-  final String name;
-  final String imageUrl;
-  final String id;
-
-  ImageModel({this.name, this.imageUrl, this.id});
-
-  @override
-  String toString() => 'ImageModel{name: $name, imageUrl: $imageUrl, id: $id}';
-}
-
 class _AllPageState extends State<AllPage> {
   final imagesCollection = Firestore.instance.collection('images');
 
@@ -125,10 +119,9 @@ class _AllPageState extends State<AllPage> {
     return StreamBuilder<List<ImageModel>>(
       stream: imagesCollection.snapshots().map((QuerySnapshot querySnapshot) {
         return querySnapshot.documents.map((documentSnapshot) {
-          return ImageModel(
-            name: documentSnapshot['name'],
-            imageUrl: documentSnapshot['imageUrl'],
+          return ImageModel.fromJson(
             id: documentSnapshot.documentID,
+            json: documentSnapshot.data,
           );
         }).toList();
       }),
@@ -139,7 +132,6 @@ class _AllPageState extends State<AllPage> {
         }
 
         final images = snapshot.data;
-        debugPrint(images.toString());
 
         return StaggeredGridView.countBuilder(
           crossAxisCount: 4,
@@ -169,144 +161,11 @@ class _AllPageState extends State<AllPage> {
         child: Hero(
           tag: image.id,
           child: FadeInImage(
-            placeholder: AssetImage(''),
+            placeholder: AssetImage('assets/picture.png'),
             image: NetworkImage(image.imageUrl),
             fit: BoxFit.cover,
           ),
         ),
-      ),
-    );
-  }
-}
-
-class CategoryPage extends StatefulWidget {
-  @override
-  _CategoryPageState createState() => _CategoryPageState();
-}
-
-class _CategoryPageState extends State<CategoryPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text('Category page'),
-    );
-  }
-}
-
-class ImageDetailPage extends StatefulWidget {
-  final ImageModel imageModel;
-
-  const ImageDetailPage(this.imageModel, {Key key}) : super(key: key);
-
-  @override
-  _ImageDetailPageState createState() => _ImageDetailPageState();
-}
-
-class _ImageDetailPageState extends State<ImageDetailPage> {
-  ImageModel imageModel;
-  final imagesCollection = Firestore.instance.collection('images');
-  StreamSubscription<DocumentSnapshot> subscription;
-
-  @override
-  void initState() {
-    super.initState();
-    imageModel = widget.imageModel;
-    subscription = imagesCollection
-        .document('${imageModel.id}')
-        .snapshots()
-        .listen((DocumentSnapshot documentSnapshot) {
-      setState(() {
-        final newImageModel = new ImageModel(
-          name: documentSnapshot['name'],
-          imageUrl: documentSnapshot['imageUrl'],
-          id: documentSnapshot.documentID,
-        );
-        setState(() => imageModel = newImageModel);
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    subscription.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      body: new Container(
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
-            colors: <Color>[
-              Colors.black.withOpacity(0.8),
-              Colors.black.withOpacity(0.9),
-            ],
-            begin: AlignmentDirectional.topStart,
-            end: AlignmentDirectional.bottomEnd,
-          ),
-        ),
-        padding: const EdgeInsets.only(left: 4.0, right: 4.0, bottom: 4.0),
-        child: new Stack(
-          children: <Widget>[
-            new Center(
-              child: new Stack(
-                children: <Widget>[
-                  new Hero(
-                    tag: imageModel.id,
-                    child: new FadeInImage(
-                      placeholder: new AssetImage(''),
-                      image: new NetworkImage(imageModel.imageUrl),
-                    ),
-                  ),
-                  new Positioned(
-                    child: new Container(
-                      decoration: new BoxDecoration(
-                        gradient: new LinearGradient(
-                          colors: <Color>[
-                            Colors.transparent,
-                            Colors.black.withOpacity(0.8),
-                          ],
-                          begin: AlignmentDirectional.topCenter,
-                          end: AlignmentDirectional.bottomCenter,
-                        ),
-                      ),
-                      child: new Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: new Text(
-                          imageModel.name,
-                          style: new TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                    bottom: 0.0,
-                    left: 0.0,
-                    right: 0.0,
-                  )
-                ],
-              ),
-            ),
-            new Positioned(
-              child: new AppBar(
-                elevation: 0.0,
-                backgroundColor: Colors.transparent,
-                leading: new IconButton(
-                  icon: new Icon(Icons.close, color: Colors.white),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              top: 0.0,
-              left: 0.0,
-              right: 0.0,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: new FloatingActionButton(
-        onPressed: () {},
-        child: new Icon(Icons.arrow_downward),
       ),
     );
   }
