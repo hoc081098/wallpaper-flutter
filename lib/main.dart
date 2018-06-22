@@ -1,9 +1,8 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:wallpaper/category_page.dart';
-import 'package:wallpaper/image_detail.dart';
-import 'package:wallpaper/models.dart';
 
 void main() => runApp(MyApp());
 
@@ -36,10 +35,23 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       drawer: _buildDrawer(context),
       appBar: AppBar(
-        title: Text('App bar title'),
+        title: _buildTitle(_selectedIndex),
       ),
       body: _buildBody(_selectedIndex),
     );
+  }
+
+  Text _buildTitle(int index) {
+    switch (index) {
+      case 0:
+        return Text('Category');
+      case 1:
+        return Text('All images');
+      case 2:
+        return Text('Recents');
+      default:
+        throw StateError("Error occurred");
+    }
   }
 
   Widget _buildBody(int index) {
@@ -48,6 +60,8 @@ class _MyHomePageState extends State<MyHomePage> {
         return CategoryPage();
       case 1:
         return AllPage();
+      case 2:
+        return RecentsPage();
       default:
         throw StateError("Error occurred");
     }
@@ -88,6 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           ListTile(
             title: Text('Category'),
+            trailing: new Icon(Icons.category),
             onTap: () {
               setState(() => _selectedIndex = 0);
               Navigator.pop(context);
@@ -95,8 +110,17 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
           ListTile(
             title: Text('All'),
+            trailing: new Icon(Icons.image),
             onTap: () {
               setState(() => _selectedIndex = 1);
+              Navigator.pop(context);
+            },
+          ),
+          ListTile(
+            title: Text('Recents'),
+            trailing: new Icon(Icons.history),
+            onTap: () {
+              setState(() => _selectedIndex = 2);
               Navigator.pop(context);
             },
           ),
@@ -106,67 +130,35 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class AllPage extends StatefulWidget {
+class AllPage extends StatelessWidget {
   @override
-  _AllPageState createState() => _AllPageState();
+  Widget build(BuildContext context) {
+    return new AllImagesList();
+  }
 }
 
-class _AllPageState extends State<AllPage> {
+class AllImagesList extends ImagesPage {
   final imagesCollection = Firestore.instance.collection('images');
 
   @override
+  Stream<QuerySnapshot> get stream => imagesCollection.snapshots();
+}
+
+class RecentsPage extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<ImageModel>>(
-      stream: imagesCollection.snapshots().map((QuerySnapshot querySnapshot) {
-        return querySnapshot.documents.map((documentSnapshot) {
-          return ImageModel.fromJson(
-            id: documentSnapshot.documentID,
-            json: documentSnapshot.data,
-          );
-        }).toList();
-      }),
-      builder:
-          (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot) {
-        if (!snapshot.hasData) {
-          return Center(child: CircularProgressIndicator());
-        }
-
-        final images = snapshot.data;
-
-        return StaggeredGridView.countBuilder(
-          crossAxisCount: 4,
-          itemCount: images.length,
-          itemBuilder: (context, index) =>
-              _buildImageItem(context, images[index]),
-          staggeredTileBuilder: (index) =>
-              StaggeredTile.count(2, index.isEven ? 2 : 1),
-          mainAxisSpacing: 8.0,
-          crossAxisSpacing: 8.0,
-        );
-      },
-    );
+    return new RecentsList();
   }
+}
 
-  Widget _buildImageItem(BuildContext context, ImageModel image) {
-    return Material(
-      borderRadius: BorderRadius.all(Radius.circular(4.0)),
-      elevation: 3.0,
-      child: InkWell(
-        onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ImageDetailPage(image),
-              ),
-            ),
-        child: Hero(
-          tag: image.id,
-          child: FadeInImage(
-            placeholder: AssetImage('assets/picture.png'),
-            image: NetworkImage(image.imageUrl),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
-    );
+class RecentsList extends ImagesPage {
+  final imagesCollection = Firestore.instance.collection('images');
+
+  @override
+  Stream<QuerySnapshot> get stream {
+    return imagesCollection
+        .orderBy('uploadedTime', descending: true)
+        .limit(10)
+        .snapshots();
   }
 }

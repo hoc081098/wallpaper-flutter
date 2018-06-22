@@ -116,7 +116,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   ClipOval _buildCloseIcon(BuildContext context) {
     return new ClipOval(
       child: new Container(
-        color: Colors.black.withOpacity(0.6),
+        color: Colors.black.withOpacity(0.3),
         child: new IconButton(
           icon: new Icon(Icons.close, color: Colors.white),
           onPressed: () {
@@ -168,7 +168,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         new SnackBar(content: new Text(text), duration: duration));
   }
 
-  _downloadImage() async {
+  Future<Null> _downloadImage() async {
     try {
       setState(() => isLoading = true);
 
@@ -188,8 +188,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
               .requestPermission(Permission.WriteExternalStorage);
           if (!requestRes) {
             _showSnackBar('Permission denined. Go to setting to granted!');
-            _done();
-            return;
+            return _done();
           }
         }
 
@@ -197,25 +196,32 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       }
 
       // check file is exists, if exists not download again
-      var filePath = path.join(
-          externalDir.path, 'flutterImages', imageModel.name + '.png');
+      var filePath =
+          path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
       final file = new File(filePath);
       if (await file.exists()) {
-        _showSnackBar('Already download this image!');
+        if (await file.length() > 0) {
+          _showSnackBar('Already download this image!');
+        } else {
+          await file.delete();
+        }
       } else {
         final List<int> bytes = await http.readBytes(imageModel.imageUrl);
+        final queryData = MediaQuery.of(context);
         final res = await compute<Map<String, dynamic>, bool>(
           resizeAndSaveImage,
           <String, dynamic>{
-            'width': MediaQuery.of(context).size.width.toInt(),
+            'width': (queryData.size.shortestSide * queryData.devicePixelRatio)
+                .toInt(),
+            'height': (queryData.size.longestSide * queryData.devicePixelRatio)
+                .toInt(),
             'filePath': filePath,
             'bytes': bytes,
           },
         );
         if (!res) {
           _showSnackBar("Failed to download image");
-          _done();
-          return;
+          return _done();
         }
       }
 
@@ -224,19 +230,17 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       if (agree) {
         final String res = await methodChannel.invokeMethod(
           setWallpaper,
-          ['flutterImages', '${imageModel.name}.png'],
+          ['flutterImages', '${imageModel.id}.png'],
         );
         _showSnackBar(res);
       }
-
-      _done();
     } on PlatformException catch (e) {
-      _showSnackBar("PlatformException ${e.message}");
-      _done();
+      _showSnackBar(e.message);
     } catch (e) {
-      _showSnackBar("Error $e");
-      _done();
+      _showSnackBar("Error: $e");
     }
+
+    return _done();
   }
 
   void _done() {
@@ -270,7 +274,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 bool resizeAndSaveImage(Map<String, dynamic> map) {
   try {
     final image = img.decodeImage(map['bytes']);
-    final copyImage = img.copyResize(image, map['width']);
+    final copyImage = img.copyResize(image, map['width'], map['height']);
     new File(map['filePath'])
       ..createSync()
       ..writeAsBytesSync(img.encodePng(copyImage));

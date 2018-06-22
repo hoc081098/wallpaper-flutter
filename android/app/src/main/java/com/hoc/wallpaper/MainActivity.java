@@ -41,7 +41,7 @@ public class MainActivity extends FlutterActivity {
     private void setWallpaper(Object args, MethodChannel.Result result) {
         try {
             if (!(args instanceof List)) {
-                result.error("error", "Arguments must be list of strings", null);
+                result.error("error", "Arguments must be a list", null);
                 return;
             }
             final List path = (List) args;
@@ -53,13 +53,12 @@ public class MainActivity extends FlutterActivity {
 
             final String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
             final String imageFilePath = absolutePath + File.separator + joinPath(path);
-            Log.d("@@@@", imageFilePath);
             final Bitmap bitmap = BitmapFactory.decodeFile(imageFilePath);
 
             final WallpaperManager wallpaperManager = WallpaperManager.getInstance(this);
             wallpaperManager.setBitmap(bitmap);
 
-            result.success("Set image successfully");
+            result.success("Set wallpaper successfully");
         } catch (Exception e) {
             result.error("error", e.getMessage(), null);
         }
