@@ -19,15 +19,27 @@ class ImageModel {
 
   factory ImageModel.fromJson(
       {@required String id, @required Map<String, dynamic> json}) {
+    final uploadedTime = json['uploadedTime'];
     return ImageModel(
       id: id,
       name: json['name'],
       imageUrl: json['imageUrl'],
       thumbnailUrl: json['thumbnailUrl'],
       categoryId: json['categoryId'],
-      uploadedTime: json['uploadedTime'],
+      uploadedTime: uploadedTime is DateTime
+          ? uploadedTime
+          : DateTime.parse(uploadedTime),
     );
   }
+
+  Map<String, String> toJson() => {
+        'id': id,
+        'name': name,
+        'imageUrl': imageUrl,
+        'thumbnailUrl': thumbnailUrl,
+        'categoryId': categoryId,
+        'uploadedTime': uploadedTime.toIso8601String()
+      };
 
   @override
   String toString() => 'ImageModel{id: $id, name: $name, imageUrl: $imageUrl,'

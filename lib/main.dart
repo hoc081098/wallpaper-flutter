@@ -3,11 +3,16 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpaper/category_page.dart';
+import 'package:wallpaper/database.dart';
+import 'package:wallpaper/image_list.dart';
+import 'package:wallpaper/models.dart';
+import 'package:wallpaper/upload_page.dart';
 
 void main() => runApp(MyApp());
 
 const String channel = "my_flutter_wallpaper";
 const String setWallpaper = "setWallpaper";
+const String scanFile = "scanFile";
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -29,66 +34,76 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
+  static final nav = <Map<String, dynamic>>[
+    {
+      'title': 'Categories',
+      'icon': Icons.category,
+      'builder': (BuildContext context) => new CategoryPage(),
+    },
+    {
+      'title': 'All images',
+      'icon': Icons.image,
+      'builder': (BuildContext context) => new AllPage(),
+    },
+    {
+      'title': 'Newest images',
+      'icon': Icons.update,
+      'builder': (BuildContext context) => new NewestPage(),
+    },
+    {
+      'title': 'Recent images',
+      'icon': Icons.history,
+      'builder': (BuildContext context) => new RecentPage(),
+    },
+  ];
+  Iterable<Widget> listTiles;
+
+  @override
+  void initState() {
+    super.initState();
+    listTiles = nav.asMap().map((index, m) {
+      return MapEntry(
+        index,
+        ListTile(
+          title: Text(m['title']),
+          trailing: Icon(m['icon']),
+          onTap: () {
+            setState(() => _selectedIndex = index);
+            Navigator.pop(context);
+          },
+        ),
+      );
+    }).values;
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: _buildDrawer(context),
       appBar: AppBar(
-        title: _buildTitle(_selectedIndex),
+        title: Text(nav[_selectedIndex]['title']),
       ),
-      body: _buildBody(_selectedIndex),
+      body: nav[_selectedIndex]['builder'](context),
     );
-  }
-
-  Text _buildTitle(int index) {
-    switch (index) {
-      case 0:
-        return Text('Category');
-      case 1:
-        return Text('All images');
-      case 2:
-        return Text('Recents');
-      default:
-        throw StateError("Error occurred");
-    }
-  }
-
-  Widget _buildBody(int index) {
-    switch (index) {
-      case 0:
-        return CategoryPage();
-      case 1:
-        return AllPage();
-      case 2:
-        return RecentsPage();
-      default:
-        throw StateError("Error occurred");
-    }
   }
 
   Drawer _buildDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
-        children: <Widget>[
+        children: [
           DrawerHeader(
             child: Text(
-              'Drawer Header',
+              'Wallpaper HD Flutter',
               style: Theme
                   .of(context)
                   .textTheme
                   .title
-                  .copyWith(color: Colors.white),
+                  .copyWith(color: new Color(0xFF212121)),
             ),
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: <Color>[
-                  Colors.pinkAccent.withOpacity(0.8),
-                  Colors.blueAccent.withOpacity(0.8)
-                ],
-                begin: AlignmentDirectional.topStart,
-                end: AlignmentDirectional.bottomEnd,
+              image: new DecorationImage(
+                image: new AssetImage('assets/picture.png'),
               ),
               boxShadow: <BoxShadow>[
                 BoxShadow(
@@ -100,65 +115,126 @@ class _MyHomePageState extends State<MyHomePage> {
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
             ),
           ),
+          listTiles,
           ListTile(
-            title: Text('Category'),
-            trailing: new Icon(Icons.category),
+            title: Text('Trending image'),
+            trailing: new Icon(Icons.trending_up),
             onTap: () {
-              setState(() => _selectedIndex = 0);
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new TrendingPage()),
+              );
             },
           ),
           ListTile(
-            title: Text('All'),
-            trailing: new Icon(Icons.image),
+            title: Text('Upload image'),
+            trailing: new Icon(Icons.cloud_upload),
             onTap: () {
-              setState(() => _selectedIndex = 1);
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new UploadPage()),
+              );
             },
           ),
-          ListTile(
-            title: Text('Recents'),
-            trailing: new Icon(Icons.history),
-            onTap: () {
-              setState(() => _selectedIndex = 2);
-              Navigator.pop(context);
-            },
-          ),
-        ],
+        ].expand<Widget>((i) => i is Iterable ? i : [i]).toList(),
       ),
     );
   }
 }
 
 class AllPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return new AllImagesList();
-  }
-}
-
-class AllImagesList extends ImagesPage {
   final imagesCollection = Firestore.instance.collection('images');
 
   @override
-  Stream<QuerySnapshot> get stream => imagesCollection.snapshots();
-}
-
-class RecentsPage extends StatelessWidget {
-  @override
   Widget build(BuildContext context) {
-    return new RecentsList();
+    return new ImageList(imagesCollection.snapshots().map(mapper));
   }
 }
 
-class RecentsList extends ImagesPage {
+class NewestPage extends StatelessWidget {
   final imagesCollection = Firestore.instance.collection('images');
 
   @override
-  Stream<QuerySnapshot> get stream {
-    return imagesCollection
-        .orderBy('uploadedTime', descending: true)
-        .limit(10)
-        .snapshots();
+  Widget build(BuildContext context) {
+    return new ImageList(
+      imagesCollection
+          .orderBy('uploadedTime', descending: true)
+          .limit(15)
+          .snapshots()
+          .map(mapper),
+    );
+  }
+}
+
+class RecentPage extends StatelessWidget {
+  final imageDb = new ImageDb.getInstance();
+
+  @override
+  Widget build(BuildContext context) {
+    return new ImageList(imageDb.getImages(20).asStream());
+  }
+}
+
+class TrendingPage extends StatefulWidget {
+  @override
+  _TrendingPageState createState() => new _TrendingPageState();
+}
+
+enum Trending { downloadCount, viewCount }
+
+String trendingToString(Trending trending) {
+  switch (trending) {
+    case Trending.downloadCount:
+      return "Download count";
+    case Trending.viewCount:
+      return "View count";
+  }
+  return "";
+}
+
+class _TrendingPageState extends State<TrendingPage> {
+  Trending _selected = Trending.downloadCount;
+  final imagesCollection = Firestore.instance.collection('images');
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: new AppBar(
+        title: Text('Trending images'),
+        actions: _buildActions(),
+      ),
+      body: new ImageList(stream(_selected)),
+    );
+  }
+
+  List<Widget> _buildActions() {
+    return <Widget>[
+      new DropdownButton<Trending>(
+        items: Trending.values.map((e) {
+          return new DropdownMenuItem(
+            child: new Text(trendingToString(e)),
+            value: e,
+          );
+        }).toList(),
+        value: _selected,
+        onChanged: (newValue) => setState(() => _selected = newValue),
+      ),
+    ];
+  }
+
+  Stream<List<ImageModel>> stream(Trending selected) {
+    switch (selected) {
+      case Trending.downloadCount:
+        return imagesCollection
+            .orderBy('downloadCount', descending: true)
+            .snapshots()
+            .map(mapper);
+      case Trending.viewCount:
+        return imagesCollection
+            .orderBy('viewCount', descending: true)
+            .snapshots()
+            .map(mapper);
+    }
+    return null;
   }
 }

@@ -1,8 +1,12 @@
 package com.hoc.wallpaper;
 
+import android.annotation.TargetApi;
 import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.MediaScannerConnection;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
@@ -17,11 +21,11 @@ import java.util.List;
 public class MainActivity extends FlutterActivity {
     private static final String CHANNEL = "my_flutter_wallpaper";
     private static final String SET_WALLPAPER = "setWallpaper";
+    private static final String SCAN_FILE = "scanFile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         new MethodChannel(getFlutterView(), CHANNEL)
                 .setMethodCallHandler(new MethodChannel.MethodCallHandler() {
@@ -29,6 +33,8 @@ public class MainActivity extends FlutterActivity {
                     public void onMethodCall(MethodCall methodCall, MethodChannel.Result result) {
                         if (SET_WALLPAPER.equals(methodCall.method)) {
                             setWallpaper(methodCall.arguments, result);
+                        } else if (SCAN_FILE.equals(methodCall.method)) {
+                            scanImageFile(methodCall.arguments, result);
                         } else {
                             result.notImplemented();
                         }
@@ -38,6 +44,40 @@ public class MainActivity extends FlutterActivity {
         GeneratedPluginRegistrant.registerWith(this);
     }
 
+    @TargetApi(Build.VERSION_CODES.FROYO)
+    private void scanImageFile(Object args, final MethodChannel.Result result) {
+        try {
+            if (!(args instanceof List)) {
+                result.error("error", "Arguments must be a list", null);
+                return;
+            }
+            final List path = (List) args;
+
+            if (!isExternalStorageReadable()) {
+                result.error("error", "External storage is unavailable", null);
+                return;
+            }
+
+            final String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+            final String imageFilePath = absolutePath + File.separator + joinPath(path);
+
+
+            MediaScannerConnection.scanFile(this, new String[]{imageFilePath},
+                    null,
+                    new MediaScannerConnection.OnScanCompletedListener() {
+                        @Override
+                        public void onScanCompleted(String path, Uri uri) {
+                            Log.d("MY_TAG", "Path: " + path);
+                            Log.d("MY_TAG", "Uri: " + uri);
+                            result.success("Scan completed");
+                        }
+                    });
+        } catch (Exception e) {
+            result.error("error", e.getMessage(), null);
+        }
+    }
+
+    @TargetApi(Build.VERSION_CODES.ECLAIR)
     private void setWallpaper(Object args, MethodChannel.Result result) {
         try {
             if (!(args instanceof List)) {
