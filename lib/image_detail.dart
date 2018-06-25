@@ -36,6 +36,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
     isLoading = false;
     imageModel = widget.imageModel;
     subscription = imagesCollection
@@ -50,6 +51,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   @override
   void dispose() {
     subscription.cancel();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     super.dispose();
   }
 
@@ -78,21 +80,14 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
             _buildCloseIcon(context),
             new SizedBox(width: 8.0),
             _buildImageNameText(),
+            new IconButton(
+              icon: Icon(Icons.share),
+              onPressed: _shareImageToFacebook,
+            ),
           ],
         ),
-        height: kToolbarHeight + MediaQuery
-            .of(context)
-            .padding
-            .top,
-        padding: new EdgeInsets.only(top: MediaQuery
-            .of(context)
-            .padding
-            .top),
-        constraints: new BoxConstraints.expand(
-            height: kToolbarHeight + MediaQuery
-                .of(context)
-                .padding
-                .top),
+        height: kToolbarHeight,
+        constraints: new BoxConstraints.expand(height: kToolbarHeight),
         decoration: new BoxDecoration(
           gradient: new LinearGradient(
               colors: <Color>[
@@ -161,6 +156,11 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     );
   }
 
+  _shareImageToFacebook() {
+    final url = imageModel.imageUrl;
+    methodChannel.invokeMethod(shareImageToFacebook, url);
+  }
+
   _showSnackBar(String text,
       {Duration duration = const Duration(seconds: 1, milliseconds: 500)}) {
     return scaffoldKey.currentState.showSnackBar(
@@ -187,7 +187,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
       // check file is exists, if exists then delete file
       final filePath =
-      path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
+          path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
       final file = new File(filePath);
       if (await file.exists()) {
         await file.delete();
@@ -205,7 +205,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           'width': (queryData.size.shortestSide * queryData.devicePixelRatio)
               .toInt(),
           'height':
-          (queryData.size.longestSide * queryData.devicePixelRatio).toInt(),
+              (queryData.size.longestSide * queryData.devicePixelRatio).toInt(),
           'filePath': filePath,
           'bytes': bytes,
         },
@@ -266,7 +266,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           new Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child:
-            isLoading ? new CircularProgressIndicator() : new Container(),
+                isLoading ? new CircularProgressIndicator() : new Container(),
           ),
           new Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -310,7 +310,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       // get external directory
       final externalDir = await getExternalStorageDirectory();
       final filePath =
-      path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
+          path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
 
       // check image is exists
       if (!(await new File(filePath).exists())) {

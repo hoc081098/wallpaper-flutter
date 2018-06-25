@@ -13,6 +13,7 @@ void main() => runApp(MyApp());
 const String channel = "my_flutter_wallpaper";
 const String setWallpaper = "setWallpaper";
 const String scanFile = "scanFile";
+const String shareImageToFacebook = 'shareImageToFacebook';
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -99,11 +100,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   .of(context)
                   .textTheme
                   .title
-                  .copyWith(color: new Color(0xFF212121)),
+                  .copyWith(color: Colors.white),
             ),
             decoration: BoxDecoration(
               image: new DecorationImage(
-                image: new AssetImage('assets/picture.png'),
+                image: new AssetImage('assets/drawer_header_image.jpg'),
+                fit: BoxFit.cover,
+                colorFilter: new ColorFilter.mode(
+                  Colors.black26,
+                  BlendMode.darken,
+                ),
               ),
               boxShadow: <BoxShadow>[
                 BoxShadow(

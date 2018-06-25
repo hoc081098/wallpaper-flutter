@@ -51,13 +51,24 @@ class _UploadPageState extends State<UploadPage> {
   Widget build(BuildContext context) {
     return new Scaffold(
       key: scaffoldKey,
-      body: new Column(
-        children: <Widget>[
-          _buildImagePreview(),
-          _buildCategoryDropDownButton(),
-          _buildTextFieldName(),
-          _buildButtons(),
-        ],
+      body: new Container(
+        child: new Column(
+          children: <Widget>[
+            _buildImagePreview(),
+            _buildCategoryDropDownButton(),
+            _buildTextFieldName(),
+            _buildButtons(),
+          ],
+        ),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+              colors: <Color>[
+                Colors.blue.withOpacity(0.8),
+                Colors.purple.withOpacity(0.6),
+              ],
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.bottomEnd),
+        ),
       ),
     );
   }
@@ -65,7 +76,8 @@ class _UploadPageState extends State<UploadPage> {
   Widget _buildImagePreview() {
     return new Flexible(
       child: new Padding(
-        padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top + 8),
+        padding: EdgeInsets.only(
+            top: MediaQuery.of(context).padding.top + 8, left: 8.0, right: 8.0),
         child: Material(
           borderRadius: BorderRadius.all(Radius.circular(6.0)),
           elevation: 3.0,
@@ -73,6 +85,8 @@ class _UploadPageState extends State<UploadPage> {
               ? new Image.asset(
                   'assets/picture.png',
                   fit: BoxFit.cover,
+                  colorBlendMode: BlendMode.darken,
+                  color: Colors.black38,
                 )
               : new Image.file(
                   _imageFile,
@@ -111,15 +125,17 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildTextFieldName() {
-    return new TextField(
-      controller: _textController,
-      decoration: new InputDecoration(
-        labelText: 'Image name',
-        border: new OutlineInputBorder(),
-        filled: true,
-        contentPadding: const EdgeInsets.all(16.0),
+    return new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new TextField(
+        controller: _textController,
+        decoration: new InputDecoration(
+          labelText: 'Image name',
+          filled: true,
+          contentPadding: const EdgeInsets.all(8.0),
+        ),
+        maxLines: 1,
       ),
-      maxLines: 1,
     );
   }
 
@@ -129,25 +145,25 @@ class _UploadPageState extends State<UploadPage> {
       children: <Widget>[
         new Flexible(
           child: new FlatButton(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             onPressed: _chooseImage,
             child: Text(
               'Choose image',
               textAlign: TextAlign.center,
             ),
-            color: Colors.black.withOpacity(0.7),
+            color: Colors.black.withOpacity(0.6),
           ),
           fit: FlexFit.tight,
         ),
         new Flexible(
           child: new FlatButton(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(20.0),
             onPressed: _uploadImage,
             child: Text(
               'Upload',
               textAlign: TextAlign.center,
             ),
-            color: Colors.black.withOpacity(0.7),
+            color: Colors.black.withOpacity(0.6),
           ),
           fit: FlexFit.tight,
         ),
@@ -192,16 +208,19 @@ class _UploadPageState extends State<UploadPage> {
         barrierDismissible: false,
         builder: (context) {
           return new Dialog(
-            child: new Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                new CircularProgressIndicator(),
-                new Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: new Text('Uploading...'),
-                ),
-              ],
+            child: new Padding(
+              padding: const EdgeInsets.symmetric(vertical: 32.0),
+              child: new Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  new CircularProgressIndicator(),
+                  new Padding(
+                    padding: const EdgeInsets.only(top: 16.0),
+                    child: new Text('Uploading...'),
+                  ),
+                ],
+              ),
             ),
           );
         });
@@ -285,54 +304,55 @@ class _AddCategoryState extends State<AddCategory> {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
-      decoration: new BoxDecoration(
-        borderRadius: new BorderRadius.only(
-          topLeft: Radius.circular(8.0),
-          topRight: Radius.circular(8.0),
+    return new Column(
+      mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: <Widget>[
+        new Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: new Text('Add new category'),
         ),
-      ),
-      child: new Column(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Text('Add new category'),
-          ),
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _buildTextField(),
-          ),
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _buildImagePreview(),
-          ),
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: _buildProgressOrMsgTextOrButtonChooseImage(),
-          ),
-          new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new FlatButton(
-                  child: new Text('Cancel'),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                new FlatButton(
-                  child: new Text('Add'),
-                  onPressed: _addCategory,
-                ),
-              ],
+        new Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _buildTextField(),
+        ),
+        new Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _buildImagePreview(),
+        ),
+        new Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: _buildProgressOrMsgTextOrButtonChooseImage(),
+        ),
+        new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisSize: MainAxisSize.max,
+          children: <Widget>[
+            new Expanded(
+              child: new FlatButton(
+                child: new Text('Cancel'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                padding: const EdgeInsets.all(16.0),
+                color: Colors.blue.shade400,
+              ),
             ),
-          ),
-        ],
-      ),
+            SizedBox(
+              width: 4.0,
+            ),
+            new Expanded(
+              child: new FlatButton(
+                padding: const EdgeInsets.all(16.0),
+                child: new Text('Add'),
+                onPressed: _addCategory,
+                color: Colors.blue.shade400,
+              ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 
@@ -345,8 +365,7 @@ class _AddCategoryState extends State<AddCategory> {
                 onPressed: _chooseImage,
                 icon: Icon(Icons.image),
                 label: Text('Choose image'),
-                color: Theme.of(context).primaryColorLight,
-              );
+                color: Colors.purple.shade400);
   }
 
   Widget _buildImagePreview() {

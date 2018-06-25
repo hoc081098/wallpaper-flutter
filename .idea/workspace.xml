@@ -1,26 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="info" />
+    <option name="TOOL_WINDOW_CUSTOM_FILTER" value="@@@@" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="debug" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
     <option name="TOOL_WINDOW_REGEXP_FILTER" value="false" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/hs_err_pid11028.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/hs_err_pid6428.log" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/database.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/image_list.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/upload_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/drawer_header_image.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/category_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/category_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/image_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/image_detail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/upload_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/upload_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -35,61 +32,14 @@
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="main.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/main.dart">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="193" selection-start-line="193" selection-end-line="193" />
+            <state relative-caret-position="661">
+              <caret line="59" selection-start-line="59" selection-end-line="59" />
               <folding>
-                <element signature="n#!!block;n#MyApp#0" />
-                <element signature="n#!!block;n#MyHomePage#0" />
-                <element signature="n#!!block;n#AllPage#0" />
-                <element signature="n#!!block;n#NewestPage#0" />
-                <element signature="n#!!block;n#RecentPage#0" />
-                <element signature="n#!!block;n#TrendingPage#0" />
-                <element signature="n#Trending#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="image_detail.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/image_detail.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2822">
-              <caret line="336" column="49" selection-start-line="336" selection-start-column="49" selection-end-line="336" selection-end-column="49" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-                <element signature="n#!!block;n#ImageDetailPage#0" />
-                <element signature="e#2126#3068#0" />
-                <element signature="e#2153#3063#0" />
-                <element signature="e#2181#3005#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="image_list.dart" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/image_list.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
-              <caret line="78" column="6" selection-start-line="59" selection-start-column="10" selection-end-line="78" selection-end-column="6" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="upload_page.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/upload_page.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1466">
-              <caret line="284" selection-start-line="284" selection-end-line="284" />
-              <folding>
-                <element signature="n#!!block;n#UploadPage#0" />
-                <element signature="e#923#938#0" />
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -101,6 +51,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Dart File" />
+        <option value="valueResourceFile" />
       </list>
     </option>
   </component>
@@ -143,25 +94,31 @@
     </replaceStrings>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="Petrus Hoc &lt;hoc081098@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" />
-        <option value="$PROJECT_DIR$/android/build.gradle" />
-        <option value="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/android/app/build.gradle" />
         <option value="$PROJECT_DIR$/lib/database.dart" />
-        <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/ImageList.dart" />
         <option value="$PROJECT_DIR$/lib/models.dart" />
         <option value="$PROJECT_DIR$/lib/image_list.dart" />
         <option value="$PROJECT_DIR$/lib/category_page.dart" />
-        <option value="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" />
-        <option value="$PROJECT_DIR$/lib/main.dart" />
-        <option value="$PROJECT_DIR$/lib/image_detail.dart" />
         <option value="$PROJECT_DIR$/lib/upload_page.dart" />
+        <option value="$PROJECT_DIR$/lib/image_detail.dart" />
+        <option value="$PROJECT_DIR$/android/build.gradle" />
+        <option value="$PROJECT_DIR$/android/app/build.gradle" />
+        <option value="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/pubspec.yaml" />
+        <option value="$PROJECT_DIR$/lib/main.dart" />
+        <option value="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" />
       </list>
     </option>
   </component>
@@ -254,7 +211,37 @@
             <path>
               <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
               <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
+              <item name="android" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="res" type="462c0819:PsiDirectoryNode" />
+              <item name="values" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
               <item name="assets" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
+              <item name="build" type="462c0819:PsiDirectoryNode" />
+              <item name="cloud_firestore" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
@@ -269,9 +256,9 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,12 +271,14 @@
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Admin\Documents\Java\wallpaper\assets" />
+      <recent name="D:\Admin\Documents\Java\wallpaper\android\app" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Admin\Documents\Java\wallpaper\assets" />
       <recent name="D:\Admin\Documents\Java\wallpaper\android\app" />
       <recent name="D:\Admin\Documents\Java\wallpaper\android\app\src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Admin\Documents\Java\wallpaper\android\app" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -381,7 +370,14 @@
       <option name="project" value="LOCAL" />
       <updated>1529427999600</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Many changes...!!">
+      <created>1529773787621</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1529773787621</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -394,7 +390,7 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.28382838" />
       <window_info anchor="right" id="Flutter Outline" order="3" />
-      <window_info anchor="bottom" id="Logcat" order="7" weight="0.36633664" />
+      <window_info anchor="bottom" id="Logcat" order="7" weight="0.33168316" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -403,24 +399,24 @@
       <window_info anchor="right" id="Device File Explorer" order="3" sideWeight="0.5033003" side_tool="true" weight="0.25037822" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.24257426" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.28712872" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.16831683" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.55445546" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.41419142" />
       <window_info id="Captures" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14447807" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1762481" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Flutter Inspector" order="3" sideWeight="0.49669966" visible="true" weight="0.19742814" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.21452145" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -431,7 +427,8 @@
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Write MethodChannel to set wallpaper&#10;Split main.dart into many files&#10;And other updates" />
-    <option name="LAST_COMMIT_MESSAGE" value="Write MethodChannel to set wallpaper&#10;Split main.dart into many files&#10;And other updates" />
+    <MESSAGE value="Many changes...!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Many changes...!!" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -441,106 +438,160 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/text_field.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/widgets/basic.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="271" column="20" selection-start-line="271" selection-start-column="13" selection-end-line="271" selection-end-column="20" />
+        <state relative-caret-position="244">
+          <caret line="3889" column="8" selection-start-line="3889" selection-start-column="8" selection-end-line="3889" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/foundation.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/dropdown.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="7" lean-forward="true" selection-start-line="11" selection-start-column="7" selection-end-line="11" selection-end-column="7" />
+        <state relative-caret-position="353">
+          <caret line="522" column="13" selection-start-line="522" selection-start-column="13" selection-end-line="522" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/cloud_firestore.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/rendering/flex.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+        <state relative-caret-position="244">
+          <caret line="130" column="2" selection-start-line="130" selection-start-column="2" selection-end-line="130" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_storage-0.3.7/lib/src/storage_reference.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/input_decorator.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="68" column="20" selection-start-line="68" selection-start-column="20" selection-end-line="68" selection-end-column="20" />
+        <state relative-caret-position="199">
+          <caret line="2019" column="14" selection-start-line="2019" selection-start-column="14" selection-end-line="2019" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/io/file.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/dialog.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="615" column="13" selection-start-line="615" selection-start-column="13" selection-end-line="615" selection-end-column="13" />
+        <state relative-caret-position="257">
+          <caret line="142" column="10" lean-forward="true" selection-start-line="120" selection-start-column="8" selection-end-line="142" selection-end-column="10" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/image-2.0.4/lib/src/formats/png_encoder.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/widgets/navigator.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-209">
-          <caret line="23" column="2" selection-start-line="23" selection-start-column="2" selection-end-line="23" selection-end-column="2" />
+        <state relative-caret-position="231">
+          <caret line="1674" column="7" selection-start-line="1674" selection-start-column="7" selection-end-line="1674" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/image-2.0.4/lib/src/formats/formats.dart">
+    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/image_picker-0.4.5/lib/image_picker.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="188">
-          <caret line="223" column="19" selection-start-line="223" selection-start-column="19" selection-end-line="223" selection-end-column="19" />
+        <state relative-caret-position="232">
+          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/meta-1.1.5/lib/meta.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/bottom_sheet.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1938" />
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/button.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="218" column="8" selection-start-line="218" selection-start-column="8" selection-end-line="218" selection-end-column="8" />
+        <state relative-caret-position="-63">
+          <caret line="250" lean-forward="true" selection-start-line="250" selection-end-line="250" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/stream.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/scaffold.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="587" column="12" selection-start-line="587" selection-start-column="12" selection-end-line="587" selection-end-column="12" />
+        <state relative-caret-position="521">
+          <caret line="1242" column="37" selection-start-line="1242" selection-start-column="37" selection-end-line="1242" selection-end-column="37" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/icons.dart">
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/flat_button.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="531" column="24" selection-start-line="531" selection-start-column="24" selection-end-line="531" selection-end-column="24" />
+        <state relative-caret-position="307">
+          <caret line="148" column="14" selection-start-line="148" selection-start-column="14" selection-end-line="148" selection-end-column="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/map.dart">
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/zone.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="395" column="16" selection-start-line="395" selection-start-column="16" selection-end-line="395" selection-end-column="16" />
+        <state relative-caret-position="11799">
+          <caret line="623" column="8" selection-start-line="623" selection-start-column="8" selection-end-line="623" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/type.dart">
+    <entry file="file://$PROJECT_DIR$/lib/models.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        <state relative-caret-position="-406">
+          <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/app.dart">
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/timer.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="218" column="24" lean-forward="true" selection-start-line="218" selection-start-column="24" selection-end-line="218" selection-end-column="24" />
+        <state relative-caret-position="-1030">
+          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/future.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="305" column="17" selection-start-line="305" selection-start-column="17" selection-end-line="305" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/packages/flutter/lib/src/services/system_chrome.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="269" column="27" lean-forward="true" selection-start-line="269" selection-start-column="27" selection-end-line="269" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/share-0.5.2/lib/share.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="29" column="22" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="37" column="57" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="50" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="969">
+          <caret line="51" column="68" selection-start-line="51" selection-start-column="68" selection-end-line="51" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="22" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/upload_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="324" column="10" selection-start-line="324" selection-start-column="10" selection-end-line="324" selection-end-column="10" />
+          <folding>
+            <element signature="n#!!block;n#UploadPage#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://C:/flutter/packages/flutter/lib/src/widgets/framework.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
-          <caret line="3583" column="50" selection-start-line="3583" selection-start-column="29" selection-end-line="3583" selection-end-column="50" />
+          <caret line="3589" column="15" selection-start-line="3589" selection-start-column="15" selection-end-line="3589" selection-end-column="15" />
           <folding>
             <element signature="e#997#1020#0" />
             <element signature="e#1345#1382#0" />
@@ -950,628 +1001,176 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/app_bar.dart">
+    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.2.1/lib/src/rendering/sliver_staggered_grid.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1420">
-          <caret line="208" column="21" selection-start-line="208" selection-start-column="21" selection-end-line="208" selection-end-column="21" />
+        <state relative-caret-position="57">
+          <caret line="11" column="19" lean-forward="true" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/iterable.dart">
+    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.2.1/lib/src/widgets/staggered_grid_view.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="198" column="14" selection-start-line="198" selection-start-column="14" selection-end-line="198" selection-end-column="14" />
+        <state relative-caret-position="133">
+          <caret line="325" column="32" selection-start-line="325" selection-start-column="32" selection-end-line="325" selection-end-column="32" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/bin/cache/dart-sdk/lib/async/stream_controller.dart">
+    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.2.1/lib/src/widgets/staggered_tile.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="38" column="5" lean-forward="true" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
+        <state relative-caret-position="399">
+          <caret line="24" column="33" lean-forward="true" selection-start-line="24" selection-start-column="33" selection-end-line="24" selection-end-column="33" />
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/flutter/bin/cache/dart-sdk/lib/async/stream.dart">
+    <entry file="file://$PROJECT_DIR$/lib/image_list.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-570" />
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/sink.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="14" column="15" lean-forward="true" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/provider/MediaStore.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="883" column="37" selection-start-line="883" selection-start-column="34" selection-end-line="883" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/content/ServiceConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-23">
-          <caret line="27" column="17" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-228" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/media/MediaScannerConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="26">
-          <caret line="77" column="21" selection-start-line="77" selection-start-column="21" selection-end-line="77" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/category_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="105" column="25" selection-start-line="105" selection-start-column="25" selection-end-line="105" selection-end-column="25" />
-          <folding>
-            <element signature="n#!!block;n#CategoryPage#0" />
-            <element signature="e#454#580#0" />
-            <element signature="e#633#1003#0" />
-            <element signature="e#878#971#0" />
-            <element signature="e#3615#3723#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/database.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="338">
-          <caret line="92" column="16" selection-start-line="92" selection-start-column="16" selection-end-line="92" selection-end-column="16" />
+        <state relative-caret-position="465">
+          <caret line="58" column="66" selection-start-line="58" selection-start-column="66" selection-end-line="58" selection-end-column="66" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java">
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/java/lang/Throwable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="110">
-          <caret line="47" column="43" selection-start-line="47" selection-start-column="43" selection-end-line="47" selection-end-column="43" />
+        <state relative-caret-position="129">
+          <caret line="469" column="18" selection-start-line="469" selection-start-column="18" selection-end-line="469" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/content/pm/Signature.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-305">
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/annotation/TargetApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="130">
+          <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="35">
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/image_detail.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="60" column="23" selection-start-line="60" selection-start-column="23" selection-end-line="60" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="n#!!block;n#ImageDetailPage#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/ui/painting.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="2077" column="6" selection-start-line="2077" selection-start-column="6" selection-end-line="2077" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/packages/flutter/lib/src/painting/decoration_image.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Desktop/ava.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/assets/drawer_header_image.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Runner/AppDelegate.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Runner/AppDelegate.m">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-94" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Runner/Info.plist">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ios/Runner/main.m">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/broadcast_stream_controller.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="411" column="2" selection-start-line="411" selection-start-column="2" selection-end-line="411" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/src/firestore.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/sink.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="28">
+          <caret line="14" column="18" lean-forward="true" selection-start-line="14" selection-start-column="18" selection-end-line="14" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/stream.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="1795" column="15" selection-start-line="1795" selection-start-column="15" selection-end-line="1795" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/stream_controller.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="34" column="50" lean-forward="true" selection-start-line="34" selection-start-column="50" selection-end-line="34" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/src/query.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1043">
-          <caret line="106" column="23" lean-forward="true" selection-start-line="106" selection-start-column="23" selection-end-line="106" selection-end-column="23" />
+        <state relative-caret-position="124">
+          <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pubspec.yaml">
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/list.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="9" column="25" lean-forward="true" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/uri.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2061">
-          <caret line="37" column="19" lean-forward="true" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
-          <folding>
-            <element signature="e#779#1104#0" />
-            <element signature="e#1128#1422#0" />
-            <element signature="e#1458#4877#0" />
-            <element signature="e#5075#5102#0" />
-            <element signature="e#5157#6180#0" />
-            <element signature="e#6301#6478#0" />
-            <element signature="e#6601#9388#0" />
-            <element signature="e#9453#9742#0" />
-            <element signature="e#9817#11252#0" />
-            <element signature="e#11412#11602#0" />
-            <element signature="e#11455#11576#0" />
-            <element signature="e#11606#12327#0" />
-            <element signature="e#12486#12661#0" />
-            <element signature="e#12528#12635#0" />
-            <element signature="e#12665#12888#0" />
-            <element signature="e#12913#13119#0" />
-            <element signature="e#13147#13309#0" />
-            <element signature="e#13336#13733#0" />
-            <element signature="e#13756#13977#0" />
-            <element signature="e#13997#14211#0" />
-            <element signature="e#14234#14445#0" />
-            <element signature="e#14469#14612#0" />
-            <element signature="e#14639#15001#0" />
-            <element signature="e#15038#15755#0" />
-            <element signature="e#15802#16449#0" />
-            <element signature="e#16505#16657#0" />
-            <element signature="e#16684#16748#0" />
-            <element signature="e#16795#16863#0" />
-            <element signature="e#16892#17162#0" />
-            <element signature="e#17186#17242#0" />
-            <element signature="e#17267#17326#0" />
-            <element signature="e#17354#17411#0" />
-            <element signature="e#17440#17520#0" />
-            <element signature="e#17552#17855#0" />
-            <element signature="e#17880#17929#0" />
-            <element signature="e#18384#21012#0" />
-            <element signature="e#21015#21087#0" />
-            <element signature="e#21189#21427#0" />
-            <element signature="e#21451#21509#0" />
-            <element signature="e#21793#23322#0" />
-            <element signature="e#23520#23547#0" />
-            <element signature="e#23595#23752#0" />
-            <element signature="e#23780#24039#0" />
-            <element signature="e#24076#24651#0" />
-            <element signature="e#24688#25275#0" />
-            <element signature="e#25302#25579#0" />
-            <element signature="e#25637#36968#0" />
-            <element signature="e#25643#25705#0" />
-            <element signature="e#28366#28436#0" />
-            <element signature="e#28562#28567#0" />
-            <element signature="e#28567#28570#0" />
-            <element signature="e#28577#28617#0" />
-            <element signature="e#29107#29173#0" />
-            <element signature="e#29659#29734#0" />
-            <element signature="e#30399#30466#0" />
-            <element signature="e#30731#30794#0" />
-            <element signature="e#31347#31411#0" />
-            <element signature="e#31575#31625#0" />
-            <element signature="e#31865#31911#0" />
-            <element signature="e#32238#32309#0" />
-            <element signature="e#32567#32618#0" />
-            <element signature="e#32988#33026#0" />
-            <element signature="e#36727#36821#0" />
-            <element signature="e#36859#36963#0" />
-            <element signature="e#36972#37228#0" />
-            <element signature="e#37289#37449#0" />
-            <element signature="e#37453#38247#0" />
-            <element signature="e#38298#38382#0" />
-            <element signature="e#38386#39719#0" />
-            <element signature="e#39808#39891#0" />
-            <element signature="e#39895#40426#0" />
-            <element signature="e#40484#40585#0" />
-            <element signature="e#40589#40855#0" />
-            <element signature="e#40951#41055#0" />
-            <element signature="e#41059#41418#0" />
-            <element signature="e#41458#41532#0" />
-            <element signature="e#41536#41854#0" />
-            <element signature="e#41894#41960#0" />
-            <element signature="e#41964#42533#0" />
-            <element signature="e#42627#43145#0" />
-            <element signature="e#43149#43395#0" />
-            <element signature="e#43639#44751#0" />
-            <element signature="e#43682#43768#0" />
-            <element signature="e#43715#43761#0" />
-            <element signature="e#43800#43803#0" />
-            <element signature="e#44755#45317#0" />
-            <element signature="e#45393#48725#0" />
-            <element signature="e#45439#45514#0" />
-            <element signature="e#45896#45982#0" />
-            <element signature="e#45929#45975#0" />
-            <element signature="e#46047#46382#0" />
-            <element signature="e#48274#48278#0" />
-            <element signature="e#48755#109511#0" />
-            <element signature="e#48759#48813#0" />
-            <element signature="e#48877#49088#0" />
-            <element signature="e#49118#49354#0" />
-            <element signature="e#49380#49558#0" />
-            <element signature="e#49575#49637#0" />
-            <element signature="e#49827#49892#0" />
-            <element signature="e#49926#50001#0" />
-            <element signature="e#50021#50103#0" />
-            <element signature="e#50129#50197#0" />
-            <element signature="e#50291#50366#0" />
-            <element signature="e#50849#50889#0" />
-            <element signature="e#51329#52603#0" />
-            <element signature="e#52061#52097#0" />
-            <element signature="e#52536#52598#0" />
-            <element signature="e#52838#52865#0" />
-            <element signature="e#52909#54094#0" />
-            <element signature="e#54027#54089#0" />
-            <element signature="e#54237#54318#0" />
-            <element signature="e#54463#54545#0" />
-            <element signature="e#54570#54693#0" />
-            <element signature="e#54750#54897#0" />
-            <element signature="e#54914#54989#0" />
-            <element signature="e#55082#55177#0" />
-            <element signature="e#55290#55488#0" />
-            <element signature="e#55492#55561#0" />
-            <element signature="e#56139#56616#0" />
-            <element signature="e#56467#56472#0" />
-            <element signature="e#56507#56512#0" />
-            <element signature="e#56706#56763#0" />
-            <element signature="e#56737#56758#0" />
-            <element signature="e#56889#58819#0" />
-            <element signature="e#57747#57812#0" />
-            <element signature="e#58070#58133#0" />
-            <element signature="e#58631#58814#0" />
-            <element signature="e#58906#59071#0" />
-            <element signature="e#59168#59315#0" />
-            <element signature="e#59507#59795#0" />
-            <element signature="e#59639#59674#0" />
-            <element signature="e#59729#59764#0" />
-            <element signature="e#59922#60252#0" />
-            <element signature="e#60016#60033#0" />
-            <element signature="e#60100#60129#0" />
-            <element signature="e#60184#60223#0" />
-            <element signature="e#60322#60736#0" />
-            <element signature="e#60534#60606#0" />
-            <element signature="e#60595#60605#0" />
-            <element signature="e#60653#60725#0" />
-            <element signature="e#60714#60724#0" />
-            <element signature="e#60795#61212#0" />
-            <element signature="e#61079#61119#0" />
-            <element signature="e#61177#61201#0" />
-            <element signature="e#61278#63839#0" />
-            <element signature="e#61608#61675#0" />
-            <element signature="e#61998#62063#0" />
-            <element signature="e#62361#62405#0" />
-            <element signature="e#63026#63099#0" />
-            <element signature="e#63412#63456#0" />
-            <element signature="e#63800#63828#0" />
-            <element signature="e#64038#64065#0" />
-            <element signature="e#64109#65906#0" />
-            <element signature="e#64115#64170#0" />
-            <element signature="e#65839#65901#0" />
-            <element signature="e#65931#66069#0" />
-            <element signature="e#66002#66064#0" />
-            <element signature="e#66103#66543#0" />
-            <element signature="e#66408#66416#0" />
-            <element signature="e#66429#66491#0" />
-            <element signature="e#66587#66768#0" />
-            <element signature="e#66683#66699#0" />
-            <element signature="e#66699#66728#0" />
-            <element signature="e#66821#67232#0" />
-            <element signature="e#67029#67037#0" />
-            <element signature="e#67050#67076#0" />
-            <element signature="e#67132#67154#0" />
-            <element signature="e#67167#67188#0" />
-            <element signature="e#67256#67414#0" />
-            <element signature="e#67464#67599#0" />
-            <element signature="e#67603#68062#0" />
-            <element signature="e#68139#69041#0" />
-            <element signature="e#69082#69167#0" />
-            <element signature="e#69171#69439#0" />
-            <element signature="e#69507#72048#0" />
-            <element signature="e#72052#72199#0" />
-            <element signature="e#72263#72977#0" />
-            <element signature="e#72981#73029#0" />
-            <element signature="e#73147#73343#0" />
-            <element signature="e#73412#73526#0" />
-            <element signature="e#73658#74439#0" />
-            <element signature="e#73901#73941#0" />
-            <element signature="e#74443#74507#0" />
-            <element signature="e#74806#75000#0" />
-            <element signature="e#75089#75116#0" />
-            <element signature="e#75136#76082#0" />
-            <element signature="e#75231#75275#0" />
-            <element signature="e#75522#75771#0" />
-            <element signature="e#76151#76268#0" />
-            <element signature="e#76272#76866#0" />
-            <element signature="e#76942#77978#0" />
-            <element signature="e#77645#77652#0" />
-            <element signature="e#77841#77912#0" />
-            <element signature="e#78018#79198#0" />
-            <element signature="e#78211#78214#0" />
-            <element signature="e#78739#78757#0" />
-            <element signature="e#79182#79193#0" />
-            <element signature="e#79202#79441#0" />
-            <element signature="e#79546#79651#0" />
-            <element signature="e#79655#80056#0" />
-            <element signature="e#80189#82108#0" />
-            <element signature="e#82151#82232#0" />
-            <element signature="e#82276#82384#0" />
-            <element signature="e#82388#82439#0" />
-            <element signature="e#82550#83618#0" />
-            <element signature="e#83183#83244#0" />
-            <element signature="e#83622#83688#0" />
-            <element signature="e#83909#84017#0" />
-            <element signature="e#84021#84067#0" />
-            <element signature="e#84326#84981#0" />
-            <element signature="e#84985#85048#0" />
-            <element signature="e#85633#86603#0" />
-            <element signature="e#86712#87142#0" />
-            <element signature="e#87176#87226#0" />
-            <element signature="e#87260#90356#0" />
-            <element signature="e#89035#89084#0" />
-            <element signature="e#89665#89690#0" />
-            <element signature="e#90254#90351#0" />
-            <element signature="e#90684#91177#0" />
-            <element signature="e#90736#90781#0" />
-            <element signature="e#90864#90934#0" />
-            <element signature="e#91008#91078#0" />
-            <element signature="e#91215#91756#0" />
-            <element signature="e#91293#91353#0" />
-            <element signature="e#91416#91491#0" />
-            <element signature="e#91557#91635#0" />
-            <element signature="e#91781#92278#0" />
-            <element signature="e#91853#91953#0" />
-            <element signature="e#92324#93174#0" />
-            <element signature="e#93203#93257#0" />
-            <element signature="e#93297#93503#0" />
-            <element signature="e#93507#93745#0" />
-            <element signature="e#93808#93814#0" />
-            <element signature="e#93844#93889#0" />
-            <element signature="e#93918#94422#0" />
-            <element signature="e#94099#94159#0" />
-            <element signature="e#94457#94939#0" />
-            <element signature="e#94960#95016#0" />
-            <element signature="e#95129#96037#0" />
-            <element signature="e#95269#95676#0" />
-            <element signature="e#96161#96284#0" />
-            <element signature="e#96336#96848#0" />
-            <element signature="e#96778#96802#0" />
-            <element signature="e#96852#97294#0" />
-            <element signature="e#97399#98732#0" />
-            <element signature="e#98280#98315#0" />
-            <element signature="e#98435#98452#0" />
-            <element signature="e#98785#98898#0" />
-            <element signature="e#98942#99041#0" />
-            <element signature="e#99045#99112#0" />
-            <element signature="e#99303#99344#0" />
-            <element signature="e#99447#99479#0" />
-            <element signature="e#99536#99568#0" />
-            <element signature="e#99620#99652#0" />
-            <element signature="e#99710#99742#0" />
-            <element signature="e#99800#99832#0" />
-            <element signature="e#99890#99922#0" />
-            <element signature="e#100117#100158#0" />
-            <element signature="e#100261#100293#0" />
-            <element signature="e#100350#100382#0" />
-            <element signature="e#100434#100466#0" />
-            <element signature="e#100524#100556#0" />
-            <element signature="e#100614#100646#0" />
-            <element signature="e#100704#100736#0" />
-            <element signature="e#100944#100985#0" />
-            <element signature="e#101088#101120#0" />
-            <element signature="e#101178#101210#0" />
-            <element signature="e#101268#101300#0" />
-            <element signature="e#101358#101390#0" />
-            <element signature="e#101448#101480#0" />
-            <element signature="e#101538#101570#0" />
-            <element signature="e#101752#101793#0" />
-            <element signature="e#101896#101928#0" />
-            <element signature="e#101985#102017#0" />
-            <element signature="e#102069#102101#0" />
-            <element signature="e#102159#102191#0" />
-            <element signature="e#102244#102276#0" />
-            <element signature="e#102334#102366#0" />
-            <element signature="e#102575#102616#0" />
-            <element signature="e#102719#102751#0" />
-            <element signature="e#102808#102840#0" />
-            <element signature="e#102892#102924#0" />
-            <element signature="e#102944#102976#0" />
-            <element signature="e#102996#103028#0" />
-            <element signature="e#103086#103118#0" />
-            <element signature="e#103212#103276#0" />
-            <element signature="e#103511#103552#0" />
-            <element signature="e#103655#103687#0" />
-            <element signature="e#103744#103776#0" />
-            <element signature="e#103832#103864#0" />
-            <element signature="e#103922#103954#0" />
-            <element signature="e#104012#104044#0" />
-            <element signature="e#104102#104134#0" />
-            <element signature="e#104232#104286#0" />
-            <element signature="e#104405#104446#0" />
-            <element signature="e#104549#104581#0" />
-            <element signature="e#104639#104671#0" />
-            <element signature="e#104729#104761#0" />
-            <element signature="e#104804#104836#0" />
-            <element signature="e#104892#104924#0" />
-            <element signature="e#104944#104976#0" />
-            <element signature="e#105037#105090#0" />
-            <element signature="e#105229#105270#0" />
-            <element signature="e#105373#105405#0" />
-            <element signature="e#105462#105494#0" />
-            <element signature="e#105550#105582#0" />
-            <element signature="e#105640#105672#0" />
-            <element signature="e#105730#105762#0" />
-            <element signature="e#105820#105852#0" />
-            <element signature="e#105950#106003#0" />
-            <element signature="e#106136#106177#0" />
-            <element signature="e#106280#106312#0" />
-            <element signature="e#106369#106401#0" />
-            <element signature="e#106457#106489#0" />
-            <element signature="e#106547#106579#0" />
-            <element signature="e#106637#106669#0" />
-            <element signature="e#106727#106759#0" />
-            <element signature="e#106857#106906#0" />
-            <element signature="e#107046#107087#0" />
-            <element signature="e#107190#107222#0" />
-            <element signature="e#107279#107311#0" />
-            <element signature="e#107367#107399#0" />
-            <element signature="e#107457#107489#0" />
-            <element signature="e#107547#107579#0" />
-            <element signature="e#107637#107669#0" />
-            <element signature="e#107767#107816#0" />
-            <element signature="e#107907#107948#0" />
-            <element signature="e#108051#108083#0" />
-            <element signature="e#108141#108173#0" />
-            <element signature="e#108229#108261#0" />
-            <element signature="e#108319#108351#0" />
-            <element signature="e#108410#108442#0" />
-            <element signature="e#108500#108532#0" />
-            <element signature="e#108630#108680#0" />
-            <element signature="e#108789#108830#0" />
-            <element signature="e#108933#108965#0" />
-            <element signature="e#109023#109055#0" />
-            <element signature="e#109113#109145#0" />
-            <element signature="e#109203#109235#0" />
-            <element signature="e#109293#109325#0" />
-            <element signature="e#109383#109415#0" />
-            <element signature="e#109513#109584#0" />
-            <element signature="e#109670#110024#0" />
-            <element signature="e#110039#131622#0" />
-            <element signature="e#110078#110340#0" />
-            <element signature="e#110366#111041#0" />
-            <element signature="e#111082#111135#0" />
-            <element signature="e#111302#111494#0" />
-            <element signature="e#111654#112567#0" />
-            <element signature="e#112528#112562#0" />
-            <element signature="e#112571#112764#0" />
-            <element signature="e#112923#113525#0" />
-            <element signature="e#113394#113402#0" />
-            <element signature="e#113486#113520#0" />
-            <element signature="e#113529#113826#0" />
-            <element signature="e#113862#114403#0" />
-            <element signature="e#113931#113968#0" />
-            <element signature="e#114039#114098#0" />
-            <element signature="e#114168#114233#0" />
-            <element signature="e#114407#114660#0" />
-            <element signature="e#114795#116423#0" />
-            <element signature="e#115153#115209#0" />
-            <element signature="e#115834#115875#0" />
-            <element signature="e#115949#116026#0" />
-            <element signature="e#116427#116703#0" />
-            <element signature="e#116752#117031#0" />
-            <element signature="e#117035#118147#0" />
-            <element signature="e#118183#118672#0" />
-            <element signature="e#118406#118473#0" />
-            <element signature="e#118628#118667#0" />
-            <element signature="e#118676#118834#0" />
-            <element signature="e#118849#119412#0" />
-            <element signature="e#119366#119385#0" />
-            <element signature="e#119416#120216#0" />
-            <element signature="e#120239#120425#0" />
-            <element signature="e#120429#120885#0" />
-            <element signature="e#120907#121513#0" />
-            <element signature="e#121517#121574#0" />
-            <element signature="e#121633#121762#0" />
-            <element signature="e#121839#122180#0" />
-            <element signature="e#122210#123431#0" />
-            <element signature="e#122362#122428#0" />
-            <element signature="e#122760#122768#0" />
-            <element signature="e#123322#123357#0" />
-            <element signature="e#123435#124075#0" />
-            <element signature="e#124122#124664#0" />
-            <element signature="e#124334#124363#0" />
-            <element signature="e#124668#125304#0" />
-            <element signature="e#125342#125773#0" />
-            <element signature="e#125838#128082#0" />
-            <element signature="e#126437#126467#0" />
-            <element signature="e#126528#126594#0" />
-            <element signature="e#126654#126684#0" />
-            <element signature="e#127289#127311#0" />
-            <element signature="e#127411#127437#0" />
-            <element signature="e#127636#127705#0" />
-            <element signature="e#128051#128077#0" />
-            <element signature="e#128086#128234#0" />
-            <element signature="e#128334#129133#0" />
-            <element signature="e#128340#128406#0" />
-            <element signature="e#129080#129104#0" />
-            <element signature="e#129228#129284#0" />
-            <element signature="e#129618#129660#0" />
-            <element signature="e#129765#129798#0" />
-            <element signature="e#129856#129889#0" />
-            <element signature="e#129942#129975#0" />
-            <element signature="e#130034#130067#0" />
-            <element signature="e#130126#130159#0" />
-            <element signature="e#130218#130251#0" />
-            <element signature="e#130351#130394#0" />
-            <element signature="e#130899#130941#0" />
-            <element signature="e#131046#131079#0" />
-            <element signature="e#131138#131171#0" />
-            <element signature="e#131224#131257#0" />
-            <element signature="e#131316#131349#0" />
-            <element signature="e#131403#131436#0" />
-            <element signature="e#131495#131528#0" />
-            <element signature="e#131624#131695#0" />
-            <element signature="e#132609#132667#0" />
-            <element signature="e#132806#132874#0" />
-            <element signature="e#134181#134254#0" />
-            <element signature="e#134297#134361#0" />
-            <element signature="e#138120#146347#0" />
-            <element signature="e#138124#138162#0" />
-            <element signature="e#138991#139068#0" />
-            <element signature="e#139652#139727#0" />
-            <element signature="e#139823#139834#0" />
-            <element signature="e#139843#139881#0" />
-            <element signature="e#139876#139880#0" />
-            <element signature="e#139886#139958#0" />
-            <element signature="e#140106#140180#0" />
-            <element signature="e#140378#140512#0" />
-            <element signature="e#140516#140587#0" />
-            <element signature="e#140927#141053#0" />
-            <element signature="e#145988#146050#0" />
-            <element signature="e#146349#146420#0" />
-            <element signature="e#146463#146522#0" />
-            <element signature="e#146736#147188#0" />
-            <element signature="e#147222#163015#0" />
-            <element signature="e#147397#147446#0" />
-            <element signature="e#148755#148922#0" />
-            <element signature="e#148944#149353#0" />
-            <element signature="e#149679#149835#0" />
-            <element signature="e#150146#150840#0" />
-            <element signature="e#150279#150324#0" />
-            <element signature="e#150390#150463#0" />
-            <element signature="e#150533#150603#0" />
-            <element signature="e#150874#151335#0" />
-            <element signature="e#151302#151310#0" />
-            <element signature="e#151323#151330#0" />
-            <element signature="e#151379#151517#0" />
-            <element signature="e#151467#151483#0" />
-            <element signature="e#151483#151512#0" />
-            <element signature="e#151570#151927#0" />
-            <element signature="e#151793#151801#0" />
-            <element signature="e#151814#151840#0" />
-            <element signature="e#151866#151888#0" />
-            <element signature="e#151901#151922#0" />
-            <element signature="e#151957#152107#0" />
-            <element signature="e#152164#152422#0" />
-            <element signature="e#152226#152417#0" />
-            <element signature="e#152621#152648#0" />
-            <element signature="e#152692#154645#0" />
-            <element signature="e#154578#154640#0" />
-            <element signature="e#154679#154729#0" />
-            <element signature="e#154763#154902#0" />
-            <element signature="e#154906#154972#0" />
-            <element signature="e#155272#161503#0" />
-            <element signature="e#155833#156099#0" />
-            <element signature="e#156505#156750#0" />
-            <element signature="e#156999#157237#0" />
-            <element signature="e#157506#157735#0" />
-            <element signature="e#157799#157834#0" />
-            <element signature="e#158220#158449#0" />
-            <element signature="e#158461#158476#0" />
-            <element signature="e#159247#159300#0" />
-            <element signature="e#159674#159738#0" />
-            <element signature="e#159950#159989#0" />
-            <element signature="e#160476#160542#0" />
-            <element signature="e#160923#160992#0" />
-            <element signature="e#161285#161498#0" />
-            <element signature="e#161541#162123#0" />
-            <element signature="e#161614#161674#0" />
-            <element signature="e#161795#161872#0" />
-            <element signature="e#161914#161992#0" />
-            <element signature="e#162148#162393#0" />
-            <element signature="e#162260#162360#0" />
-            <element signature="e#162414#162466#0" />
-            <element signature="e#162558#162681#0" />
-            <element signature="e#162704#162983#0" />
-            <element signature="e#162735#162978#0" />
-            <element signature="e#163100#163277#0" />
-            <element signature="e#163279#163345#0" />
-            <element signature="e#163722#164074#0" />
-            <element signature="e#163894#163899#0" />
-            <element signature="e#163946#163951#0" />
-            <element signature="e#163998#164003#0" />
-            <element signature="e#164050#164055#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_storage-0.3.7/lib/src/upload_task.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="80" column="10" lean-forward="true" selection-start-line="80" selection-start-column="10" selection-end-line="80" selection-end-column="10" />
+        <state relative-caret-position="421">
+          <caret line="191" column="17" selection-start-line="191" selection-start-column="17" selection-end-line="191" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="193" selection-start-line="193" selection-end-line="193" />
+        <state relative-caret-position="149">
+          <caret line="229" column="54" selection-start-line="229" selection-start-column="54" selection-end-line="229" selection-end-column="54" />
           <folding>
             <element signature="n#!!block;n#MyApp#0" />
             <element signature="n#!!block;n#MyHomePage#0" />
@@ -1584,198 +1183,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/image_detail.dart">
+    <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2822">
-          <caret line="336" column="49" selection-start-line="336" selection-start-column="49" selection-end-line="336" selection-end-column="49" />
+        <state relative-caret-position="661">
+          <caret line="59" selection-start-line="59" selection-end-line="59" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="n#!!block;n#ImageDetailPage#0" />
-            <element signature="e#2126#3068#0" />
-            <element signature="e#2153#3063#0" />
-            <element signature="e#2181#3005#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/image_list.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="78" column="6" selection-start-line="59" selection-start-column="10" selection-end-line="78" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/src/document_reference.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="258">
-          <caret line="41" column="15" selection-start-line="41" selection-start-column="15" selection-end-line="41" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/src/collection_reference.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="56" column="28" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/widgets/basic.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="3889" column="8" selection-start-line="3889" selection-start-column="8" selection-end-line="3889" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/dropdown.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="353">
-          <caret line="522" column="13" selection-start-line="522" selection-start-column="13" selection-end-line="522" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/rendering/flex.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="244">
-          <caret line="130" column="2" selection-start-line="130" selection-start-column="2" selection-end-line="130" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/input_decorator.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="2019" column="14" selection-start-line="2019" selection-start-column="14" selection-end-line="2019" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/dialog.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="142" column="10" lean-forward="true" selection-start-line="120" selection-start-column="8" selection-end-line="142" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/widgets/navigator.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="1674" column="7" selection-start-line="1674" selection-start-column="7" selection-end-line="1674" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/image_picker-0.4.5/lib/image_picker.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="31" column="22" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/bottom_sheet.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-63">
-          <caret line="250" lean-forward="true" selection-start-line="250" selection-end-line="250" />
-          <folding>
-            <element signature="e#411#430#0" />
-            <element signature="e#519#554#0" />
-            <element signature="e#1644#3186#0" />
-            <element signature="e#1648#1675#0" />
-            <element signature="e#2084#2144#0" />
-            <element signature="e#2321#2370#0" />
-            <element signature="e#2630#2674#0" />
-            <element signature="e#3044#3184#0" />
-            <element signature="e#3080#3179#0" />
-            <element signature="e#3239#4742#0" />
-            <element signature="e#3285#3318#0" />
-            <element signature="e#3347#3463#0" />
-            <element signature="e#3611#3759#0" />
-            <element signature="e#3807#4459#0" />
-            <element signature="e#4510#4740#0" />
-            <element signature="e#4542#4735#0" />
-            <element signature="e#4657#4729#0" />
-            <element signature="e#4744#4771#0" />
-            <element signature="e#4884#5499#0" />
-            <element signature="e#5035#5228#0" />
-            <element signature="e#5066#5223#0" />
-            <element signature="e#5298#5374#0" />
-            <element signature="e#5321#5369#0" />
-            <element signature="e#5447#5497#0" />
-            <element signature="e#5551#5757#0" />
-            <element signature="e#5749#5752#0" />
-            <element signature="e#5827#6536#0" />
-            <element signature="e#5878#6534#0" />
-            <element signature="e#5910#6529#0" />
-            <element signature="e#5987#6523#0" />
-            <element signature="e#6117#6504#0" />
-            <element signature="e#6165#6492#0" />
-            <element signature="e#6218#6248#0" />
-            <element signature="e#6286#6478#0" />
-            <element signature="e#6592#7834#0" />
-            <element signature="e#7129#7294#0" />
-            <element signature="e#7416#7832#0" />
-            <element signature="e#7422#7493#0" />
-            <element signature="e#7610#7716#0" />
-            <element signature="e#7693#7696#0" />
-            <element signature="e#7696#7709#0" />
-            <element signature="e#7770#7803#0" />
-            <element signature="e#9241#9521#0" />
-            <element signature="e#9356#9359#0" />
-            <element signature="e#9359#9517#0" />
-            <element signature="e#9523#9601#0" />
-            <element signature="e#11222#11338#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/scaffold.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="1242" column="37" selection-start-line="1242" selection-start-column="37" selection-end-line="1242" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/flat_button.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="148" column="14" selection-start-line="148" selection-start-column="14" selection-end-line="148" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/zone.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11799">
-          <caret line="623" column="8" selection-start-line="623" selection-start-column="8" selection-end-line="623" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-406">
-          <caret line="21" column="46" lean-forward="true" selection-start-line="21" selection-start-column="46" selection-end-line="21" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/timer.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1030">
-          <caret line="44" column="10" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/future.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="305" column="17" selection-start-line="305" selection-start-column="17" selection-end-line="305" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/upload_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1466">
-          <caret line="284" selection-start-line="284" selection-end-line="284" />
-          <folding>
-            <element signature="n#!!block;n#UploadPage#0" />
-            <element signature="e#923#938#0" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
