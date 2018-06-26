@@ -158,7 +158,12 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   _shareImageToFacebook() {
     final url = imageModel.imageUrl;
-    methodChannel.invokeMethod(shareImageToFacebook, url);
+    methodChannel
+        .invokeMethod(shareImageToFacebook, url)
+        .then((res) => debugPrint(res.toString()))
+        .catchError((error) =>
+        debugPrint(
+            error is PlatformException ? error.message : error.toString()));
   }
 
   _showSnackBar(String text,

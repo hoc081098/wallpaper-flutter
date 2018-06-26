@@ -3,13 +3,13 @@ package com.hoc.wallpaper;
 import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -17,16 +17,15 @@ import com.facebook.share.Sharer;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
-
-import java.io.File;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.List;
-
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
+
+import java.io.File;
+import java.util.List;
 
 import static io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import static io.flutter.plugin.common.MethodChannel.Result;
@@ -36,6 +35,55 @@ public class MainActivity extends FlutterActivity {
     private static final String SET_WALLPAPER = "setWallpaper";
     private static final String SCAN_FILE = "scanFile";
     private static final String SHARE_IMAGE_TO_FACEBOOK = "shareImageToFacebook";
+
+    private final Target target = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            Log.d("MY_TAG", "onBitmapLoaded");
+
+            SharePhoto photo = new SharePhoto.Builder()
+                    .setBitmap(bitmap)
+                    .build();
+            SharePhotoContent content = new SharePhotoContent.Builder()
+                    .addPhoto(photo)
+                    .build();
+
+            ShareDialog shareDialog = new ShareDialog(MainActivity.this);
+            shareDialog.registerCallback(CallbackManager.Factory.create(), new FacebookCallback<Sharer.Result>() {
+                @Override
+                public void onSuccess(Sharer.Result r) {
+                    Toast.makeText(MainActivity.this, "Share image successfully", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onCancel() {
+                    Toast.makeText(MainActivity.this, "Share cancelled", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onError(FacebookException error) {
+                    Toast.makeText(MainActivity.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            });
+            if (shareDialog.canShow(content)) {
+                Log.d("MY_TAG", "can show and show");
+                shareDialog.show(content);
+            } else {
+                Log.d("MY_TAG", "can not show");
+            }
+        }
+
+        @Override
+        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+            Log.d("MY_TAG", "onBitmapFailed " + e);
+            Toast.makeText(MainActivity.this, "Loaded image failed", Toast.LENGTH_SHORT).show();
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+            Log.d("MY_TAG", "onPrepareLoad");
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +101,7 @@ public class MainActivity extends FlutterActivity {
                                 scanImageFile(methodCall.arguments, result);
                                 break;
                             case SHARE_IMAGE_TO_FACEBOOK:
-                                shareImageToFacebook((String) methodCall.arguments);
+                                shareImageToFacebook((String) methodCall.arguments, result);
                                 break;
                             default:
                                 result.notImplemented();
@@ -65,54 +113,9 @@ public class MainActivity extends FlutterActivity {
         GeneratedPluginRegistrant.registerWith(this);
     }
 
-    private void shareImageToFacebook(String imageUrl) {
-        Bitmap image;
-        try {
-            image = getBitmapFromURL(imageUrl);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Toast.makeText(this,"Error "+ e.getMessage(), Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (image == null) {
-            Toast.makeText(this, "An error occurred", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        SharePhoto photo = new SharePhoto.Builder()
-                .setBitmap(image)
-                .build();
-        SharePhotoContent content = new SharePhotoContent.Builder()
-                .addPhoto(photo)
-                .build();
-
-        ShareDialog shareDialog = new ShareDialog(this);
-        shareDialog.registerCallback(CallbackManager.Factory.create(), new FacebookCallback<Sharer.Result>() {
-            @Override
-            public void onSuccess(Sharer.Result result) {
-                Toast.makeText(MainActivity.this, "Share image successfully", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onCancel() {
-                Toast.makeText(MainActivity.this, "Share cancelled", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(FacebookException error) {
-                Toast.makeText(MainActivity.this, "Error " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
-        if (shareDialog.canShow(content)) {
-            shareDialog.show(content);
-        }
-    }
-
-    public static Bitmap getBitmapFromURL(String src) throws Exception {
-        URL url = new URL(src);
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setDoInput(true);
-        connection.connect();
-        return BitmapFactory.decodeStream(connection.getInputStream());
+    private void shareImageToFacebook(String imageUrl, final Result result) {
+        Log.d("MY_TAG", "imageUrl = " + imageUrl);
+        Picasso.get().load(imageUrl).into(target);
     }
 
     private void scanImageFile(Object args, final Result result) {
