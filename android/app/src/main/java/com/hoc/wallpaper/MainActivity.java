@@ -141,7 +141,6 @@ public class MainActivity extends FlutterActivity {
         final Matrix matrix = new Matrix();
         matrix.postScale(scaleWidth, scaleHeight);
         final Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
-        bm.recycle();
         return resizedBitmap;
     }
 
