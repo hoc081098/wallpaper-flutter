@@ -13,23 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/constants.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/data/models/image_category_model.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/all_images_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/newest_image_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/screens/trending_images_page.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/category_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/category_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/image_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/image_detail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/image_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/image_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/image_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/upload_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/upload_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/upload_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/upload_page.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,8 +31,8 @@
       <file leaf-file-name="upload_page.dart" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/screens/upload_page.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="27" column="53" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
+            <state relative-caret-position="223">
+              <caret line="359" column="6" lean-forward="true" selection-start-line="359" selection-start-column="6" selection-end-line="359" selection-end-column="6" />
               <folding>
                 <element signature="n#!!block;n#UploadPage#0" />
               </folding>
@@ -138,10 +122,10 @@
         <option value="$PROJECT_DIR$/lib/image_list.dart" />
         <option value="$PROJECT_DIR$/lib/screens/category_page.dart" />
         <option value="$PROJECT_DIR$/lib/screens/trending_images_page.dart" />
-        <option value="$PROJECT_DIR$/lib/screens/upload_page.dart" />
         <option value="$PROJECT_DIR$/lib/constants.dart" />
         <option value="$PROJECT_DIR$/lib/screens/image_detail.dart" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/upload_page.dart" />
       </list>
     </option>
   </component>
@@ -168,6 +152,18 @@
               <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
               <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="data" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wallpaper" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="screens" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -325,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530612283028</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Split to many files">
+      <created>1530624416291</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1530624416291</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -339,6 +342,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
@@ -359,11 +363,11 @@
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.63071895" />
-      <window_info anchor="bottom" id="Version Control" order="7" weight="0.5620915" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.26797387" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.40522876" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.50816995" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.4248366" />
       <window_info id="Captures" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18986385" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18986385" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Flutter Inspector" order="3" sideWeight="0.49669966" visible="true" weight="0.1785174" />
@@ -443,13 +447,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Write MethodChannel to set wallpaper&#10;Split main.dart into many files&#10;And other updates" />
     <MESSAGE value="Many changes...!!" />
     <MESSAGE value="Change share to facebook (MainActivity.java)&#10;Change image_detail.dart" />
     <MESSAGE value="Write method channel to resize image, and apply to image_detail.dart and upload_page.dart" />
-    <option name="LAST_COMMIT_MESSAGE" value="Write method channel to resize image, and apply to image_detail.dart and upload_page.dart" />
+    <MESSAGE value="Split to many files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Split to many files" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -774,13 +778,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1520">
-          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_storage-0.3.7/lib/src/firebase_storage.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1059,10 +1056,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1121">
+          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/lib/screens/upload_page.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="27" column="53" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
+        <state relative-caret-position="223">
+          <caret line="359" column="6" lean-forward="true" selection-start-line="359" selection-start-column="6" selection-end-line="359" selection-end-column="6" />
           <folding>
             <element signature="n#!!block;n#UploadPage#0" />
           </folding>

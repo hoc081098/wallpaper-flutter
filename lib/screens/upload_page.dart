@@ -253,16 +253,15 @@ class _UploadPageState extends State<UploadPage> {
           .readAsBytes()
           .then((bytes) => Uint8List.fromList(bytes))
           .then(
-            (bytes) =>
-            methodChannel.invokeMethod(
-              resizeImage,
-              <String, dynamic>{
-                'bytes': bytes,
-                'width': 360,
-                'height': 640,
-              },
-            ),
-      )
+            (bytes) => methodChannel.invokeMethod(
+                  resizeImage,
+                  <String, dynamic>{
+                    'bytes': bytes,
+                    'width': 360,
+                    'height': 640,
+                  },
+                ),
+          )
           .then(uploadThumbnail);
 
       final urls = await Future.wait([task1, task2]);
@@ -368,23 +367,23 @@ class _AddCategoryState extends State<AddCategory> {
     return _msg != null
         ? Text(_msg)
         : new FlatButton.icon(
-      onPressed: _chooseImage,
-      icon: Icon(Icons.image),
-      label: Text('Choose image'),
-      color: Colors.purple.shade400,
-    );
+            onPressed: _chooseImage,
+            icon: Icon(Icons.image),
+            label: Text('Choose image'),
+            color: Colors.purple.shade400,
+          );
   }
 
   Widget _buildImagePreview() {
     return _imageFile != null
         ? new Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: new Image.file(
-        _imageFile,
-        width: 64.0,
-        height: 64.0,
-        fit: BoxFit.cover,
-      ),
+            padding: const EdgeInsets.all(8.0),
+            child: new Image.file(
+              _imageFile,
+              width: 64.0,
+              height: 64.0,
+              fit: BoxFit.cover,
+            ),
           )
         : new Container();
   }
@@ -415,22 +414,17 @@ class _AddCategoryState extends State<AddCategory> {
         .readAsBytes()
         .then((bytes) => Uint8List.fromList(bytes))
         .then(
-          (bytes) =>
-          methodChannel.invokeMethod(
-            resizeImage,
-            <String, dynamic>{
-              'bytes': bytes,
-              'width': 360,
-              'height': 360,
-            },
-          ),
-    )
+          (bytes) => methodChannel.invokeMethod(
+                resizeImage,
+                <String, dynamic>{
+                  'bytes': bytes,
+                  'width': 360,
+                  'height': 360,
+                },
+              ),
+        )
         .then((bytes) =>
-    firebaseStorage
-        .ref()
-        .child(uploadPath)
-        .putData(bytes)
-        .future);
+            firebaseStorage.ref().child(uploadPath).putData(bytes).future);
 
     await categoriesCollection.add(<String, String>{
       'name': _textController.text,
