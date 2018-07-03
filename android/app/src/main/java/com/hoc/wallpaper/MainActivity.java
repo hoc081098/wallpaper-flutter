@@ -3,6 +3,7 @@ package com.hoc.wallpaper;
 import android.app.WallpaperManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -10,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -19,13 +21,15 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.List;
+
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
-
-import java.io.File;
-import java.util.List;
 
 import static io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import static io.flutter.plugin.common.MethodChannel.Result;
@@ -35,6 +39,7 @@ public class MainActivity extends FlutterActivity {
     private static final String SET_WALLPAPER = "setWallpaper";
     private static final String SCAN_FILE = "scanFile";
     private static final String SHARE_IMAGE_TO_FACEBOOK = "shareImageToFacebook";
+    private static final String RESIZE_IMAGE = "resizeImage";
 
     private final Target target = new Target() {
         @Override
@@ -103,6 +108,14 @@ public class MainActivity extends FlutterActivity {
                             case SHARE_IMAGE_TO_FACEBOOK:
                                 shareImageToFacebook((String) methodCall.arguments, result);
                                 break;
+                            case RESIZE_IMAGE:
+                                resizeImage(
+                                        methodCall.argument("bytes"),
+                                        result,
+                                        methodCall.argument("width"),
+                                        methodCall.argument("height")
+                                );
+                                break;
                             default:
                                 result.notImplemented();
                                 break;
@@ -111,6 +124,27 @@ public class MainActivity extends FlutterActivity {
                 });
 
         GeneratedPluginRegistrant.registerWith(this);
+    }
+
+    private void resizeImage(byte[] bytes, Result result, int width, int height) {
+        final Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+        final Bitmap resized = getResizedBitmap(bitmap, width, height);
+
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        resized.compress(Bitmap.CompressFormat.PNG, 100, baos);
+        result.success(baos.toByteArray());
+    }
+
+    private Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
+        final int width = bm.getWidth();
+        final int height = bm.getHeight();
+        final float scaleWidth = (float) newWidth / width;
+        final float scaleHeight = (float) newHeight / height;
+        final Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        final Bitmap resizedBitmap = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
     }
 
     private void shareImageToFacebook(String imageUrl, final Result result) {

@@ -1,15 +1,16 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:image/image.dart' as img;
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:uuid/uuid.dart';
+import 'package:wallpaper/main.dart';
 import 'package:wallpaper/models.dart';
 
 class UploadPage extends StatefulWidget {
@@ -172,7 +173,11 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   _chooseImage() async {
-    _imageFile = await ImagePicker.pickImage(source: ImageSource.gallery);
+    _imageFile = await ImagePicker.pickImage(
+      source: ImageSource.gallery,
+      maxWidth: 1080.0,
+      maxHeight: 1920.0,
+    );
     _textController.text = path.basename(_imageFile.path);
     setState(() {});
   }
@@ -236,39 +241,44 @@ class _UploadPageState extends State<UploadPage> {
       final task1 =
           firebaseStorage.ref().child(uploadPath).putFile(_imageFile).future;
 
-      final uploadThumbnail = (thumbnailBytes) {
+      final uploadThumbnail = (Uint8List thumbnailBytes) {
         return firebaseStorage
             .ref()
             .child('uploadImages/${new Uuid().v1()}.png')
             .putData(thumbnailBytes)
             .future;
       };
-      final task2 = compute<String, List<int>>(
-        resizeImage,
-        _imageFile.path,
-      ).then(uploadThumbnail);
 
-      final urls = await Future.wait([task1, task2]).then(
-          (tasks) => tasks.map((task) => task.downloadUrl.toString()).toList());
-      debugPrint("Urls: $urls");
+      final task2 = _imageFile
+          .readAsBytes()
+          .then<Uint8List>((List<int> bytes) => Uint8List.fromList(bytes))
+          .then<Uint8List>((Uint8List bytes) =>
+      methodChannel.invokeMethod(resizeImage, <String, dynamic>{
+        'bytes': bytes,
+        'width': 360.0,
+        'height': 640.0,
+      }) as Future<Uint8List>)
+          .then(uploadThumbnail);
+
+      final urls = await Future.wait([task1, task2]);
 
       await imagesCollection.add(<String, dynamic>{
         'name': _textController.text,
-        'imageUrl': urls[0],
-        'thumbnailUrl': urls[1],
+        'imageUrl': urls[0].downloadUrl.toString(),
+        'thumbnailUrl': urls[1].downloadUrl.toString(),
         'categoryId': _selectedCategory.id,
         'uploadedTime': DateTime.now(),
         'viewCount': 0,
         'downloadCount': 0,
       });
 
-      Navigator.pop(context); //pop
+      Navigator.pop(context); //pop dialog
       _showSnackBar('Image uploaded successfully');
     } on PlatformException catch (e) {
-      Navigator.pop(context); //pop
+      Navigator.pop(context); //pop dialog
       _showSnackBar(e.message);
     } catch (e) {
-      Navigator.pop(context); //pop
+      Navigator.pop(context); //pop dialog
       _showSnackBar("An error occurred");
       debugPrint('Error $e}');
     }
@@ -279,13 +289,6 @@ class _UploadPageState extends State<UploadPage> {
       return new AddCategory();
     });
   }
-}
-
-List<int> resizeImage(String path) {
-  final imageFile = new File(path);
-  final src = img.decodeImage(imageFile.readAsBytesSync());
-  final thumbnail = img.copyResize(src, 360, 640);
-  return img.encodePng(thumbnail);
 }
 
 class AddCategory extends StatefulWidget {
@@ -357,22 +360,24 @@ class _AddCategoryState extends State<AddCategory> {
   }
 
   Widget _buildProgressOrMsgTextOrButtonChooseImage() {
-    return _isLoading
-        ? new CircularProgressIndicator()
-        : _msg != null
-            ? Text(_msg)
-            : new FlatButton.icon(
-                onPressed: _chooseImage,
-                icon: Icon(Icons.image),
-                label: Text('Choose image'),
-                color: Colors.purple.shade400);
+    if (_isLoading) {
+      return new CircularProgressIndicator();
+    }
+    return _msg != null
+        ? Text(_msg)
+        : new FlatButton.icon(
+      onPressed: _chooseImage,
+      icon: Icon(Icons.image),
+      label: Text('Choose image'),
+      color: Colors.purple.shade400,
+    );
   }
 
   Widget _buildImagePreview() {
     return _imageFile != null
         ? new Image.file(
             _imageFile,
-            width: 36.0,
+      width: 64.0,
             height: 64.0,
             fit: BoxFit.cover,
           )
@@ -401,11 +406,23 @@ class _AddCategoryState extends State<AddCategory> {
             : extension
     }';
 
-    final task = await firebaseStorage
-        .ref()
-        .child(uploadPath)
-        .putFile(_imageFile)
-        .future;
+    final task = await _imageFile
+        .readAsBytes()
+        .then<Uint8List>((List<int> bytes) => Uint8List.fromList(bytes))
+        .then<Uint8List>((Uint8List bytes) =>
+    methodChannel.invokeMethod(resizeImage, <String, dynamic>{
+      'bytes': bytes,
+      'width': 360.0,
+      'height': 360.0,
+    }) as Future<Uint8List>)
+        .then<UploadTaskSnapshot>(
+          (bytes) =>
+      firebaseStorage
+          .ref()
+          .child(uploadPath)
+          .putData(bytes)
+          .future,
+    );
 
     await categoriesCollection.add(<String, String>{
       'name': _textController.text,
@@ -432,8 +449,8 @@ class _AddCategoryState extends State<AddCategory> {
   _chooseImage() async {
     _imageFile = await ImagePicker.pickImage(
       source: ImageSource.gallery,
-      maxWidth: 480.0,
-      maxHeight: 854.0,
+      maxWidth: 720.0,
+      maxHeight: 720.0,
     );
     setState(() {});
   }

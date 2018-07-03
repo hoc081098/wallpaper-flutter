@@ -1,12 +1,12 @@
 import 'dart:async';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
-import 'package:image/image.dart' as img;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_permissions/simple_permissions.dart';
@@ -31,7 +31,6 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   StreamSubscription subscription;
   bool isLoading;
   final scaffoldKey = new GlobalKey<ScaffoldState>();
-  static const methodChannel = MethodChannel(channel);
 
   @override
   void initState() {
@@ -83,6 +82,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
             new IconButton(
               icon: Icon(Icons.share),
               onPressed: _shareImageToFacebook,
+              tooltip: 'Share to facebook',
             ),
           ],
         ),
@@ -158,12 +158,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   _shareImageToFacebook() {
     final url = imageModel.imageUrl;
-    methodChannel
-        .invokeMethod(shareImageToFacebook, url)
-        .then((res) => debugPrint(res.toString()))
-        .catchError((error) =>
-        debugPrint(
-            error is PlatformException ? error.message : error.toString()));
+    methodChannel.invokeMethod(shareImageToFacebook, url);
   }
 
   _showSnackBar(String text,
@@ -176,9 +171,6 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     try {
       setState(() => isLoading = true);
 
-      // get external directory
-      final externalDir = await getExternalStorageDirectory();
-
       // request runtime permission
       if (!(await SimplePermissions
           .checkPermission(Permission.WriteExternalStorage))) {
@@ -189,6 +181,9 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           return _done();
         }
       }
+
+      // get external directory
+      final externalDir = await getExternalStorageDirectory();
 
       // check file is exists, if exists then delete file
       final filePath =
@@ -202,29 +197,35 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       _increaseCount('downloadCount', imageModel.id);
 
       // after that, download and resize image
-      final List<int> bytes = await http.readBytes(imageModel.imageUrl);
+      final Uint8List bytes = await http.readBytes(imageModel.imageUrl);
+      // resize image ??
       final queryData = MediaQuery.of(context);
-      final res = await compute<Map<String, dynamic>, bool>(
-        resizeAndSaveImage,
+      final Uint8List outBytes = await methodChannel.invokeMethod(
+        resizeImage,
         <String, dynamic>{
+          'bytes': bytes,
           'width': (queryData.size.shortestSide * queryData.devicePixelRatio)
               .toInt(),
           'height':
               (queryData.size.longestSide * queryData.devicePixelRatio).toInt(),
-          'filePath': filePath,
-          'bytes': bytes,
         },
       );
 
-      // call scanFile method
-      methodChannel.invokeMethod(
-        scanFile,
-        <String>['flutterImages', '${imageModel.id}.png'],
-      ).then((scanFileRes) => debugPrint("Scan file: $scanFileRes"));
+      //save image to storage
+      final message = await compute<Map<String, dynamic>, bool>(
+        saveImage,
+        <String, dynamic>{'filePath': filePath, 'bytes': outBytes},
+      )
+          ? 'Image downloaded successfully'
+          : 'Failed to download image';
 
-      _showSnackBar(
-        res ? 'Image downloaded successfully' : 'Failed to download image',
-      );
+      _showSnackBar(message);
+
+      // call scanFile method, to show image in gallery
+      methodChannel.invokeMethod(scanFile, <String>[
+        'flutterImages',
+        '${imageModel.id}.png'
+      ]).then((scanFileRes) => debugPrint("Scan file: $scanFileRes"));
     } on PlatformException catch (e) {
       _showSnackBar(e.message);
     } catch (e) {
@@ -326,7 +327,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       if (await _showDialogSetImageAsWallpaper()) {
         final String res = await methodChannel.invokeMethod(
           setWallpaper,
-          ['flutterImages', '${imageModel.id}.png'],
+          <String>['flutterImages', '${imageModel.id}.png'],
         );
         _showSnackBar(res);
       }
@@ -356,13 +357,11 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 }
 
-bool resizeAndSaveImage(Map<String, dynamic> map) {
+bool saveImage(Map<String, dynamic> map) {
   try {
-    final image = img.decodeImage(map['bytes']);
-    final copyImage = img.copyResize(image, map['width'], map['height']);
     new File(map['filePath'])
       ..createSync(recursive: true)
-      ..writeAsBytesSync(img.encodePng(copyImage));
+      ..writeAsBytesSync(map['bytes']);
     return true;
   } catch (e) {
     return false;

@@ -1,0 +1,105 @@
+Flutter crash report; please file at https://github.com/flutter/flutter/issues.
+
+## command
+
+flutter run
+
+## exception
+
+FormatException: FormatException: Bad UTF-8 encoding 0x3f (at offset 7)
+
+```
+#0      _Utf8Decoder.convert (dart:convert/utf.dart:490)
+#1      _Utf8ConversionSink.addSlice (dart:convert/string_conversion.dart:345)
+#2      _Utf8ConversionSink.add (dart:convert/string_conversion.dart:341)
+#3      _ConverterStreamEventSink.add (dart:convert/chunked_conversion.dart:86)
+#4      _SinkTransformerStreamSubscription._handleData (dart:async/stream_transformers.dart:120)
+#5      _rootRunUnary (dart:async/zone.dart:1134)
+#6      _CustomZone.runUnary (dart:async/zone.dart:1031)
+#7      _CustomZone.runUnaryGuarded (dart:async/zone.dart:933)
+#8      _BufferingStreamSubscription._sendData (dart:async/stream_impl.dart:330)
+#9      _BufferingStreamSubscription._add (dart:async/stream_impl.dart:257)
+#10     _StreamController&&_SyncStreamControllerDispatch._sendData (dart:async/stream_controller.dart:763)
+#11     _StreamController._add (dart:async/stream_controller.dart:639)
+#12     _StreamController.add (dart:async/stream_controller.dart:585)
+#13     _Socket._onData (dart:io-patch/socket_patch.dart:1672)
+#14     _rootRunUnary (dart:async/zone.dart:1138)
+#15     _CustomZone.runUnary (dart:async/zone.dart:1031)
+#16     _CustomZone.runUnaryGuarded (dart:async/zone.dart:933)
+#17     _BufferingStreamSubscription._sendData (dart:async/stream_impl.dart:330)
+#18     _BufferingStreamSubscription._add (dart:async/stream_impl.dart:257)
+#19     _StreamController&&_SyncStreamControllerDispatch._sendData (dart:async/stream_controller.dart:763)
+#20     _StreamController._add (dart:async/stream_controller.dart:639)
+#21     _StreamController.add (dart:async/stream_controller.dart:585)
+#22     new _RawSocket.<anonymous closure> (dart:io-patch/socket_patch.dart:1245)
+#23     _NativeSocket.issueReadEvent.issue (dart:io-patch/socket_patch.dart:797)
+#24     _microtaskLoop (dart:async/schedule_microtask.dart:41)
+#25     _startMicrotaskLoop (dart:async/schedule_microtask.dart:50)
+#26     _runPendingImmediateCallback (dart:isolate-patch/dart:isolate/isolate_patch.dart:113)
+#27     _RawReceivePortImpl._handleMessage (dart:isolate-patch/dart:isolate/isolate_patch.dart:166)
+```
+
+## flutter doctor
+
+```
+[✓] Flutter (Channel beta, v0.4.4, on Microsoft Windows [Version 10.0.17134.112], locale vi-VN)
+    • Flutter version 0.4.4 at C:\flutter
+    • Framework revision f9bb4289e9 (7 weeks ago), 2018-05-11 21:44:54 -0700
+    • Engine revision 06afdfe54e
+    • Dart version 2.0.0-dev.54.0.flutter-46ab040e58
+
+[!] Android toolchain - develop for Android devices (Android SDK 27.0.3)
+    • Android SDK at C:\Users\Admin\AppData\Local\Android\sdk
+    • Android NDK location not configured (optional; useful for native profiling support)
+    • Platform android-27, build-tools 27.0.3
+    • Java binary at: D:\Admin\Other\android-studio\jre\bin\java
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1136-b01)
+    ✗ Android license status unknown.
+
+[✓] Android Studio (version 3.1)
+    • Android Studio at C:\Program Files\Android\Android Studio
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1024-b02)
+
+[✓] Android Studio (version 3.0)
+    • Android Studio at D:\Admin\Other\Android Studio Preview
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-915-b01)
+
+[✓] Android Studio (version 3.2)
+    • Android Studio at D:\Admin\Other\android-studio
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • Java version OpenJDK Runtime Environment (build 1.8.0_152-release-1136-b01)
+
+[!] IntelliJ IDEA Community Edition (version 2017.2)
+    • IntelliJ at C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2017.2.1
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • For information about installing plugins, see
+      https://flutter.io/intellij-setup/#installing-the-plugins
+
+[✓] IntelliJ IDEA Community Edition (version 2018.1)
+    • IntelliJ at C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2018.1
+    • Flutter plugin version 23.1.3
+    • Dart plugin version 181.4203.498
+
+[!] IntelliJ IDEA Ultimate Edition (version 2017.3)
+    • IntelliJ at C:\Program Files\JetBrains\IntelliJ IDEA 2017.3
+    ✗ Flutter plugin not installed; this adds Flutter specific functionality.
+    ✗ Dart plugin not installed; this adds Dart specific functionality.
+    • For information about installing plugins, see
+      https://flutter.io/intellij-setup/#installing-the-plugins
+
+[!] VS Code, 64-bit edition (version 1.24.1)
+    • VS Code at C:\Program Files\Microsoft VS Code
+    • Dart Code extension not installed; install from
+      https://marketplace.visualstudio.com/items?itemName=Dart-Code.dart-code
+
+[✓] Connected devices (1 available)
+    • Lenovo A2010 a • 0123456789ABCDEF • android-arm • Android 5.1 (API 22)
+
+! Doctor found issues in 4 categories.
+```
