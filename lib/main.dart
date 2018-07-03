@@ -1,62 +1,12 @@
-import 'dart:async';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:wallpaper/category_page.dart';
-import 'package:wallpaper/database.dart';
-import 'package:wallpaper/image_list.dart';
-import 'package:wallpaper/models.dart';
-import 'package:wallpaper/upload_page.dart';
+import 'package:wallpaper/screens/all_images_page.dart';
+import 'package:wallpaper/screens/category_page.dart';
+import 'package:wallpaper/screens/newest_image_page.dart';
+import 'package:wallpaper/screens/recent_images_page.dart';
+import 'package:wallpaper/screens/trending_images_page.dart';
+import 'package:wallpaper/screens/upload_page.dart';
 
 void main() => runApp(MyApp());
-
-/// only Android platform, because i don't have MacOS :)
-const String channel = "my_flutter_wallpaper";
-const methodChannel = MethodChannel(channel);
-
-/// Set image as wallpaper
-/// Arguments: [List] of [String]s, is path of image file, start from folder in external storage directory
-/// Return   : a [String] when success or [PlatformException] when failed
-/// Example:
-/// path of image: 'external storage directory'/flutterImages/image.png
-///   methodChannel.invokeMethod(
-///      setWallpaper,
-///      <String>['flutterImages', 'image.png'],
-///   );
-const String setWallpaper = "setWallpaper";
-
-/// Scan image file, after scan, we can see image in gallery
-/// Arguments: [List] of [String]s, is path of image file, start from folder in external storage directory
-/// Return   : a [String] when success or [PlatformException] when failed
-/// Example:
-/// path of image: 'external storage directory'/flutterImages/image.png
-///   methodChannel.invokeMethod(scanFile, <String>[
-///     'flutterImages',
-///     'image.png'
-///   ]);
-const String scanFile = "scanFile";
-
-/// Share image to facebook
-/// Arguments: [String], it is image url
-/// Return   : [Null]
-/// Example:
-/// methodChannel.invokeMethod(shareImageToFacebook, url);
-const String shareImageToFacebook = 'shareImageToFacebook';
-
-/// Resize image
-/// Arguments: [Map], keys is [String]s, values is dynamic type
-/// Return   : a [Uint8List] when success or [PlatformException] when failed
-/// Example:
-/// final Uint8List outBytes = await methodChannel.invokeMethod(
-///   resizeImage,
-///   <String, dynamic>{
-///     'bytes': bytes,
-///     'width': 720,
-///     'height': 1280,
-///   },
-/// );
-const String resizeImage = "resizeImage";
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -185,105 +135,13 @@ class _MyHomePageState extends State<MyHomePage> {
               );
             },
           ),
+          new AboutListTile(
+            applicationName: 'Flutter wallpaper HD',
+            applicationIcon: new FlutterLogo(),
+            applicationVersion: '1.0.0',
+          ),
         ].expand<Widget>((i) => i is Iterable ? i : [i]).toList(),
       ),
     );
-  }
-}
-
-class AllPage extends StatelessWidget {
-  final imagesCollection = Firestore.instance.collection('images');
-
-  @override
-  Widget build(BuildContext context) {
-    return new ImageList(imagesCollection.snapshots().map(mapper));
-  }
-}
-
-class NewestPage extends StatelessWidget {
-  final imagesCollection = Firestore.instance.collection('images');
-
-  @override
-  Widget build(BuildContext context) {
-    return new ImageList(
-      imagesCollection
-          .orderBy('uploadedTime', descending: true)
-          .limit(15)
-          .snapshots()
-          .map(mapper),
-    );
-  }
-}
-
-class RecentPage extends StatelessWidget {
-  final imageDb = new ImageDb.getInstance();
-
-  @override
-  Widget build(BuildContext context) {
-    return new ImageList(imageDb.getImages(20).asStream());
-  }
-}
-
-class TrendingPage extends StatefulWidget {
-  @override
-  _TrendingPageState createState() => new _TrendingPageState();
-}
-
-enum Trending { downloadCount, viewCount }
-
-String trendingToString(Trending trending) {
-  switch (trending) {
-    case Trending.downloadCount:
-      return "Download count";
-    case Trending.viewCount:
-      return "View count";
-  }
-  return "";
-}
-
-class _TrendingPageState extends State<TrendingPage> {
-  Trending _selected = Trending.downloadCount;
-  final imagesCollection = Firestore.instance.collection('images');
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: Text('Trending images'),
-        actions: _buildActions(),
-      ),
-      body: new ImageList(stream(_selected)),
-    );
-  }
-
-  List<Widget> _buildActions() {
-    return <Widget>[
-      new DropdownButton<Trending>(
-        items: Trending.values.map((e) {
-          return new DropdownMenuItem(
-            child: new Text(trendingToString(e)),
-            value: e,
-          );
-        }).toList(),
-        value: _selected,
-        onChanged: (newValue) => setState(() => _selected = newValue),
-      ),
-    ];
-  }
-
-  Stream<List<ImageModel>> stream(Trending selected) {
-    switch (selected) {
-      case Trending.downloadCount:
-        return imagesCollection
-            .orderBy('downloadCount', descending: true)
-            .snapshots()
-            .map(mapper);
-      case Trending.viewCount:
-        return imagesCollection
-            .orderBy('viewCount', descending: true)
-            .snapshots()
-            .map(mapper);
-    }
-    return null;
   }
 }

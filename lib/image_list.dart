@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:wallpaper/image_detail.dart';
-import 'package:wallpaper/models.dart';
+import 'package:wallpaper/data/models/image_model.dart';
+import 'package:wallpaper/screens/image_detail.dart';
 
 class ImageList extends StatelessWidget {
   final Stream<List<ImageModel>> stream;

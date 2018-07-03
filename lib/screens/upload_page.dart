@@ -10,8 +10,8 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
 import 'package:uuid/uuid.dart';
-import 'package:wallpaper/main.dart';
-import 'package:wallpaper/models.dart';
+import 'package:wallpaper/constants.dart';
+import 'package:wallpaper/data/models/image_category_model.dart';
 
 class UploadPage extends StatefulWidget {
   @override
@@ -241,7 +241,7 @@ class _UploadPageState extends State<UploadPage> {
       final task1 =
           firebaseStorage.ref().child(uploadPath).putFile(_imageFile).future;
 
-      final uploadThumbnail = (Uint8List thumbnailBytes) {
+      final uploadThumbnail = (thumbnailBytes) {
         return firebaseStorage
             .ref()
             .child('uploadImages/${new Uuid().v1()}.png')
@@ -251,13 +251,18 @@ class _UploadPageState extends State<UploadPage> {
 
       final task2 = _imageFile
           .readAsBytes()
-          .then<Uint8List>((List<int> bytes) => Uint8List.fromList(bytes))
-          .then<Uint8List>((Uint8List bytes) =>
-      methodChannel.invokeMethod(resizeImage, <String, dynamic>{
-        'bytes': bytes,
-        'width': 360.0,
-        'height': 640.0,
-      }) as Future<Uint8List>)
+          .then((bytes) => Uint8List.fromList(bytes))
+          .then(
+            (bytes) =>
+            methodChannel.invokeMethod(
+              resizeImage,
+              <String, dynamic>{
+                'bytes': bytes,
+                'width': 360,
+                'height': 640,
+              },
+            ),
+      )
           .then(uploadThumbnail);
 
       final urls = await Future.wait([task1, task2]);
@@ -320,12 +325,9 @@ class _AddCategoryState extends State<AddCategory> {
           padding: const EdgeInsets.all(8.0),
           child: _buildTextField(),
         ),
+        _buildImagePreview(),
         new Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: _buildImagePreview(),
-        ),
-        new Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(12.0),
           child: _buildProgressOrMsgTextOrButtonChooseImage(),
         ),
         new Row(
@@ -375,11 +377,14 @@ class _AddCategoryState extends State<AddCategory> {
 
   Widget _buildImagePreview() {
     return _imageFile != null
-        ? new Image.file(
-            _imageFile,
-      width: 64.0,
-            height: 64.0,
-            fit: BoxFit.cover,
+        ? new Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: new Image.file(
+        _imageFile,
+        width: 64.0,
+        height: 64.0,
+        fit: BoxFit.cover,
+      ),
           )
         : new Container();
   }
@@ -408,21 +413,24 @@ class _AddCategoryState extends State<AddCategory> {
 
     final task = await _imageFile
         .readAsBytes()
-        .then<Uint8List>((List<int> bytes) => Uint8List.fromList(bytes))
-        .then<Uint8List>((Uint8List bytes) =>
-    methodChannel.invokeMethod(resizeImage, <String, dynamic>{
-      'bytes': bytes,
-      'width': 360.0,
-      'height': 360.0,
-    }) as Future<Uint8List>)
-        .then<UploadTaskSnapshot>(
+        .then((bytes) => Uint8List.fromList(bytes))
+        .then(
           (bytes) =>
-      firebaseStorage
-          .ref()
-          .child(uploadPath)
-          .putData(bytes)
-          .future,
-    );
+          methodChannel.invokeMethod(
+            resizeImage,
+            <String, dynamic>{
+              'bytes': bytes,
+              'width': 360,
+              'height': 360,
+            },
+          ),
+    )
+        .then((bytes) =>
+    firebaseStorage
+        .ref()
+        .child(uploadPath)
+        .putData(bytes)
+        .future);
 
     await categoriesCollection.add(<String, String>{
       'name': _textController.text,
@@ -435,12 +443,17 @@ class _AddCategoryState extends State<AddCategory> {
   }
 
   bool _validate() {
+    final textIsEmpty = _textController.text.isEmpty;
+    if (_imageFile == null && textIsEmpty) {
+      _showMessage('Please select image and provide name');
+      return false;
+    }
     if (_imageFile == null) {
       _showMessage('Please select image');
       return false;
     }
-    if (_textController.text.isEmpty) {
-      _showMessage('Please provider name');
+    if (textIsEmpty) {
+      _showMessage('Please provide name');
       return false;
     }
     return true;

@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
@@ -21,15 +20,14 @@ import com.facebook.share.model.SharePhotoContent;
 import com.facebook.share.widget.ShareDialog;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.util.List;
-
 import io.flutter.app.FlutterActivity;
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugins.GeneratedPluginRegistrant;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.util.List;
 
 import static io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import static io.flutter.plugin.common.MethodChannel.Result;
@@ -110,10 +108,10 @@ public class MainActivity extends FlutterActivity {
                                 break;
                             case RESIZE_IMAGE:
                                 resizeImage(
-                                        methodCall.argument("bytes"),
+                                        (byte[]) methodCall.argument("bytes"),
                                         result,
-                                        methodCall.argument("width"),
-                                        methodCall.argument("height")
+                                        (int) methodCall.argument("width"),
+                                        (int) methodCall.argument("height")
                                 );
                                 break;
                             default:

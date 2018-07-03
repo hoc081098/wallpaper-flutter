@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:wallpaper/data/models/image_category_model.dart';
 import 'package:wallpaper/image_list.dart';
-import 'package:wallpaper/models.dart';
+import 'package:wallpaper/utils.dart';
 
 class CategoryPage extends StatelessWidget {
   final categoriesCollection = Firestore.instance.collection('categories');
@@ -115,15 +116,4 @@ class ImagesByCategoryPage extends StatelessWidget {
       ),
     );
   }
-}
-
-List<ImageModel> mapper(QuerySnapshot querySnapshot) {
-  return querySnapshot.documents.map(mapperImageModel).toList();
-}
-
-ImageModel mapperImageModel(documentSnapshot) {
-  return ImageModel.fromJson(
-    id: documentSnapshot.documentID,
-    json: documentSnapshot.data,
-  );
 }

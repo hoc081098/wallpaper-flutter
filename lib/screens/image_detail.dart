@@ -10,10 +10,10 @@ import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
 import 'package:simple_permissions/simple_permissions.dart';
-import 'package:wallpaper/category_page.dart';
-import 'package:wallpaper/database.dart';
-import 'package:wallpaper/main.dart';
-import 'package:wallpaper/models.dart';
+import 'package:wallpaper/constants.dart';
+import 'package:wallpaper/data/database.dart';
+import 'package:wallpaper/data/models/image_model.dart';
+import 'package:wallpaper/utils.dart';
 import 'package:zoomable_image/zoomable_image.dart';
 
 class ImageDetailPage extends StatefulWidget {
@@ -354,16 +354,5 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         .insert(image)
         .then((i) => debugPrint("Inserted $i"))
         .catchError((e) => debugPrint("Inserted error $e"));
-  }
-}
-
-bool saveImage(Map<String, dynamic> map) {
-  try {
-    new File(map['filePath'])
-      ..createSync(recursive: true)
-      ..writeAsBytesSync(map['bytes']);
-    return true;
-  } catch (e) {
-    return false;
   }
 }

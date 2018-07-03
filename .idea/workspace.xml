@@ -13,15 +13,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/flutter_01.log" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" afterPath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" />
-      <change beforePath="$PROJECT_DIR$/lib/image_detail.dart" afterPath="$PROJECT_DIR$/lib/image_detail.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" afterPath="$PROJECT_DIR$/lib/main.dart" />
-      <change beforePath="$PROJECT_DIR$/lib/upload_page.dart" afterPath="$PROJECT_DIR$/lib/upload_page.dart" />
+      <change afterPath="$PROJECT_DIR$/lib/constants.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/data/models/image_category_model.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/all_images_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/newest_image_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/screens/trending_images_page.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/utils.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/category_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/category_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/database.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/image_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/image_detail.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/image_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/image_list.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/image_model.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/upload_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/upload_page.dart" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -36,57 +44,13 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="image_detail.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/image_detail.dart">
+      <file leaf-file-name="upload_page.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/screens/upload_page.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-367">
-              <caret line="204" column="26" lean-forward="false" selection-start-line="204" selection-start-column="26" selection-end-line="204" selection-end-column="26" />
+            <state relative-caret-position="95">
+              <caret line="27" column="53" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
               <folding>
-                <element signature="e#0#20#0" expanded="true" />
-                <element signature="e#703#888#0" expanded="false" />
-                <element signature="e#1132#1147#0" expanded="false" />
-                <element signature="e#1183#1624#0" expanded="false" />
-                <element signature="e#1655#1777#0" expanded="false" />
-                <element signature="e#1828#2145#0" expanded="false" />
-                <element signature="e#1853#2140#0" expanded="false" />
-                <element signature="e#1904#2133#0" expanded="false" />
-                <element signature="e#1973#2124#0" expanded="false" />
-                <element signature="e#1995#2003#0" expanded="false" />
-                <element signature="e#2195#3145#0" expanded="false" />
-                <element signature="e#2222#3140#0" expanded="false" />
-                <element signature="e#2250#3082#0" expanded="false" />
-                <element signature="e#2274#2613#0" expanded="false" />
-                <element signature="e#2296#2304#0" expanded="false" />
-                <element signature="e#2368#2380#0" expanded="false" />
-                <element signature="e#2443#2589#0" expanded="false" />
-                <element signature="e#2693#2717#0" expanded="false" />
-                <element signature="e#2756#3073#0" expanded="false" />
-                <element signature="e#2796#3062#0" expanded="false" />
-                <element signature="e#2820#2827#0" expanded="false" />
-                <element signature="e#3180#3403#0" expanded="false" />
-                <element signature="e#3205#3398#0" expanded="false" />
-                <element signature="e#3228#3391#0" expanded="false" />
-                <element signature="e#3345#3382#0" expanded="false" />
-                <element signature="e#3454#3751#0" expanded="false" />
-                <element signature="e#3479#3746#0" expanded="false" />
-                <element signature="e#3507#3739#0" expanded="false" />
-                <element signature="e#3584#3730#0" expanded="false" />
-                <element signature="e#3610#3644#0" expanded="false" />
-                <element signature="e#3782#4091#0" expanded="false" />
-                <element signature="e#3805#4086#0" expanded="false" />
-                <element signature="e#3828#4079#0" expanded="false" />
-                <element signature="e#3890#4070#0" expanded="false" />
-                <element signature="e#3918#3939#0" expanded="false" />
-                <element signature="e#3979#4001#0" expanded="false" />
-                <element signature="e#4131#4427#0" expanded="false" />
-                <element signature="e#4161#4422#0" expanded="false" />
-                <element signature="e#4197#4415#0" expanded="false" />
-                <element signature="e#4215#4222#0" expanded="false" />
-                <element signature="e#9611#9621#0" expanded="false" />
-                <element signature="e#10208#10557#0" expanded="false" />
-                <element signature="e#10429#10511#0" expanded="false" />
-                <element signature="e#10595#10762#0" expanded="false" />
-                <element signature="e#10807#10979#0" expanded="false" />
+                <element signature="n#!!block;n#UploadPage#0" />
               </folding>
             </state>
           </provider>
@@ -97,15 +61,13 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Dart File" />
         <option value="valueResourceFile" />
+        <option value="Dart File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>if (mounted) {</find>
-      <find>new</find>
       <find>padding</find>
       <find>pict</find>
       <find>floatting</find>
@@ -134,6 +96,8 @@
       <find>360.0</find>
       <find>methodChannel</find>
       <find>//</find>
+      <find>Error</find>
+      <find>resizeImage</find>
     </findStrings>
     <replaceStrings>
       <replace>final</replace>
@@ -149,29 +113,35 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GradleLocalSettings">
-    <option name="externalProjectsViewState">
-      <projects_view />
-    </option>
-  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" />
-        <option value="$PROJECT_DIR$/lib/database.dart" />
         <option value="$PROJECT_DIR$/lib/ImageList.dart" />
         <option value="$PROJECT_DIR$/lib/models.dart" />
-        <option value="$PROJECT_DIR$/lib/image_list.dart" />
-        <option value="$PROJECT_DIR$/lib/category_page.dart" />
         <option value="$PROJECT_DIR$/android/build.gradle" />
         <option value="$PROJECT_DIR$/android/app/build.gradle" />
         <option value="$PROJECT_DIR$/android/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" />
-        <option value="$PROJECT_DIR$/lib/image_detail.dart" />
-        <option value="$PROJECT_DIR$/lib/main.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/recent_images_page.dart" />
+        <option value="$PROJECT_DIR$/lib/models/image_category_model.dart" />
+        <option value="$PROJECT_DIR$/lib/models/models.dart" />
+        <option value="$PROJECT_DIR$/lib/category_page.dart" />
         <option value="$PROJECT_DIR$/lib/upload_page.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/newest_image_page.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/all_images_page.dart" />
+        <option value="$PROJECT_DIR$/lib/database.dart" />
+        <option value="$PROJECT_DIR$/lib/utils.dart" />
+        <option value="$PROJECT_DIR$/lib/image_detail.dart" />
+        <option value="$PROJECT_DIR$/lib/image_list.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/category_page.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/trending_images_page.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/upload_page.dart" />
+        <option value="$PROJECT_DIR$/lib/constants.dart" />
+        <option value="$PROJECT_DIR$/lib/screens/image_detail.dart" />
+        <option value="$PROJECT_DIR$/lib/main.dart" />
       </list>
     </option>
   </component>
@@ -182,22 +152,11 @@
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <flattenPackages />
-      <showMembers />
-      <showModules />
-      <showLibraryContents />
-      <hideEmptyPackages />
-      <abbreviatePackageNames />
-      <autoscrollToSource />
-      <autoscrollFromSource />
-      <sortByType />
-      <manualOrder />
+    <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -244,14 +203,16 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Admin\Documents\Java\wallpaper\lib\screens" />
+      <recent name="D:\Admin\Documents\Java\wallpaper\lib\data" />
+      <recent name="D:\Admin\Documents\Java\wallpaper\lib\models" />
       <recent name="D:\Admin\Documents\Java\wallpaper\assets" />
       <recent name="D:\Admin\Documents\Java\wallpaper\android\app" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
+    <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Admin\Documents\Java\wallpaper\assets" />
       <recent name="D:\Admin\Documents\Java\wallpaper\android\app" />
-      <recent name="D:\Admin\Documents\Java\wallpaper\android\app\src" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -267,56 +228,11 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="Application" factoryName="Application">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-    </configuration>
-    <configuration default="true" type="Remote" factoryName="Remote">
-      <option name="USE_SOCKET_TRANSPORT" value="true" />
-      <option name="SERVER_MODE" value="false" />
-      <option name="SHMEM_ADDRESS" value="javadebug" />
-      <option name="HOST" value="localhost" />
-      <option name="PORT" value="5005" />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-    </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -334,15 +250,41 @@
       </option>
       <patterns />
     </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
       <predefined_log_file id="idea.log" enabled="true" />
     </configuration>
-  </component>
-  <component name="ShelveChangesManager" show_recycled="false">
-    <option name="remove_strategy" value="false" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -376,7 +318,14 @@
       <option name="project" value="LOCAL" />
       <updated>1530021224139</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Write method channel to resize image, and apply to image_detail.dart and upload_page.dart">
+      <created>1530612283028</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1530612283028</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -391,76 +340,76 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36928105" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48287112" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23856209" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28921568" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26797387" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3670473" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19591528" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25037822" sideWeight="0.5033003" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.1785174" sideWeight="0.49669966" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24257426" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
+      <window_info id="Build Variants" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" weight="0.36928105" />
+      <window_info anchor="right" id="Maven Projects" order="3" />
+      <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.48287112" />
+      <window_info anchor="right" id="Flutter Outline" order="3" />
+      <window_info anchor="bottom" id="Logcat" order="7" weight="0.3670473" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="right" id="Device File Explorer" order="3" sideWeight="0.5033003" side_tool="true" weight="0.25037822" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.63071895" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.5620915" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.26797387" />
+      <window_info id="Captures" order="2" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18986385" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="right" id="Flutter Inspector" order="3" sideWeight="0.49669966" visible="true" weight="0.1785174" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.24257426" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
     </layout>
     <layout-to-restore>
-      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.36928105" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Dart Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.48287112" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Flutter Outline" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3670473" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25037822" sideWeight="0.5033003" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32952693" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24257426" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23856209" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5725938" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.26797387" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19591528" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32838285" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Flutter Inspector" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1785174" sideWeight="0.49669966" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" order="4" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Dart Analysis" order="9" weight="0.48287112" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.23856209" />
+      <window_info id="Build Variants" order="2" side_tool="true" />
+      <window_info id="Image Layers" order="6" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="5" />
+      <window_info id="Favorites" order="8" side_tool="true" />
+      <window_info id="Captures" order="7" />
+      <window_info id="Capture Tool" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="8" />
+      <window_info anchor="bottom" id="Android Profiler" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.36928105" />
+      <window_info anchor="right" id="Flutter Inspector" order="10" sideWeight="0.49669966" visible="true" weight="0.1785174" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Device File Explorer" order="6" sideWeight="0.5033003" side_tool="true" weight="0.25037822" />
+      <window_info anchor="right" id="Flutter Outline" order="5" />
+      <window_info anchor="bottom" id="Logcat" order="10" weight="0.3670473" />
+      <window_info anchor="bottom" id="Version Control" order="12" weight="0.5725938" />
+      <window_info anchor="right" id="Maven Projects" order="4" />
+      <window_info anchor="bottom" id="Terminal" order="13" weight="0.26797387" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19591528" />
+      <window_info anchor="bottom" id="Messages" order="11" weight="0.24257426" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info anchor="right" id="Theme Preview" order="9" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
     </layout-to-restore>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -499,101 +448,18 @@
     <MESSAGE value="Write MethodChannel to set wallpaper&#10;Split main.dart into many files&#10;And other updates" />
     <MESSAGE value="Many changes...!!" />
     <MESSAGE value="Change share to facebook (MainActivity.java)&#10;Change image_detail.dart" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change share to facebook (MainActivity.java)&#10;Change image_detail.dart" />
+    <MESSAGE value="Write method channel to resize image, and apply to image_detail.dart and upload_page.dart" />
+    <option name="LAST_COMMIT_MESSAGE" value="Write method channel to resize image, and apply to image_detail.dart and upload_page.dart" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <option name="time" value="11" />
     </breakpoint-manager>
-    <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/image_picker-0.4.5/lib/image_picker.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="31" column="22" lean-forward="false" selection-start-line="31" selection-start-column="22" selection-end-line="31" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/bottom_sheet.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-63">
-          <caret line="250" column="0" lean-forward="true" selection-start-line="250" selection-start-column="0" selection-end-line="250" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/scaffold.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="521">
-          <caret line="1242" column="37" lean-forward="false" selection-start-line="1242" selection-start-column="37" selection-end-line="1242" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/flat_button.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="148" column="14" lean-forward="false" selection-start-line="148" selection-start-column="14" selection-end-line="148" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/zone.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11799">
-          <caret line="623" column="8" lean-forward="false" selection-start-line="623" selection-start-column="8" selection-end-line="623" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/timer.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1030">
-          <caret line="44" column="10" lean-forward="false" selection-start-line="44" selection-start-column="10" selection-end-line="44" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/services/system_chrome.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="380">
-          <caret line="269" column="27" lean-forward="true" selection-start-line="269" selection-start-column="27" selection-end-line="269" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/share-0.5.2/lib/share.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="29" column="22" lean-forward="false" selection-start-line="29" selection-start-column="22" selection-end-line="29" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/app/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="37" column="57" lean-forward="false" selection-start-line="37" selection-start-column="57" selection-end-line="37" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/app/src/main/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="50" lean-forward="false" selection-start-line="2" selection-start-column="50" selection-end-line="2" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="22" lean-forward="false" selection-start-line="16" selection-start-column="22" selection-end-line="16" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/packages/flutter/lib/src/widgets/framework.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="3589" column="15" lean-forward="false" selection-start-line="3589" selection-start-column="15" selection-end-line="3589" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.2.1/lib/src/rendering/sliver_staggered_grid.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="57">
@@ -604,7 +470,7 @@
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/flutter_staggered_grid_view-0.2.1/lib/src/widgets/staggered_grid_view.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="325" column="32" lean-forward="false" selection-start-line="325" selection-start-column="32" selection-end-line="325" selection-end-column="32" />
+          <caret line="325" column="32" selection-start-line="325" selection-start-column="32" selection-end-line="325" selection-end-column="32" />
         </state>
       </provider>
     </entry>
@@ -615,83 +481,71 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/image_list.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="58" column="66" lean-forward="false" selection-start-line="58" selection-start-column="66" selection-end-line="58" selection-end-column="66" />
-          <folding>
-            <element signature="e#0#20#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/java/lang/Throwable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="129">
-          <caret line="469" column="18" lean-forward="false" selection-start-line="469" selection-start-column="18" selection-end-line="469" selection-end-column="18" />
+          <caret line="469" column="18" selection-start-line="469" selection-start-column="18" selection-end-line="469" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/content/pm/Signature.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-305">
-          <caret line="40" column="13" lean-forward="false" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
+          <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/annotation/TargetApi.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="130">
-          <caret line="29" column="18" lean-forward="false" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
+          <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="35">
-          <caret line="15" column="21" lean-forward="false" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
+          <caret line="15" column="21" selection-start-line="15" selection-start-column="21" selection-end-line="15" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/ui/painting.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
-          <caret line="2077" column="6" lean-forward="false" selection-start-line="2077" selection-start-column="6" selection-end-line="2077" selection-end-column="6" />
+          <caret line="2077" column="6" selection-start-line="2077" selection-start-column="6" selection-end-line="2077" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/flutter/packages/flutter/lib/src/painting/decoration_image.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
-          <caret line="60" column="14" lean-forward="false" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
-          <caret line="40" column="36" lean-forward="false" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
+          <caret line="40" column="36" selection-start-line="40" selection-start-column="36" selection-end-line="40" selection-end-column="36" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-94">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
+        <state relative-caret-position="-94" />
       </provider>
     </entry>
     <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/broadcast_stream_controller.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="22">
-          <caret line="411" column="2" lean-forward="false" selection-start-line="411" selection-start-column="2" selection-end-line="411" selection-end-column="2" />
+          <caret line="411" column="2" selection-start-line="411" selection-start-column="2" selection-end-line="411" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/src/firestore.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
-          <caret line="16" column="57" lean-forward="false" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
+          <caret line="16" column="57" selection-start-line="16" selection-start-column="57" selection-end-line="16" selection-end-column="57" />
         </state>
       </provider>
     </entry>
@@ -705,7 +559,7 @@
     <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/stream.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="361">
-          <caret line="1795" column="15" lean-forward="false" selection-start-line="1795" selection-start-column="15" selection-end-line="1795" selection-end-column="15" />
+          <caret line="1795" column="15" selection-start-line="1795" selection-start-column="15" selection-end-line="1795" selection-end-column="15" />
         </state>
       </provider>
     </entry>
@@ -719,36 +573,28 @@
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/cloud_firestore-0.7.3/lib/src/query.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="124">
-          <caret line="78" column="24" lean-forward="false" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
+          <caret line="78" column="24" selection-start-line="78" selection-start-column="24" selection-end-line="78" selection-end-column="24" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/list.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="421">
-          <caret line="191" column="17" lean-forward="false" selection-start-line="191" selection-start-column="17" selection-end-line="191" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/models.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="589">
-          <caret line="31" column="6" lean-forward="false" selection-start-line="31" selection-start-column="6" selection-end-line="31" selection-end-column="6" />
+          <caret line="191" column="17" selection-start-line="191" selection-start-column="17" selection-end-line="191" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/flutter/bin/cache/artifacts/engine/android-arm/flutter.jar!/io/flutter/plugin/common/MethodChannel.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="283">
-          <caret line="103" column="21" lean-forward="false" selection-start-line="103" selection-start-column="21" selection-end-line="103" selection-end-column="21" />
+          <caret line="103" column="21" selection-start-line="103" selection-start-column="21" selection-end-line="103" selection-end-column="21" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="451">
-          <caret line="51" column="68" lean-forward="false" selection-start-line="51" selection-start-column="68" selection-end-line="51" selection-end-column="68" />
-          <folding />
+          <caret line="51" column="68" selection-start-line="51" selection-start-column="68" selection-end-line="51" selection-end-column="68" />
         </state>
       </provider>
     </entry>
@@ -756,31 +602,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="327">
           <caret line="41" column="54" lean-forward="true" selection-start-line="41" selection-start-column="41" selection-end-line="41" selection-end-column="54" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/flutter/packages/flutter/lib/src/services/platform_channel.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
-          <caret line="270" column="18" lean-forward="false" selection-start-line="270" selection-start-column="18" selection-end-line="270" selection-end-column="18" />
-          <folding />
+          <caret line="270" column="18" selection-start-line="270" selection-start-column="18" selection-end-line="270" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/io/file.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="146">
-          <caret line="494" column="20" lean-forward="false" selection-start-line="494" selection-start-column="20" selection-end-line="494" selection-end-column="20" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/future.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="146">
-          <caret line="588" column="12" lean-forward="false" selection-start-line="588" selection-start-column="12" selection-end-line="588" selection-end-column="12" />
-          <folding />
+          <caret line="494" column="20" selection-start-line="494" selection-start-column="20" selection-end-line="494" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -788,214 +623,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="127">
           <caret line="805" column="2" lean-forward="true" selection-start-line="805" selection-start-column="2" selection-end-line="805" selection-end-column="2" />
-          <folding>
-            <element signature="e#532#701#0" expanded="false" />
-            <element signature="e#728#14064#0" expanded="false" />
-            <element signature="e#732#796#0" expanded="false" />
-            <element signature="e#825#1456#0" expanded="false" />
-            <element signature="e#1522#2151#0" expanded="false" />
-            <element signature="e#2215#2860#0" expanded="false" />
-            <element signature="e#2940#3800#0" expanded="false" />
-            <element signature="e#3868#4726#0" expanded="false" />
-            <element signature="e#4792#5672#0" expanded="false" />
-            <element signature="e#5740#6618#0" expanded="false" />
-            <element signature="e#6684#7566#0" expanded="false" />
-            <element signature="e#7634#8514#0" expanded="false" />
-            <element signature="e#8580#9467#0" expanded="false" />
-            <element signature="e#9537#10419#0" expanded="false" />
-            <element signature="e#10489#11373#0" expanded="false" />
-            <element signature="e#11443#12334#0" expanded="false" />
-            <element signature="e#12408#13299#0" expanded="false" />
-            <element signature="e#13373#14002#0" expanded="false" />
-            <element signature="e#14066#14113#0" expanded="false" />
-            <element signature="e#14139#14573#0" expanded="false" />
-            <element signature="e#14143#14242#0" expanded="false" />
-            <element signature="e#14276#14364#0" expanded="false" />
-            <element signature="e#14393#14450#0" expanded="false" />
-            <element signature="e#14479#14546#0" expanded="false" />
-            <element signature="e#14622#14990#0" expanded="false" />
-            <element signature="e#14626#14947#0" expanded="false" />
-            <element signature="e#15041#15430#0" expanded="false" />
-            <element signature="e#15045#15381#0" expanded="false" />
-            <element signature="e#15533#15872#0" expanded="false" />
-            <element signature="e#15580#15624#0" expanded="false" />
-            <element signature="e#15674#15721#0" expanded="false" />
-            <element signature="e#15777#15822#0" expanded="false" />
-            <element signature="e#15874#15967#0" expanded="false" />
-            <element signature="e#16003#16321#0" expanded="false" />
-            <element signature="e#16114#16121#0" expanded="false" />
-            <element signature="e#16168#16174#0" expanded="false" />
-            <element signature="e#16229#16266#0" expanded="false" />
-            <element signature="e#16253#16258#0" expanded="false" />
-            <element signature="e#16323#17317#0" expanded="false" />
-            <element signature="e#17363#27826#0" expanded="false" />
-            <element signature="e#17367#17485#0" expanded="false" />
-            <element signature="e#17530#18145#0" expanded="false" />
-            <element signature="e#18232#18290#0" expanded="false" />
-            <element signature="e#18294#18658#0" expanded="false" />
-            <element signature="e#18693#19075#0" expanded="false" />
-            <element signature="e#19122#19449#0" expanded="false" />
-            <element signature="e#19485#19856#0" expanded="false" />
-            <element signature="e#19904#20302#0" expanded="false" />
-            <element signature="e#20368#20800#0" expanded="false" />
-            <element signature="e#20878#21248#0" expanded="false" />
-            <element signature="e#21315#21724#0" expanded="false" />
-            <element signature="e#21803#22202#0" expanded="false" />
-            <element signature="e#22268#22702#0" expanded="false" />
-            <element signature="e#22780#23151#0" expanded="false" />
-            <element signature="e#23218#23629#0" expanded="false" />
-            <element signature="e#23708#24108#0" expanded="false" />
-            <element signature="e#24174#24610#0" expanded="false" />
-            <element signature="e#24688#25060#0" expanded="false" />
-            <element signature="e#25127#25540#0" expanded="false" />
-            <element signature="e#25619#25950#0" expanded="false" />
-            <element signature="e#26021#26926#0" expanded="false" />
-            <element signature="e#27009#27341#0" expanded="false" />
-            <element signature="e#27412#27745#0" expanded="false" />
-            <element signature="e#27828#28193#0" expanded="false" />
-            <element signature="e#28254#29626#0" expanded="false" />
-            <element signature="e#28258#28380#0" expanded="false" />
-            <element signature="e#28425#28660#0" expanded="false" />
-            <element signature="e#28722#29337#0" expanded="false" />
-            <element signature="e#29424#29482#0" expanded="false" />
-            <element signature="e#29628#29977#0" expanded="false" />
-            <element signature="e#30043#30165#0" expanded="false" />
-            <element signature="e#30510#31126#0" expanded="false" />
-            <element signature="e#31214#31273#0" expanded="false" />
-            <element signature="e#31277#31569#0" expanded="false" />
-            <element signature="e#31756#32128#0" expanded="false" />
-            <element signature="e#32197#33658#0" expanded="false" />
-            <element signature="e#32201#32330#0" expanded="false" />
-            <element signature="e#32383#32636#0" expanded="false" />
-            <element signature="e#32706#33353#0" expanded="false" />
-            <element signature="e#33448#33514#0" expanded="false" />
-            <element signature="e#33660#34065#0" expanded="false" />
-            <element signature="e#34127#35604#0" expanded="false" />
-            <element signature="e#34131#34254#0" expanded="false" />
-            <element signature="e#34300#34536#0" expanded="false" />
-            <element signature="e#34599#35313#0" expanded="false" />
-            <element signature="e#35401#35460#0" expanded="false" />
-            <element signature="e#35606#35993#0" expanded="false" />
-            <element signature="e#36056#37561#0" expanded="false" />
-            <element signature="e#36060#36183#0" expanded="false" />
-            <element signature="e#36230#36467#0" expanded="false" />
-            <element signature="e#36531#37268#0" expanded="false" />
-            <element signature="e#37357#37417#0" expanded="false" />
-            <element signature="e#37563#37977#0" expanded="false" />
-            <element signature="e#38039#39516#0" expanded="false" />
-            <element signature="e#38043#38166#0" expanded="false" />
-            <element signature="e#38212#38448#0" expanded="false" />
-            <element signature="e#38511#39225#0" expanded="false" />
-            <element signature="e#39313#39372#0" expanded="false" />
-            <element signature="e#39518#39910#0" expanded="false" />
-            <element signature="e#39973#41478#0" expanded="false" />
-            <element signature="e#39977#40100#0" expanded="false" />
-            <element signature="e#40147#40384#0" expanded="false" />
-            <element signature="e#40448#41185#0" expanded="false" />
-            <element signature="e#41274#41334#0" expanded="false" />
-            <element signature="e#41480#41913#0" expanded="false" />
-            <element signature="e#41975#43452#0" expanded="false" />
-            <element signature="e#41979#42102#0" expanded="false" />
-            <element signature="e#42148#42384#0" expanded="false" />
-            <element signature="e#42447#43161#0" expanded="false" />
-            <element signature="e#43249#43308#0" expanded="false" />
-            <element signature="e#43454#43856#0" expanded="false" />
-            <element signature="e#43919#45425#0" expanded="false" />
-            <element signature="e#43923#44046#0" expanded="false" />
-            <element signature="e#44093#44330#0" expanded="false" />
-            <element signature="e#44394#45132#0" expanded="false" />
-            <element signature="e#45221#45281#0" expanded="false" />
-            <element signature="e#45427#45856#0" expanded="false" />
-            <element signature="e#45925#47419#0" expanded="false" />
-            <element signature="e#45929#46053#0" expanded="false" />
-            <element signature="e#46101#46339#0" expanded="false" />
-            <element signature="e#46407#47124#0" expanded="false" />
-            <element signature="e#47214#47275#0" expanded="false" />
-            <element signature="e#47421#47688#0" expanded="false" />
-            <element signature="e#47757#49130#0" expanded="false" />
-            <element signature="e#47761#47885#0" expanded="false" />
-            <element signature="e#47933#48050#0" expanded="false" />
-            <element signature="e#48118#48835#0" expanded="false" />
-            <element signature="e#48925#48986#0" expanded="false" />
-            <element signature="e#49132#49358#0" expanded="false" />
-            <element signature="e#49426#51093#0" expanded="false" />
-            <element signature="e#49430#49556#0" expanded="false" />
-            <element signature="e#49606#49725#0" expanded="false" />
-            <element signature="e#49798#50519#0" expanded="false" />
-            <element signature="e#50611#50674#0" expanded="false" />
-            <element signature="e#50678#50895#0" expanded="false" />
-            <element signature="e#51095#51319#0" expanded="false" />
-            <element signature="e#51383#53022#0" expanded="false" />
-            <element signature="e#51387#51511#0" expanded="false" />
-            <element signature="e#51559#51676#0" expanded="false" />
-            <element signature="e#51745#52462#0" expanded="false" />
-            <element signature="e#52552#52613#0" expanded="false" />
-            <element signature="e#52617#52828#0" expanded="false" />
-            <element signature="e#53024#53250#0" expanded="false" />
-            <element signature="e#53318#54993#0" expanded="false" />
-            <element signature="e#53322#53456#0" expanded="false" />
-            <element signature="e#53506#53625#0" expanded="false" />
-            <element signature="e#53698#53915#0" expanded="false" />
-            <element signature="e#53972#54693#0" expanded="false" />
-            <element signature="e#54785#54848#0" expanded="false" />
-            <element signature="e#54995#55172#0" expanded="false" />
-            <element signature="e#55198#83350#0" expanded="false" />
-            <element signature="e#55413#55488#0" expanded="false" />
-            <element signature="e#56335#56394#0" expanded="false" />
-            <element signature="e#56868#56941#0" expanded="false" />
-            <element signature="e#82298#82361#0" expanded="false" />
-            <element signature="e#83352#83492#0" expanded="false" />
-            <element signature="e#83516#111295#0" expanded="false" />
-            <element signature="e#84254#84325#0" expanded="false" />
-            <element signature="e#109680#109743#0" expanded="false" />
-            <element signature="e#111043#111108#0" expanded="false" />
-            <element signature="e#111297#111463#0" expanded="false" />
-            <element signature="e#111489#113121#0" expanded="false" />
-            <element signature="e#112055#112114#0" expanded="false" />
-            <element signature="e#112504#112577#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_storage-0.3.7/lib/src/upload_task.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
-          <caret line="80" column="12" lean-forward="false" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
-          <folding />
+          <caret line="80" column="12" selection-start-line="80" selection-start-column="12" selection-end-line="80" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/http-0.11.3+16/lib/http.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
-          <caret line="160" column="18" lean-forward="false" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
-          <folding />
+          <caret line="160" column="18" selection-start-line="160" selection-start-column="18" selection-end-line="160" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://C:/flutter/packages/flutter/lib/src/services/message_codec.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
-          <caret line="100" column="6" lean-forward="false" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/database.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#20#0" expanded="false" />
-          </folding>
+          <caret line="100" column="6" selection-start-line="100" selection-start-column="6" selection-end-line="100" selection-end-column="6" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/path_provider-0.4.1/lib/path_provider.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="280">
-          <caret line="53" column="55" lean-forward="false" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="55" />
-          <folding />
+          <caret line="53" column="55" selection-start-line="53" selection-start-column="28" selection-end-line="53" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1003,123 +658,413 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
           <caret line="238" column="13" lean-forward="true" selection-start-line="238" selection-start-column="5" selection-end-line="238" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/sdk/sources/android-25/android/media/MediaScannerConnection.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="479">
-          <caret line="237" column="23" lean-forward="false" selection-start-line="237" selection-start-column="23" selection-end-line="237" selection-end-column="23" />
-          <folding />
+          <caret line="237" column="23" selection-start-line="237" selection-start-column="23" selection-end-line="237" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/async.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="102" column="5" lean-forward="true" selection-start-line="102" selection-start-column="5" selection-end-line="102" selection-end-column="5" />
+          <folding>
+            <element signature="e#3832#3884#0" expanded="true" />
+            <element signature="e#4045#4069#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/progress_indicator.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="337" column="8" selection-start-line="337" selection-start-column="8" selection-end-line="337" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/async/future.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="305" column="17" selection-start-line="305" selection-start-column="17" selection-end-line="305" selection-end-column="17" />
+          <folding>
+            <element signature="e#238#304#0" />
+            <element signature="e#1601#1679#0" />
+            <element signature="e#1714#1785#0" />
+            <element signature="e#1746#1780#0" />
+            <element signature="e#1789#6012#0" />
+            <element signature="e#6140#6146#0" />
+            <element signature="e#6152#6158#0" />
+            <element signature="e#6263#6269#0" />
+            <element signature="e#6275#6282#0" />
+            <element signature="e#6287#6805#0" />
+            <element signature="e#6850#7077#0" />
+            <element signature="e#6887#6890#0" />
+            <element signature="e#7081#7619#0" />
+            <element signature="e#7674#7909#0" />
+            <element signature="e#7711#7714#0" />
+            <element signature="e#7913#8320#0" />
+            <element signature="e#8370#9076#0" />
+            <element signature="e#8588#8591#0" />
+            <element signature="e#8601#8609#0" />
+            <element signature="e#8652#8655#0" />
+            <element signature="e#8661#8669#0" />
+            <element signature="e#8743#8746#0" />
+            <element signature="e#9080#9644#0" />
+            <element signature="e#9689#9738#0" />
+            <element signature="e#9713#9716#0" />
+            <element signature="e#9726#9733#0" />
+            <element signature="e#9742#10217#0" />
+            <element signature="e#10280#10647#0" />
+            <element signature="e#10605#10608#0" />
+            <element signature="e#10623#10642#0" />
+            <element signature="e#10651#11432#0" />
+            <element signature="e#11543#11546#0" />
+            <element signature="e#11563#11725#0" />
+            <element signature="e#11753#13059#0" />
+            <element signature="e#13184#16325#0" />
+            <element signature="e#13233#13242#0" />
+            <element signature="e#13451#13494#0" />
+            <element signature="e#13690#14351#0" />
+            <element signature="e#13928#13982#0" />
+            <element signature="e#14369#14434#0" />
+            <element signature="e#14916#14970#0" />
+            <element signature="e#15159#15213#0" />
+            <element signature="e#15437#15447#0" />
+            <element signature="e#15480#15483#0" />
+            <element signature="e#15483#15494#0" />
+            <element signature="e#15524#15591#0" />
+            <element signature="e#15711#15739#0" />
+            <element signature="e#16078#16085#0" />
+            <element signature="e#16110#16180#0" />
+            <element signature="e#16804#17182#0" />
+            <element signature="e#16839#16842#0" />
+            <element signature="e#17186#17881#0" />
+            <element signature="e#17959#18200#0" />
+            <element signature="e#18300#19280#0" />
+            <element signature="e#19330#20319#0" />
+            <element signature="e#19399#19473#0" />
+            <element signature="e#19847#19908#0" />
+            <element signature="e#20323#22346#0" />
+            <element signature="e#22421#23793#0" />
+            <element signature="e#23796#23848#0" />
+            <element signature="e#24252#25536#0" />
+            <element signature="e#25585#25899#0" />
+            <element signature="e#25927#26532#0" />
+            <element signature="e#26604#26689#0" />
+            <element signature="n#!!block;n#TimeoutException#0" />
+            <element signature="e#26738#26785#0" />
+            <element signature="e#26812#26850#0" />
+            <element signature="e#26951#27141#0" />
+            <element signature="e#28498#29166#0" />
+            <element signature="e#29211#29214#0" />
+            <element signature="e#29221#31604#0" />
+            <element signature="e#31653#31656#0" />
+            <element signature="e#31663#31810#0" />
+            <element signature="e#32353#33014#0" />
+            <element signature="e#33079#33586#0" />
+            <element signature="e#33614#33687#0" />
+            <element signature="e#33787#34028#0" />
+            <element signature="e#34169#34415#0" />
+            <element signature="e#34417#34484#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-278">
-          <caret line="43" column="25" lean-forward="false" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
-          <folding />
+        <state relative-caret-position="-1520">
+          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/upload_page.dart">
+    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/firebase_storage-0.3.7/lib/src/firebase_storage.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7372">
-          <caret line="413" column="29" lean-forward="true" selection-start-line="413" selection-start-column="29" selection-end-line="413" selection-end-column="29" />
+        <state relative-caret-position="177">
+          <caret line="26" column="25" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/recent_images_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="51" lean-forward="true" selection-start-line="10" selection-start-column="51" selection-end-line="10" selection-end-column="51" />
           <folding>
-            <element signature="e#542#617#0" expanded="false" />
-            <element signature="e#927#942#0" expanded="false" />
-            <element signature="e#1174#1544#0" expanded="false" />
-            <element signature="e#13171#13202#0" expanded="false" />
-            <element signature="e#13205#13472#0" expanded="false" />
-            <element signature="e#13338#13467#0" expanded="false" />
+            <element signature="e#1#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/category_page.dart">
+    <entry file="file://$PROJECT_DIR$/lib/data/models/image_model.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-30">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="-67">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
           <folding>
-            <element signature="e#0#20#0" expanded="false" />
+            <element signature="e#439#787#0" />
+            <element signature="e#823#1029#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/data/models/image_category_model.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="190">
+          <caret line="10" column="66" lean-forward="true" selection-start-line="10" selection-start-column="66" selection-end-line="10" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/newest_image_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="38" selection-start-line="3" selection-start-column="38" selection-end-line="3" selection-end-column="38" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/data/database.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="70" column="15" selection-start-line="70" selection-start-column="15" selection-end-line="70" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/image_list.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="81" lean-forward="true" selection-start-line="81" selection-end-line="81" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/trending_images_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/category_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="76">
+          <caret line="118" column="1" selection-start-line="118" selection-start-column="1" selection-end-line="118" selection-end-column="1" />
+          <folding>
+            <element signature="n#!!block;n#CategoryPage#0" />
+            <element signature="e#438#564#0" />
+            <element signature="e#617#987#0" />
+            <element signature="e#862#955#0" />
+            <element signature="e#1091#1582#0" />
+            <element signature="e#1256#1577#0" />
+            <element signature="e#1323#1420#0" />
+            <element signature="e#1658#2918#0" />
+            <element signature="e#1945#1955#0" />
+            <element signature="e#2014#2897#0" />
+            <element signature="e#2036#2044#0" />
+            <element signature="e#2284#2873#0" />
+            <element signature="e#2320#2804#0" />
+            <element signature="e#2365#2370#0" />
+            <element signature="e#2417#2477#0" />
+            <element signature="e#2510#2747#0" />
+            <element signature="e#2630#2728#0" />
+            <element signature="n#!!block;n#ImagesByCategoryPage#0" />
+            <element signature="e#3194#3504#0" />
+            <element signature="e#3219#3499#0" />
+            <element signature="e#3245#3294#0" />
+            <element signature="e#3270#3285#0" />
+            <element signature="e#3321#3492#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/all_images_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#54#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/utils.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="16" column="5" selection-start-line="16" selection-start-column="5" selection-end-line="16" selection-end-column="5" />
+          <folding>
+            <element signature="e#0#17#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/image_detail.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="361">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/flutter_logo.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/flutter/packages/flutter/lib/src/material/about.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="434" column="12" lean-forward="true" selection-start-line="434" selection-start-column="12" selection-end-line="434" selection-end-column="12" />
+          <folding>
+            <element signature="e#679#720#0" />
+            <element signature="e#1271#4322#0" />
+            <element signature="e#1275#1324#0" />
+            <element signature="e#1594#1600#0" />
+            <element signature="e#1782#1824#0" />
+            <element signature="e#2041#2083#0" />
+            <element signature="e#2243#2275#0" />
+            <element signature="e#2606#2655#0" />
+            <element signature="e#2818#2889#0" />
+            <element signature="e#3226#3283#0" />
+            <element signature="e#3415#3493#0" />
+            <element signature="e#3754#4320#0" />
+            <element signature="e#3823#4315#0" />
+            <element signature="e#3884#3991#0" />
+            <element signature="e#4324#4401#0" />
+            <element signature="e#5248#5618#0" />
+            <element signature="e#5385#5604#0" />
+            <element signature="e#5620#5695#0" />
+            <element signature="e#6322#6608#0" />
+            <element signature="e#6398#6404#0" />
+            <element signature="e#6404#6604#0" />
+            <element signature="e#6460#6600#0" />
+            <element signature="e#6610#6683#0" />
+            <element signature="e#7280#10713#0" />
+            <element signature="e#7284#7309#0" />
+            <element signature="e#7709#7741#0" />
+            <element signature="e#7923#7972#0" />
+            <element signature="e#8114#8164#0" />
+            <element signature="e#8361#8397#0" />
+            <element signature="e#8529#8604#0" />
+            <element signature="e#8857#10711#0" />
+            <element signature="e#9185#9237#0" />
+            <element signature="e#9211#9223#0" />
+            <element signature="e#9265#9729#0" />
+            <element signature="e#9291#9723#0" />
+            <element signature="e#9336#9354#0" />
+            <element signature="e#9383#9715#0" />
+            <element signature="e#9405#9413#0" />
+            <element signature="e#9435#9486#0" />
+            <element signature="e#9508#9559#0" />
+            <element signature="e#9586#9600#0" />
+            <element signature="e#9622#9693#0" />
+            <element signature="e#9766#9852#0" />
+            <element signature="e#9942#10706#0" />
+            <element signature="e#9984#10038#0" />
+            <element signature="e#10013#10029#0" />
+            <element signature="e#10055#10063#0" />
+            <element signature="e#10087#10503#0" />
+            <element signature="e#10114#10173#0" />
+            <element signature="e#10527#10691#0" />
+            <element signature="e#10554#10606#0" />
+            <element signature="e#10715#10783#0" />
+            <element signature="e#11159#12391#0" />
+            <element signature="e#11163#11239#0" />
+            <element signature="e#11745#11777#0" />
+            <element signature="e#11959#12008#0" />
+            <element signature="e#12150#12186#0" />
+            <element signature="e#12477#12526#0" />
+            <element signature="e#13238#13493#0" />
+            <element signature="e#13285#13301#0" />
+            <element signature="e#13330#13483#0" />
+            <element signature="e#13531#13854#0" />
+            <element signature="e#13574#13658#0" />
+            <element signature="e#13608#13646#0" />
+            <element signature="e#13633#13645#0" />
+            <element signature="e#13685#13844#0" />
+            <element signature="e#13762#13791#0" />
+            <element signature="e#14020#14284#0" />
+            <element signature="e#14066#14077#0" />
+            <element signature="e#14108#14270#0" />
+            <element signature="e#14180#14209#0" />
+            <element signature="e#14386#14544#0" />
+            <element signature="e#14441#14483#0" />
+            <element signature="e#14514#14530#0" />
+            <element signature="e#14762#16523#0" />
+            <element signature="e#15082#15162#0" />
+            <element signature="e#15178#15258#0" />
+            <element signature="e#15279#15293#0" />
+            <element signature="e#15309#15416#0" />
+            <element signature="e#15437#15451#0" />
+            <element signature="e#15467#15560#0" />
+            <element signature="e#15581#15595#0" />
+            <element signature="e#15688#15848#0" />
+            <element signature="e#15733#15749#0" />
+            <element signature="e#15778#15840#0" />
+            <element signature="e#15880#16518#0" />
+            <element signature="e#15906#15973#0" />
+            <element signature="e#15931#15964#0" />
+            <element signature="e#15981#16054#0" />
+            <element signature="e#16121#16511#0" />
+            <element signature="e#16151#16163#0" />
+            <element signature="e#16226#16502#0" />
+            <element signature="e#16312#16491#0" />
+            <element signature="e#16345#16478#0" />
+            <element signature="e#16396#16429#0" />
+            <element signature="e#16580#16752#0" />
+            <element signature="e#16810#16879#0" />
+            <element signature="e#16934#17005#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1257">
-          <caret line="13" column="2" lean-forward="false" selection-start-line="13" selection-start-column="2" selection-end-line="13" selection-end-column="2" />
+        <state relative-caret-position="-739">
+          <caret line="51" column="4" selection-start-line="51" selection-start-column="3" selection-end-line="51" selection-end-column="4" />
           <folding>
-            <element signature="e#0#20#0" expanded="false" />
-            <element signature="e#560#586#0" expanded="false" />
-            <element signature="e#1013#1073#0" expanded="false" />
-            <element signature="e#1485#1512#0" expanded="false" />
-            <element signature="e#1709#1725#0" expanded="false" />
-            <element signature="e#2154#2417#0" expanded="false" />
-            <element signature="e#2459#2530#0" expanded="false" />
-            <element signature="e#2581#5689#0" expanded="false" />
-            <element signature="e#5729#5924#0" expanded="false" />
-            <element signature="e#5967#6271#0" expanded="false" />
-            <element signature="e#6314#6478#0" expanded="false" />
-            <element signature="e#6522#6601#0" expanded="false" />
-            <element signature="e#6603#6645#0" expanded="false" />
+            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#2205#2468#0" />
+            <element signature="e#2306#2466#0" />
+            <element signature="e#2510#2581#0" />
+            <element signature="e#2709#2838#0" />
+            <element signature="e#2844#2965#0" />
+            <element signature="e#2971#3099#0" />
+            <element signature="e#3105#3234#0" />
+            <element signature="e#3303#3662#0" />
+            <element signature="e#3713#3918#0" />
+            <element signature="e#4405#4670#0" />
+            <element signature="e#4444#4478#0" />
+            <element signature="e#4564#4653#0" />
+            <element signature="e#5110#5129#0" />
+            <element signature="e#5247#5289#0" />
+            <element signature="e#5427#5447#0" />
+            <element signature="e#5565#5605#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/image_detail.dart">
+    <entry file="file://$PROJECT_DIR$/lib/constants.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-367">
-          <caret line="204" column="26" lean-forward="false" selection-start-line="204" selection-start-column="26" selection-end-line="204" selection-end-column="26" />
+        <state relative-caret-position="-403">
+          <caret line="4" column="30" selection-start-line="4" selection-start-column="30" selection-end-line="4" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/upload_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="27" column="53" selection-start-line="27" selection-start-column="53" selection-end-line="27" selection-end-column="53" />
           <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#703#888#0" expanded="false" />
-            <element signature="e#1132#1147#0" expanded="false" />
-            <element signature="e#1183#1624#0" expanded="false" />
-            <element signature="e#1655#1777#0" expanded="false" />
-            <element signature="e#1828#2145#0" expanded="false" />
-            <element signature="e#1853#2140#0" expanded="false" />
-            <element signature="e#1904#2133#0" expanded="false" />
-            <element signature="e#1973#2124#0" expanded="false" />
-            <element signature="e#1995#2003#0" expanded="false" />
-            <element signature="e#2195#3145#0" expanded="false" />
-            <element signature="e#2222#3140#0" expanded="false" />
-            <element signature="e#2250#3082#0" expanded="false" />
-            <element signature="e#2274#2613#0" expanded="false" />
-            <element signature="e#2296#2304#0" expanded="false" />
-            <element signature="e#2368#2380#0" expanded="false" />
-            <element signature="e#2443#2589#0" expanded="false" />
-            <element signature="e#2693#2717#0" expanded="false" />
-            <element signature="e#2756#3073#0" expanded="false" />
-            <element signature="e#2796#3062#0" expanded="false" />
-            <element signature="e#2820#2827#0" expanded="false" />
-            <element signature="e#3180#3403#0" expanded="false" />
-            <element signature="e#3205#3398#0" expanded="false" />
-            <element signature="e#3228#3391#0" expanded="false" />
-            <element signature="e#3345#3382#0" expanded="false" />
-            <element signature="e#3454#3751#0" expanded="false" />
-            <element signature="e#3479#3746#0" expanded="false" />
-            <element signature="e#3507#3739#0" expanded="false" />
-            <element signature="e#3584#3730#0" expanded="false" />
-            <element signature="e#3610#3644#0" expanded="false" />
-            <element signature="e#3782#4091#0" expanded="false" />
-            <element signature="e#3805#4086#0" expanded="false" />
-            <element signature="e#3828#4079#0" expanded="false" />
-            <element signature="e#3890#4070#0" expanded="false" />
-            <element signature="e#3918#3939#0" expanded="false" />
-            <element signature="e#3979#4001#0" expanded="false" />
-            <element signature="e#4131#4427#0" expanded="false" />
-            <element signature="e#4161#4422#0" expanded="false" />
-            <element signature="e#4197#4415#0" expanded="false" />
-            <element signature="e#4215#4222#0" expanded="false" />
-            <element signature="e#9611#9621#0" expanded="false" />
-            <element signature="e#10208#10557#0" expanded="false" />
-            <element signature="e#10429#10511#0" expanded="false" />
-            <element signature="e#10595#10762#0" expanded="false" />
-            <element signature="e#10807#10979#0" expanded="false" />
+            <element signature="n#!!block;n#UploadPage#0" />
           </folding>
         </state>
       </provider>

@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:wallpaper/models.dart';
+import 'package:wallpaper/data/models/image_model.dart';
 
 class ImageDb {
   static const dbName = "images.db";
