@@ -7,7 +7,7 @@ List<ImageModel> mapper(QuerySnapshot querySnapshot) {
   return querySnapshot.documents.map(mapperImageModel).toList();
 }
 
-ImageModel mapperImageModel(documentSnapshot) {
+ImageModel mapperImageModel(DocumentSnapshot documentSnapshot) {
   return ImageModel.fromJson(
     id: documentSnapshot.documentID,
     json: documentSnapshot.data,

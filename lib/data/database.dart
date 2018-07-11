@@ -41,11 +41,13 @@ class ImageDb {
   }
 
   Future<int> insert(ImageModel image) async {
-    final values = image.toJson()
-      ..addAll({'viewTime': new DateTime.now().toIso8601String()});
+    final values = (image..viewTime = DateTime.now()).toJson();
     final dbClient = await db;
-    return await dbClient.insert(tableRecent, values,
-        conflictAlgorithm: ConflictAlgorithm.replace);
+    return await dbClient.insert(
+      tableRecent,
+      values,
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   Future<int> update(ImageModel image) async {
@@ -68,6 +70,11 @@ class ImageDb {
     );
   }
 
+  Future<int> deleteAll() async {
+    final dbClient = await db;
+    return await dbClient.delete(tableRecent, where: '1');
+  }
+
   Future<ImageModel> getImage(String id) async {
     final dbClient = await db;
     final maps = await dbClient.query(
@@ -81,13 +88,19 @@ class ImageDb {
         : null;
   }
 
-  Future<List<ImageModel>> getImages(int limit) async {
+  Future<List<ImageModel>> getImages({int limit}) async {
     final dbClient = await db;
-    final maps = await dbClient.query(
+
+    final maps = await (limit != null
+        ? dbClient.query(
       tableRecent,
       orderBy: 'datetime(viewTime) DESC',
       limit: limit,
-    );
+    )
+        : dbClient.query(
+      tableRecent,
+      orderBy: 'datetime(viewTime) DESC',
+    ));
     return maps
         .map((json) => ImageModel.fromJson(id: json['id'], json: json))
         .toList();

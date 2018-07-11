@@ -8,6 +8,9 @@ class ImageModel {
   final String categoryId;
   final DateTime uploadedTime;
 
+  ///
+  DateTime viewTime;
+
   ImageModel({
     this.id,
     this.name,
@@ -15,6 +18,7 @@ class ImageModel {
     this.thumbnailUrl,
     this.categoryId,
     this.uploadedTime,
+    this.viewTime,
   });
 
   factory ImageModel.fromJson(
@@ -29,6 +33,7 @@ class ImageModel {
       uploadedTime: uploadedTime is DateTime
           ? uploadedTime
           : DateTime.parse(uploadedTime),
+      viewTime: DateTime.tryParse(json['viewTime'] ?? ''),
     );
   }
 
@@ -38,7 +43,8 @@ class ImageModel {
         'imageUrl': imageUrl,
         'thumbnailUrl': thumbnailUrl,
         'categoryId': categoryId,
-        'uploadedTime': uploadedTime.toIso8601String()
+    'uploadedTime': uploadedTime.toIso8601String(),
+    'viewTime': viewTime.toIso8601String()
       };
 
   @override
