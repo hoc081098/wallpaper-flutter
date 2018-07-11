@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   // clear history functionality
   final StreamController clearStreamController =
-  new StreamController.broadcast();
+      new StreamController.broadcast();
 
   @override
   void initState() {
@@ -82,11 +82,10 @@ class _MyHomePageState extends State<MyHomePage>
       {
         'title': 'Recent images',
         'icon': Icons.history,
-        'builder': (BuildContext context) =>
-        new RecentPage(
-          clearStream: clearStreamController.stream,
-          scaffoldKey: _scaffoldKey,
-        ),
+        'builder': (BuildContext context) => new RecentPage(
+              clearStream: clearStreamController.stream,
+              scaffoldKey: _scaffoldKey,
+            ),
       },
     ];
 
@@ -120,8 +119,7 @@ class _MyHomePageState extends State<MyHomePage>
           curve: Curves.easeOut,
         ),
       ),
-    )
-      ..addListener(() => setState(() {}));
+    )..addListener(() => setState(() {}));
     _searchStream = _streamController
         .debounce(Duration(milliseconds: 300))
         .map((s) => s.trim())

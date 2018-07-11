@@ -101,10 +101,7 @@ class _RecentPageState extends State<RecentPage> {
             children: <Widget>[
               Text(
                 'Delete',
-                style: Theme
-                    .of(context)
-                    .textTheme
-                    .subhead,
+                style: Theme.of(context).textTheme.subhead,
               ),
               SizedBox(width: 16.0),
               Icon(
@@ -126,9 +123,7 @@ class _RecentPageState extends State<RecentPage> {
               new Radius.circular(4.0),
             ),
           ),
-          color: Theme
-              .of(context)
-              .backgroundColor,
+          color: Theme.of(context).backgroundColor,
           child: new Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
@@ -176,8 +171,7 @@ class _RecentPageState extends State<RecentPage> {
         );
       }
     }).catchError(
-          (e) =>
-          widget.scaffoldKey.currentState.showSnackBar(
+      (e) => widget.scaffoldKey.currentState.showSnackBar(
             new SnackBar(content: new Text('Delete error: $e')),
           ),
     );

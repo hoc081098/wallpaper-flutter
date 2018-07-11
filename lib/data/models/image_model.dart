@@ -43,8 +43,8 @@ class ImageModel {
         'imageUrl': imageUrl,
         'thumbnailUrl': thumbnailUrl,
         'categoryId': categoryId,
-    'uploadedTime': uploadedTime.toIso8601String(),
-    'viewTime': viewTime.toIso8601String()
+        'uploadedTime': uploadedTime.toIso8601String(),
+        'viewTime': viewTime.toIso8601String()
       };
 
   @override

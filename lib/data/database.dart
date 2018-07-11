@@ -93,14 +93,14 @@ class ImageDb {
 
     final maps = await (limit != null
         ? dbClient.query(
-      tableRecent,
-      orderBy: 'datetime(viewTime) DESC',
-      limit: limit,
-    )
+            tableRecent,
+            orderBy: 'datetime(viewTime) DESC',
+            limit: limit,
+          )
         : dbClient.query(
-      tableRecent,
-      orderBy: 'datetime(viewTime) DESC',
-    ));
+            tableRecent,
+            orderBy: 'datetime(viewTime) DESC',
+          ));
     return maps
         .map((json) => ImageModel.fromJson(id: json['id'], json: json))
         .toList();
