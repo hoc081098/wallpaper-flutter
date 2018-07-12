@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:wallpaper/data/models/image_model.dart';
+import 'package:wallpaper/data/models/search_state.dart';
 import 'package:wallpaper/screens/all_images_page.dart';
 import 'package:wallpaper/screens/category_page.dart';
 import 'package:wallpaper/screens/newest_image_page.dart';
@@ -22,10 +22,11 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Wallpaper',
       theme: ThemeData(
+        fontFamily: 'NunitoSans',
         brightness: Brightness.dark,
         primaryColor: Color(0xff070b16),
         primaryColorDark: Color(0xff070a11),
-        primaryColorLight: Color(0xff070B16),
+        primaryColorLight: Color(0xff141622),
         accentColor: Color(0xffffC126),
         backgroundColor: Color(0xff0b101d),
       ),
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage>
   // search functionality
   bool _isSearching = false;
   final _streamController = PublishSubject<String>();
-  Stream<List<ImageModel>> _searchStream;
+  Stream<SearchImageState> _searchStream;
   final _imageCollection = Firestore.instance.collection('images');
   AnimationController _opacityController;
   Animation<double> _opacityAnim;
@@ -108,13 +109,13 @@ class _MyHomePageState extends State<MyHomePage>
 
     _opacityController = new AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 3000),
+      duration: Duration(milliseconds: 1500),
     );
     _opacityAnim = new Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _opacityController,
         curve: Interval(
-          0.5,
+          0.2,
           1.0,
           curve: Curves.easeOut,
         ),
@@ -129,13 +130,16 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: _scaffoldKey,
-      drawer: _buildDrawer(context),
-      appBar: _buildAppBar(context),
-      body: _isSearching
-          ? _buildSearchList(context)
-          : nav[_selectedIndex]['builder'](context),
+    return new WillPopScope(
+      child: Scaffold(
+        key: _scaffoldKey,
+        drawer: _buildDrawer(context),
+        appBar: _buildAppBar(context),
+        body: _isSearching
+            ? _buildSearchList(context)
+            : nav[_selectedIndex]['builder'](context),
+      ),
+      onWillPop: () => _onWillPop(context),
     );
   }
 
@@ -247,27 +251,30 @@ class _MyHomePageState extends State<MyHomePage>
   void _onPressIcon() {
     if (!_isSearching) {
       setState(() {
+        _actionIcon = Icon(Icons.close, color: Colors.white);
+        _appBarTitle = new FadeTransition(
+          child: TextField(
+            keyboardType: TextInputType.text,
+            maxLines: 1,
+            onChanged: (query) => _streamController.add(query),
+            style: TextStyle(
+              color: Colors.white,
+            ),
+            decoration: InputDecoration(
+              prefixIcon: new Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Icon(Icons.search),
+              ),
+              hintText: 'Search image...',
+              border: UnderlineInputBorder(),
+            ),
+          ),
+          opacity: _opacityAnim,
+        );
+
         _opacityController.reset();
         _isSearching = true;
         _opacityController.forward();
-
-        _actionIcon = Icon(Icons.close, color: Colors.white);
-        _appBarTitle = TextField(
-          keyboardType: TextInputType.text,
-          maxLines: 1,
-          onChanged: (query) => _streamController.add(query),
-          style: TextStyle(
-            color: Colors.white,
-          ),
-          decoration: InputDecoration(
-            prefixIcon: new Padding(
-              padding: const EdgeInsets.only(right: 8.0),
-              child: Icon(Icons.search),
-            ),
-            hintText: 'Search image...',
-            border: UnderlineInputBorder(),
-          ),
-        );
       });
     } else {
       _opacityController.reverse(from: _opacityController.upperBound).then((_) {
@@ -280,32 +287,32 @@ class _MyHomePageState extends State<MyHomePage>
     }
   }
 
-  Stream<List<ImageModel>> _searchImage(String value) {
+  Stream<SearchImageState> _searchImage(String value) async* {
     debugPrint('Value = $value');
-
-    if (value.isEmpty) {
-      return _imageCollection.snapshots().map(utils.mapper);
-    }
-
-    return _imageCollection
+    Stream<QuerySnapshot> stream = value.isEmpty
+        ? _imageCollection.snapshots()
+        : _imageCollection
         .orderBy('name')
-        .startAt([value])
-        .endAt(["$value" + "\u{f8ff}"])
-        .snapshots()
-        .map(utils.mapper);
-
-//    return _imageCollection.snapshots().map(utils.mapper).map((list) {
-//      return list
-//          .where((imageModel) => imageModel.name.contains(value))
-//          .toList();
-//    });
+        .startAt([value]).endAt(["$value" + "\u{f8ff}"]).snapshots();
+    yield LoadingState();
+    try {
+      await for (var result in stream
+          .map(utils.mapper)
+          .map<SearchImageState>((images) => SuccessState(images))) {
+        yield result;
+      }
+    } catch (e) {
+      yield ErrorState(e);
+    }
   }
 
   Widget _buildSearchList(BuildContext context) {
     return new FadeTransition(
       child: Container(
         decoration: BoxDecoration(
-          color: const Color(0xff070b16),
+          color: Theme
+              .of(context)
+              .backgroundColor,
         ),
         child: _buildStreamBuilder(),
       ),
@@ -313,50 +320,97 @@ class _MyHomePageState extends State<MyHomePage>
     );
   }
 
-  StreamBuilder<List<ImageModel>> _buildStreamBuilder() {
-    return new StreamBuilder<List<ImageModel>>(
-      stream: _searchStream,
-      initialData: <ImageModel>[],
+  Widget _buildStreamBuilder() {
+    return new StreamBuilder<SearchImageState>(
+      stream: _searchStream.distinct(),
       builder:
-          (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot) {
-        if (snapshot.hasError) {
+          (BuildContext context, AsyncSnapshot<SearchImageState> snapshot) {
+        if (!snapshot.hasData) {
           return Center(
-            child: Text(snapshot.error.toString()),
+            child: Text(
+              'Search somthing...',
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .subhead,
+            ),
           );
         }
 
-        if (!snapshot.hasData) {
+        final data = snapshot.data;
+        debugPrint('DEBUG $data');
+
+        if (data is ErrorState) {
+          return Center(
+            child: Text(
+              data.error.toString(),
+              style: Theme
+                  .of(context)
+                  .textTheme
+                  .subhead,
+            ),
+          );
+        }
+
+        if (data is LoadingState) {
           return Center(
             child: CircularProgressIndicator(),
           );
         }
 
-        if (snapshot.data.isEmpty) {
-          return Center(
-            child: Text('Have no data!'),
+        if (data is SuccessState) {
+          var images = data.images;
+          debugPrint('Length: ${images.length}');
+          return new Column(
+            children: <Widget>[
+              new Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: new Text('Found ${images.length} results'),
+              ),
+              new Expanded(
+                child: new GridView.builder(
+                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 2.0,
+                    mainAxisSpacing: 2.0,
+                    childAspectRatio: 9 / 16,
+                  ),
+                  itemBuilder: (BuildContext context, int index) {
+                    final item = images[index];
+                    return new FadeInImage.assetNetwork(
+                      fit: BoxFit.cover,
+                      placeholder: '',
+                      image: item.thumbnailUrl,
+                    );
+                  },
+                  itemCount: images.length,
+                ),
+              ),
+            ],
           );
         }
-
-        final data = snapshot.data;
-        debugPrint('Length: ${data.length}');
-        return new GridView.builder(
-          gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: 2.0,
-            mainAxisSpacing: 2.0,
-            childAspectRatio: 9 / 16,
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            final item = data[index];
-            return new FadeInImage.assetNetwork(
-              fit: BoxFit.cover,
-              placeholder: '',
-              image: item.thumbnailUrl,
-            );
-          },
-          itemCount: data.length,
-        );
       },
     );
+  }
+
+  Future<bool> _onWillPop(BuildContext context) {
+    return showDialog<bool>(
+        context: context,
+        builder: (context) {
+          return new AlertDialog(
+            title: Text('Exit app'),
+            content: Text('Do you want to exit app?'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('No'),
+                onPressed: () => Navigator.pop(context, false),
+              ),
+              FlatButton(
+                child: Text('Yes'),
+                onPressed: () => Navigator.pop(context, true),
+              ),
+            ],
+          );
+        });
   }
 }

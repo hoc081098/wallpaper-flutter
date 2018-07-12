@@ -5,16 +5,16 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 
-class ImageDb {
+class ImageDB {
   static const dbName = "images.db";
   static const tableRecent = 'recents';
 
   Database _db;
-  static ImageDb _instance;
+  static ImageDB _instance;
 
-  ImageDb._internal();
+  ImageDB._internal();
 
-  factory ImageDb.getInstance() => _instance ??= ImageDb._internal();
+  factory ImageDB.getInstance() => _instance ??= ImageDB._internal();
 
   Future<Database> get db async => _db ??= await open();
 

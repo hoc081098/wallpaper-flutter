@@ -58,11 +58,13 @@ class _TrendingPageState extends State<TrendingPage> {
       case Trending.downloadCount:
         return imagesCollection
             .orderBy('downloadCount', descending: true)
+            .limit(15)
             .snapshots()
             .map(mapper);
       case Trending.viewCount:
         return imagesCollection
             .orderBy('viewCount', descending: true)
+            .limit(15)
             .snapshots()
             .map(mapper);
     }

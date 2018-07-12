@@ -34,12 +34,14 @@ class _UploadPageState extends State<UploadPage> {
   void initState() {
     super.initState();
     _imageCategories = <ImageCategory>[];
-    subscription = categoriesCollection.snapshots().map((querySnapshot) {
-      return querySnapshot.documents
-          .map((doc) =>
-              new ImageCategory.fromJson(id: doc.documentID, json: doc.data))
-          .toList();
-    }).listen((list) => setState(() => _imageCategories = list));
+    subscription = categoriesCollection
+        .snapshots()
+        .map((querySnapshot) =>
+        querySnapshot.documents
+            .map((doc) =>
+            ImageCategory.fromJson(id: doc.documentID, json: doc.data))
+            .toList())
+        .listen((list) => setState(() => _imageCategories = list));
   }
 
   @override
@@ -61,38 +63,59 @@ class _UploadPageState extends State<UploadPage> {
             _buildButtons(),
           ],
         ),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-              colors: <Color>[
-                Colors.blue.withOpacity(0.8),
-                Colors.purple.withOpacity(0.6),
-              ],
-              begin: AlignmentDirectional.topStart,
-              end: AlignmentDirectional.bottomEnd),
-        ),
+        color: Theme
+            .of(context)
+            .backgroundColor,
       ),
     );
   }
 
   Widget _buildImagePreview() {
+    var placeholder = new Stack(
+      children: <Widget>[
+        new Container(
+          constraints: new BoxConstraints.expand(),
+          child: new Image.asset(
+            'assets/drawer_header_image.jpg',
+            fit: BoxFit.cover,
+            colorBlendMode: BlendMode.darken,
+            color: Colors.black38,
+          ),
+        ),
+        new Align(
+          child: Text(
+            'No selected image',
+            textScaleFactor: 1.2,
+            style: TextStyle(
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ),
+      ],
+    );
     return new Flexible(
       child: new Padding(
         padding: EdgeInsets.only(
-            top: MediaQuery.of(context).padding.top + 8, left: 8.0, right: 8.0),
+          top: MediaQuery
+              .of(context)
+              .padding
+              .top + 8,
+          left: 8.0,
+          right: 8.0,
+        ),
         child: Material(
+          shadowColor: Theme
+              .of(context)
+              .accentColor,
+          type: MaterialType.card,
           borderRadius: BorderRadius.all(Radius.circular(6.0)),
-          elevation: 3.0,
+          elevation: 4.0,
           child: _imageFile == null
-              ? new Image.asset(
-                  'assets/picture.png',
-                  fit: BoxFit.cover,
-                  colorBlendMode: BlendMode.darken,
-                  color: Colors.black38,
-                )
+              ? placeholder
               : new Image.file(
-                  _imageFile,
-                  fit: BoxFit.cover,
-                ),
+            _imageFile,
+            fit: BoxFit.cover,
+          ),
         ),
       ),
       fit: FlexFit.tight,
@@ -117,6 +140,7 @@ class _UploadPageState extends State<UploadPage> {
                   value: _selectedCategory,
                 ),
           new IconButton(
+            tooltip: 'Add new category',
             icon: Icon(Icons.add),
             onPressed: _showDialogAddCategory,
           ),
@@ -141,6 +165,10 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildButtons() {
+    var color = Theme
+        .of(context)
+        .primaryColor;
+
     return new Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -152,7 +180,7 @@ class _UploadPageState extends State<UploadPage> {
               'Choose image',
               textAlign: TextAlign.center,
             ),
-            color: Colors.black.withOpacity(0.6),
+            color: color,
           ),
           fit: FlexFit.tight,
         ),
@@ -164,7 +192,7 @@ class _UploadPageState extends State<UploadPage> {
               'Upload',
               textAlign: TextAlign.center,
             ),
-            color: Colors.black.withOpacity(0.6),
+            color: color,
           ),
           fit: FlexFit.tight,
         ),
@@ -288,119 +316,157 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
-  _showDialogAddCategory() {
-    scaffoldKey.currentState.showBottomSheet((BuildContext context) {
-      return new AddCategory();
-    });
-  }
+  _showDialogAddCategory() =>
+      scaffoldKey.currentState?.showBottomSheet(
+            (BuildContext context) => AddCategoryBottomSheet(),
+      );
 }
 
-class AddCategory extends StatefulWidget {
+///
+///
+///
+
+class AddCategoryBottomSheet extends StatefulWidget {
   @override
   _AddCategoryState createState() => new _AddCategoryState();
 }
 
-class _AddCategoryState extends State<AddCategory> {
+class _AddCategoryState extends State<AddCategoryBottomSheet>
+    with SingleTickerProviderStateMixin {
   final _textController = new TextEditingController();
   final categoriesCollection = Firestore.instance.collection('categories');
   final firebaseStorage = FirebaseStorage.instance;
 
   String _msg;
   File _imageFile;
-  bool _isLoading = false;
+
+  AnimationController _animController;
+  Animation<double> _anim;
+
+  @override
+  void initState() {
+    super.initState();
+
+    _animController = new AnimationController(
+      vsync: this,
+      duration: Duration(seconds: 2),
+    );
+    _anim = new Tween(begin: 360.0, end: 48.0).animate(
+      new CurvedAnimation(
+        parent: _animController,
+        curve: new Interval(0.1, 1.0, curve: Curves.ease),
+      ),
+    )
+      ..addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _animController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return new Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        new Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: new Text('Add new category'),
+    return new Material(
+      color: Theme
+          .of(context)
+          .primaryColorLight,
+      shape: new RoundedRectangleBorder(
+        borderRadius: new BorderRadius.only(
+          topLeft: new Radius.circular(16.0),
+          topRight: new Radius.circular(16.0),
         ),
-        new Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: _buildTextField(),
-        ),
-        _buildImagePreview(),
-        new Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: _buildProgressOrMsgTextOrButtonChooseImage(),
-        ),
-        new Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            new Expanded(
-              child: new FlatButton(
-                child: new Text('Cancel'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                padding: const EdgeInsets.all(16.0),
-                color: Colors.blue.shade400,
-              ),
-            ),
-            SizedBox(
-              width: 4.0,
-            ),
-            new Expanded(
-              child: new FlatButton(
-                padding: const EdgeInsets.all(16.0),
-                child: new Text('Add'),
-                onPressed: _addCategory,
-                color: Colors.blue.shade400,
-              ),
-            ),
-          ],
-        ),
-      ],
-    );
-  }
-
-  Widget _buildProgressOrMsgTextOrButtonChooseImage() {
-    if (_isLoading) {
-      return new CircularProgressIndicator();
-    }
-    return _msg != null
-        ? Text(_msg)
-        : new FlatButton.icon(
-            onPressed: _chooseImage,
-            icon: Icon(Icons.image),
-            label: Text('Choose image'),
-            color: Colors.purple.shade400,
-          );
-  }
-
-  Widget _buildImagePreview() {
-    return _imageFile != null
-        ? new Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: new Image.file(
-              _imageFile,
-              width: 64.0,
-              height: 64.0,
-              fit: BoxFit.cover,
-            ),
-          )
-        : new Container();
-  }
-
-  TextField _buildTextField() {
-    return new TextField(
-      controller: _textController,
-      decoration: new InputDecoration(
-        labelText: 'Category name',
       ),
-      maxLines: 1,
+      child: new Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          new Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: new Text('Add new category'),
+          ),
+          new Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: _buildTextField(),
+          ),
+          _buildImagePreview(),
+          new Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: _buildMsgTextOrButtonChooseImage(),
+          ),
+          new Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: new Container(
+              constraints: new BoxConstraints.expand(
+                height: 48.0,
+                width: _anim.value,
+              ),
+              child: new Material(
+                elevation: 4.0,
+                shadowColor: Theme
+                    .of(context)
+                    .accentColor,
+                borderRadius: new BorderRadius.all(
+                  new Radius.circular(32.0),
+                ),
+                child: _anim.value > 96.0
+                    ? new MaterialButton(
+                  splashColor: Theme
+                      .of(context)
+                      .accentColor,
+                  onPressed: _addCategory,
+                  child: Text('Add'),
+                )
+                    : new Center(
+                  child: new CircularProgressIndicator(),
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
+
+  Widget _buildMsgTextOrButtonChooseImage() =>
+      _msg != null
+          ? new Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(_msg),
+      )
+          : new FlatButton.icon(
+        onPressed: _chooseImage,
+        icon: Icon(Icons.image),
+        label: Text('Choose image'),
+      );
+
+  Widget _buildImagePreview() =>
+      _imageFile != null
+          ? new Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: new Image.file(
+          _imageFile,
+          width: 64.0,
+          height: 64.0,
+          fit: BoxFit.cover,
+        ),
+      )
+          : new Container();
+
+  TextField _buildTextField() =>
+      new TextField(
+        controller: _textController,
+        decoration: new InputDecoration(
+          labelText: 'Category name',
+        ),
+        maxLines: 1,
+      );
 
   _addCategory() async {
     if (!_validate()) return;
-    setState(() => _isLoading = true);
+    _animController.forward();
 
     //upload file
     final extension = path.extension(_imageFile.path);
@@ -430,8 +496,7 @@ class _AddCategoryState extends State<AddCategory> {
       'name': _textController.text,
       'imageUrl': task.downloadUrl.toString(),
     });
-
-    if (!mounted) return;
+    await _animController.reverse();
     await _showMessage('New category added successfully');
     Navigator.pop(context);
   }
@@ -465,17 +530,9 @@ class _AddCategoryState extends State<AddCategory> {
   _showMessage(String text,
       {Duration duration =
           const Duration(seconds: 1, milliseconds: 500)}) async {
-    if (!mounted) return;
-    setState(() {
-      _isLoading = false;
-      _msg = text;
-    });
+    if (mounted) setState(() => _msg = text);
     await new Future.delayed(duration, () {
-      if (!mounted) return;
-      setState(() {
-        _isLoading = false;
-        _msg = null;
-      });
+      if (mounted) setState(() => _msg = null);
     });
   }
 }

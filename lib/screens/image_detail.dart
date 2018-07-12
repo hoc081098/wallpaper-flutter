@@ -350,7 +350,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 
   _insertToRecent(ImageModel image) {
-    new ImageDb.getInstance()
+    new ImageDB.getInstance()
         .insert(image)
         .then((i) => debugPrint("Inserted $i"))
         .catchError((e) => debugPrint("Inserted error $e"));
