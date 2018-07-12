@@ -36,10 +36,9 @@ class _UploadPageState extends State<UploadPage> {
     _imageCategories = <ImageCategory>[];
     subscription = categoriesCollection
         .snapshots()
-        .map((querySnapshot) =>
-        querySnapshot.documents
+        .map((querySnapshot) => querySnapshot.documents
             .map((doc) =>
-            ImageCategory.fromJson(id: doc.documentID, json: doc.data))
+                ImageCategory.fromJson(id: doc.documentID, json: doc.data))
             .toList())
         .listen((list) => setState(() => _imageCategories = list));
   }
@@ -63,9 +62,7 @@ class _UploadPageState extends State<UploadPage> {
             _buildButtons(),
           ],
         ),
-        color: Theme
-            .of(context)
-            .backgroundColor,
+        color: Theme.of(context).backgroundColor,
       ),
     );
   }
@@ -96,26 +93,21 @@ class _UploadPageState extends State<UploadPage> {
     return new Flexible(
       child: new Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery
-              .of(context)
-              .padding
-              .top + 8,
+          top: MediaQuery.of(context).padding.top + 8,
           left: 8.0,
           right: 8.0,
         ),
         child: Material(
-          shadowColor: Theme
-              .of(context)
-              .accentColor,
+          shadowColor: Theme.of(context).accentColor,
           type: MaterialType.card,
           borderRadius: BorderRadius.all(Radius.circular(6.0)),
           elevation: 4.0,
           child: _imageFile == null
               ? placeholder
               : new Image.file(
-            _imageFile,
-            fit: BoxFit.cover,
-          ),
+                  _imageFile,
+                  fit: BoxFit.cover,
+                ),
         ),
       ),
       fit: FlexFit.tight,
@@ -165,9 +157,7 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildButtons() {
-    var color = Theme
-        .of(context)
-        .primaryColor;
+    var color = Theme.of(context).primaryColor;
 
     return new Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -316,9 +306,8 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
-  _showDialogAddCategory() =>
-      scaffoldKey.currentState?.showBottomSheet(
-            (BuildContext context) => AddCategoryBottomSheet(),
+  _showDialogAddCategory() => scaffoldKey.currentState?.showBottomSheet(
+        (BuildContext context) => AddCategoryBottomSheet(),
       );
 }
 
@@ -356,8 +345,7 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
         parent: _animController,
         curve: new Interval(0.1, 1.0, curve: Curves.ease),
       ),
-    )
-      ..addListener(() => setState(() {}));
+    )..addListener(() => setState(() {}));
   }
 
   @override
@@ -369,9 +357,7 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
   @override
   Widget build(BuildContext context) {
     return new Material(
-      color: Theme
-          .of(context)
-          .primaryColorLight,
+      color: Theme.of(context).primaryColorLight,
       shape: new RoundedRectangleBorder(
         borderRadius: new BorderRadius.only(
           topLeft: new Radius.circular(16.0),
@@ -405,23 +391,19 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
               ),
               child: new Material(
                 elevation: 4.0,
-                shadowColor: Theme
-                    .of(context)
-                    .accentColor,
+                shadowColor: Theme.of(context).accentColor,
                 borderRadius: new BorderRadius.all(
                   new Radius.circular(32.0),
                 ),
                 child: _anim.value > 96.0
                     ? new MaterialButton(
-                  splashColor: Theme
-                      .of(context)
-                      .accentColor,
-                  onPressed: _addCategory,
-                  child: Text('Add'),
-                )
+                        splashColor: Theme.of(context).accentColor,
+                        onPressed: _addCategory,
+                        child: Text('Add'),
+                      )
                     : new Center(
-                  child: new CircularProgressIndicator(),
-                ),
+                        child: new CircularProgressIndicator(),
+                      ),
               ),
             ),
           ),
@@ -430,33 +412,30 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
     );
   }
 
-  Widget _buildMsgTextOrButtonChooseImage() =>
-      _msg != null
-          ? new Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text(_msg),
-      )
-          : new FlatButton.icon(
-        onPressed: _chooseImage,
-        icon: Icon(Icons.image),
-        label: Text('Choose image'),
-      );
+  Widget _buildMsgTextOrButtonChooseImage() => _msg != null
+      ? new Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(_msg),
+        )
+      : new FlatButton.icon(
+          onPressed: _chooseImage,
+          icon: Icon(Icons.image),
+          label: Text('Choose image'),
+        );
 
-  Widget _buildImagePreview() =>
-      _imageFile != null
-          ? new Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: new Image.file(
-          _imageFile,
-          width: 64.0,
-          height: 64.0,
-          fit: BoxFit.cover,
-        ),
-      )
-          : new Container();
+  Widget _buildImagePreview() => _imageFile != null
+      ? new Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: new Image.file(
+            _imageFile,
+            width: 64.0,
+            height: 64.0,
+            fit: BoxFit.cover,
+          ),
+        )
+      : new Container();
 
-  TextField _buildTextField() =>
-      new TextField(
+  TextField _buildTextField() => new TextField(
         controller: _textController,
         decoration: new InputDecoration(
           labelText: 'Category name',

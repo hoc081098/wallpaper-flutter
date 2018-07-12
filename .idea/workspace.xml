@@ -30,14 +30,10 @@
     <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="image_model.dart" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/data/models/image_model.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
-            </state>
-          </provider>
+    <leaf>
+      <file leaf-file-name="main.dart" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/main.dart">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -145,7 +141,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -162,6 +157,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -358,7 +354,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531417754899</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Change search functionality&#10;Change upload page&#10;Change recent page (history)">
+      <created>1531417818822</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1531417818822</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TodoView">
@@ -390,18 +393,18 @@
       <window_info anchor="right" id="Device File Explorer" order="3" sideWeight="0.5033003" side_tool="true" weight="0.25037822" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
-      <window_info anchor="bottom" id="Messages" order="7" weight="0.30718955" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
-      <window_info anchor="bottom" id="Version Control" order="7" visible="true" weight="0.42973855" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.498366" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.88832486" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.42973855" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.78104573" />
       <window_info id="Captures" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22692889" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.22692889" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="right" id="Flutter Inspector" order="3" sideWeight="0.49669966" visible="true" weight="0.2473525" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.30718955" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -414,7 +417,6 @@
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="Dart Analysis" order="7" weight="0.48287112" />
       <window_info id="Build Variants" order="3" side_tool="true" />
-      <window_info id="Image Layers" order="4" />
       <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2318105" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -427,6 +429,7 @@
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info id="UI Designer" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" weight="0.36928105" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Device File Explorer" order="6" sideWeight="0.5033003" side_tool="true" weight="0.25037822" />
       <window_info anchor="right" id="Flutter Outline" order="7" />
@@ -437,7 +440,7 @@
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15279879" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.24257426" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.32952693" />
+      <window_info id="Image Layers" order="4" />
       <window_info anchor="right" id="Palette&#9;" order="9" />
       <window_info anchor="right" id="Theme Preview" order="10" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -497,6 +500,9 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/sqflite-0.11.0/lib/sqflite.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -538,9 +544,6 @@
           <caret line="139" column="8" selection-start-line="139" selection-start-column="8" selection-end-line="139" selection-end-column="8" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Desktop/no_image.png">
-      <provider selected="true" editor-type-id="images" />
     </entry>
     <entry file="file://C:/flutter/bin/cache/pkg/sky_engine/lib/core/duration.dart">
       <provider selected="true" editor-type-id="text-editor">
@@ -654,9 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/assets/NunitoSans-Regular.ttf">
-      <provider selected="true" editor-type-id="fontseditor" />
-    </entry>
     <entry file="file://C:/flutter/packages/flutter/lib/src/material/button.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="691">
@@ -731,226 +731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="46">
           <caret line="797" column="41" lean-forward="true" selection-start-line="797" selection-start-column="41" selection-end-line="797" selection-end-column="41" />
-          <folding>
-            <element signature="e#238#308#0" />
-            <element signature="e#434#3319#0" />
-            <element signature="e#3362#3588#0" />
-            <element signature="e#3620#3771#0" />
-            <element signature="e#3825#4027#0" />
-            <element signature="e#4074#4617#0" />
-            <element signature="e#4080#4146#0" />
-            <element signature="e#4346#4349#0" />
-            <element signature="e#4349#4361#0" />
-            <element signature="e#4621#5189#0" />
-            <element signature="e#5248#6325#0" />
-            <element signature="e#5308#5311#0" />
-            <element signature="e#5311#5323#0" />
-            <element signature="e#5348#5408#0" />
-            <element signature="e#5872#5946#0" />
-            <element signature="e#6329#6800#0" />
-            <element signature="e#6849#6946#0" />
-            <element signature="e#6886#6889#0" />
-            <element signature="e#6889#6941#0" />
-            <element signature="e#6931#6934#0" />
-            <element signature="e#6934#6940#0" />
-            <element signature="e#6950#7284#0" />
-            <element signature="e#7373#8731#0" />
-            <element signature="e#7588#7853#0" />
-            <element signature="e#7885#8009#0" />
-            <element signature="e#7948#8002#0" />
-            <element signature="e#8048#8051#0" />
-            <element signature="e#8051#8696#0" />
-            <element signature="e#8423#8544#0" />
-            <element signature="e#8735#10336#0" />
-            <element signature="e#10431#10486#0" />
-            <element signature="e#10464#10481#0" />
-            <element signature="e#10490#10780#0" />
-            <element signature="e#10856#10862#0" />
-            <element signature="e#10862#10870#0" />
-            <element signature="e#10875#10932#0" />
-            <element signature="e#10969#12019#0" />
-            <element signature="e#12167#12236#0" />
-            <element signature="e#12202#12205#0" />
-            <element signature="e#12205#12231#0" />
-            <element signature="e#12240#13873#0" />
-            <element signature="e#13992#14534#0" />
-            <element signature="e#14573#14622#0" />
-            <element signature="e#14602#14605#0" />
-            <element signature="e#14605#14617#0" />
-            <element signature="e#14626#15428#0" />
-            <element signature="e#15468#15521#0" />
-            <element signature="e#15495#15501#0" />
-            <element signature="e#15501#15516#0" />
-            <element signature="e#15525#15895#0" />
-            <element signature="e#15950#17363#0" />
-            <element signature="e#16049#16811#0" />
-            <element signature="e#16880#16883#0" />
-            <element signature="e#16893#17019#0" />
-            <element signature="e#17073#17076#0" />
-            <element signature="e#17076#17322#0" />
-            <element signature="e#17367#18273#0" />
-            <element signature="e#18329#19634#0" />
-            <element signature="e#18427#19082#0" />
-            <element signature="e#19151#19154#0" />
-            <element signature="e#19164#19290#0" />
-            <element signature="e#19344#19347#0" />
-            <element signature="e#19347#19593#0" />
-            <element signature="e#19638#21173#0" />
-            <element signature="e#21236#21300#0" />
-            <element signature="e#21271#21274#0" />
-            <element signature="e#21274#21295#0" />
-            <element signature="e#21304#22185#0" />
-            <element signature="e#22240#22296#0" />
-            <element signature="e#22270#22276#0" />
-            <element signature="e#22276#22291#0" />
-            <element signature="e#22300#22974#0" />
-            <element signature="e#23023#23107#0" />
-            <element signature="e#23111#23751#0" />
-            <element signature="e#23820#23866#0" />
-            <element signature="e#23870#24622#0" />
-            <element signature="e#24676#25742#0" />
-            <element signature="e#24713#24716#0" />
-            <element signature="e#25266#25309#0" />
-            <element signature="e#25746#26439#0" />
-            <element signature="e#26510#27002#0" />
-            <element signature="e#26547#26550#0" />
-            <element signature="e#27006#27533#0" />
-            <element signature="e#27581#28178#0" />
-            <element signature="e#27623#27631#0" />
-            <element signature="e#28182#28675#0" />
-            <element signature="e#28715#29253#0" />
-            <element signature="e#28755#28761#0" />
-            <element signature="e#30109#30634#0" />
-            <element signature="e#30678#31211#0" />
-            <element signature="e#30718#30724#0" />
-            <element signature="e#31215#31738#0" />
-            <element signature="e#31780#32312#0" />
-            <element signature="e#31820#31826#0" />
-            <element signature="e#32316#32750#0" />
-            <element signature="e#32776#33063#0" />
-            <element signature="e#32815#32820#0" />
-            <element signature="e#33067#33568#0" />
-            <element signature="e#33596#33954#0" />
-            <element signature="e#33636#33642#0" />
-            <element signature="e#33958#34163#0" />
-            <element signature="e#34295#34664#0" />
-            <element signature="e#34692#35011#0" />
-            <element signature="e#34763#34772#0" />
-            <element signature="e#35015#35337#0" />
-            <element signature="e#35363#35686#0" />
-            <element signature="e#35392#35395#0" />
-            <element signature="e#35439#35447#0" />
-            <element signature="e#35690#36073#0" />
-            <element signature="e#36184#37120#0" />
-            <element signature="e#37149#37198#0" />
-            <element signature="e#37177#37180#0" />
-            <element signature="e#37180#37193#0" />
-            <element signature="e#37202#38175#0" />
-            <element signature="e#38220#38273#0" />
-            <element signature="e#38253#38256#0" />
-            <element signature="e#38256#38268#0" />
-            <element signature="e#38277#38887#0" />
-            <element signature="e#38916#38965#0" />
-            <element signature="e#38944#38947#0" />
-            <element signature="e#38947#38960#0" />
-            <element signature="e#38969#39800#0" />
-            <element signature="e#39845#39898#0" />
-            <element signature="e#39878#39881#0" />
-            <element signature="e#39881#39893#0" />
-            <element signature="e#39902#40919#0" />
-            <element signature="e#40976#41030#0" />
-            <element signature="e#41008#41011#0" />
-            <element signature="e#41011#41025#0" />
-            <element signature="e#41034#41730#0" />
-            <element signature="e#41753#42238#0" />
-            <element signature="e#41790#41793#0" />
-            <element signature="e#42242#42538#0" />
-            <element signature="e#42560#43138#0" />
-            <element signature="e#42597#42600#0" />
-            <element signature="e#43142#43428#0" />
-            <element signature="e#43452#44385#0" />
-            <element signature="e#43489#43492#0" />
-            <element signature="e#44389#45504#0" />
-            <element signature="e#45564#46349#0" />
-            <element signature="e#46353#46743#0" />
-            <element signature="e#46802#47749#0" />
-            <element signature="e#47753#47940#0" />
-            <element signature="e#48001#49239#0" />
-            <element signature="e#48038#48041#0" />
-            <element signature="e#49243#49836#0" />
-            <element signature="e#49870#50502#0" />
-            <element signature="e#49931#49938#0" />
-            <element signature="e#49975#49978#0" />
-            <element signature="e#50394#50436#0" />
-            <element signature="e#50506#51812#0" />
-            <element signature="e#51890#54300#0" />
-            <element signature="e#52104#52214#0" />
-            <element signature="e#52263#52562#0" />
-            <element signature="e#52582#52637#0" />
-            <element signature="e#52659#53702#0" />
-            <element signature="e#52667#52718#0" />
-            <element signature="e#53025#53055#0" />
-            <element signature="e#53098#53163#0" />
-            <element signature="e#53356#53359#0" />
-            <element signature="e#53359#53365#0" />
-            <element signature="e#53726#53848#0" />
-            <element signature="e#53923#53926#0" />
-            <element signature="e#53926#53946#0" />
-            <element signature="e#53982#53985#0" />
-            <element signature="e#53985#54265#0" />
-            <element signature="e#54304#54695#0" />
-            <element signature="n#!!block;n#StreamSubscription#0" />
-            <element signature="e#54737#55688#0" />
-            <element signature="e#55711#56086#0" />
-            <element signature="e#56130#56816#0" />
-            <element signature="e#56858#57219#0" />
-            <element signature="e#57257#58497#0" />
-            <element signature="e#58538#58820#0" />
-            <element signature="e#58841#59204#0" />
-            <element signature="e#59229#59682#0" />
-            <element signature="e#59728#60090#0" />
-            <element signature="n#!!block;n#EventSink#0" />
-            <element signature="e#60142#60236#0" />
-            <element signature="e#60261#60351#0" />
-            <element signature="e#60411#60590#0" />
-            <element signature="e#60610#60675#0" />
-            <element signature="n#!!block;n#StreamView#0" />
-            <element signature="e#61229#61341#0" />
-            <element signature="e#61345#61829#0" />
-            <element signature="n#!!block;n#StreamConsumer#0" />
-            <element signature="e#61867#62656#0" />
-            <element signature="e#62698#63089#0" />
-            <element signature="e#63111#63804#0" />
-            <element signature="n#!!block;n#StreamSink#0" />
-            <element signature="e#63881#64768#0" />
-            <element signature="e#64790#65327#0" />
-            <element signature="e#65350#66065#0" />
-            <element signature="n#!!block;n#StreamTransformer#0" />
-            <element signature="e#66109#68820#0" />
-            <element signature="e#69000#70645#0" />
-            <element signature="e#70900#71310#0" />
-            <element signature="e#71412#71479#0" />
-            <element signature="e#71450#71466#0" />
-            <element signature="e#71466#71474#0" />
-            <element signature="e#71483#72424#0" />
-            <element signature="e#72464#72802#0" />
-            <element signature="e#72932#73061#0" />
-            <element signature="n#!!block;n#StreamTransformerBase#0" />
-            <element signature="e#73379#73689#0" />
-            <element signature="n#!!block;n#StreamIterator#0" />
-            <element signature="e#73727#73772#0" />
-            <element signature="e#73822#73881#0" />
-            <element signature="e#73950#73953#0" />
-            <element signature="e#73953#73961#0" />
-            <element signature="e#73966#74553#0" />
-            <element signature="e#74584#75060#0" />
-            <element signature="e#75081#75775#0" />
-            <element signature="e#75798#75876#0" />
-            <element signature="n#!!block;n#_ControllerEventSinkWrapper#0" />
-            <element signature="e#76022#76048#0" />
-            <element signature="e#76098#76142#0" />
-            <element signature="e#76159#76183#0" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -996,9 +776,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/data/models/image_category_model.dart">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/data/models/search_state.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
@@ -1037,18 +814,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="114" column="21" selection-start-line="114" selection-start-column="21" selection-end-line="114" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="n#!!block;n#MyApp#0" />
-            <element signature="n#!!block;n#MyHomePage#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/screens/upload_page.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
@@ -1077,6 +842,9 @@
           <caret line="42" column="28" selection-start-line="42" selection-start-column="28" selection-end-line="42" selection-end-column="28" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/main.dart">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">

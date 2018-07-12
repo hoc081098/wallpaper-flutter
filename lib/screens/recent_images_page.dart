@@ -51,9 +51,7 @@ class _RecentPageState extends State<RecentPage> {
             final now = DateTime.now();
             final date = item['date'];
 
-            if (now
-                .difference(date)
-                .inDays < 1) {
+            if (now.difference(date).inDays < 1) {
               return ListTile(
                 title: Text(
                   'Today',
@@ -61,9 +59,7 @@ class _RecentPageState extends State<RecentPage> {
                 ),
               );
             }
-            if (now
-                .difference(date)
-                .inDays < 2) {
+            if (now.difference(date).inDays < 2) {
               return ListTile(
                 title: Text(
                   'Yesterday',
@@ -89,9 +85,7 @@ class _RecentPageState extends State<RecentPage> {
     return Container(
       padding: const EdgeInsets.all(8.0),
       child: child,
-      color: Theme
-          .of(context)
-          .backgroundColor,
+      color: Theme.of(context).backgroundColor,
     );
   }
 
@@ -107,7 +101,7 @@ class _RecentPageState extends State<RecentPage> {
               prev.month != viewTime.month ||
               prev.day != viewTime.day)) {
         final dateTime =
-        new DateTime(viewTime.year, viewTime.month, viewTime.day);
+            new DateTime(viewTime.year, viewTime.month, viewTime.day);
         result.add({
           'type': 'header',
           'date': dateTime,
@@ -133,10 +127,7 @@ class _RecentPageState extends State<RecentPage> {
           children: <Widget>[
             Text(
               'Delete',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subhead,
+              style: Theme.of(context).textTheme.subhead,
             ),
             SizedBox(width: 16.0),
             Icon(
@@ -176,9 +167,7 @@ class _RecentPageState extends State<RecentPage> {
       child: new GestureDetector(
         onTap: () => _onTap(image),
         child: new Container(
-          color: Theme
-              .of(context)
-              .primaryColorLight,
+          color: Theme.of(context).primaryColorLight,
           child: listTile,
         ),
       ),
