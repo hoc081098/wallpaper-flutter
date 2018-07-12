@@ -55,10 +55,11 @@ class _RecentPageState extends State<RecentPage> {
                 .difference(date)
                 .inDays < 1) {
               return ListTile(
-                  title: Text(
-                    'Today',
-                    textScaleFactor: 1.1,
-                  ));
+                title: Text(
+                  'Today',
+                  textScaleFactor: 1.1,
+                ),
+              );
             }
             if (now
                 .difference(date)
