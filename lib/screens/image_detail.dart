@@ -9,6 +9,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:simple_permissions/simple_permissions.dart';
 import 'package:wallpaper/constants.dart';
 import 'package:wallpaper/data/database.dart';
@@ -26,30 +27,59 @@ class ImageDetailPage extends StatefulWidget {
 }
 
 class _ImageDetailPageState extends State<ImageDetailPage> {
-  ImageModel imageModel;
   final imagesCollection = Firestore.instance.collection('images');
-  StreamSubscription subscription;
-  bool isLoading;
   final scaffoldKey = new GlobalKey<ScaffoldState>();
+  final imageDB = new ImageDB.getInstance();
+
+  StreamSubscription subscription;
+  StreamSubscription subscription1;
+  ImageModel imageModel;
+  bool isLoading;
+
+  StreamController<bool> _isFavoriteStreamController =
+      new StreamController.broadcast();
 
   @override
   void initState() {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays([SystemUiOverlay.bottom]);
+
     isLoading = false;
     imageModel = widget.imageModel;
-    subscription = imagesCollection
+
+    var imageStream = Observable(imagesCollection
         .document(imageModel.id)
         .snapshots()
-        .map(mapperImageModel)
-        .listen((ImageModel newImage) => setState(() => imageModel = newImage));
+        .map(mapperImageModel));
+    subscription = imageStream.listen(_onListen);
+
     _increaseCount('viewCount', imageModel.id);
     _insertToRecent(imageModel);
+
+    subscription1 = Observable
+        .combineLatest2<ImageModel, bool, ImageModel>(imageStream,
+            _isFavoriteStreamController.stream.where((b) => b), (img, _) => img)
+        .listen((ImageModel newImage) {
+      debugPrint('onListen fav new $newImage');
+      debugPrint('onListen fav old $imageModel');
+      imageDB
+          .updateFavoriteImage(newImage)
+          .then((i) => debugPrint('Updated fav $i'))
+          .catchError((e) => debugPrint('Updated fav error $e'));
+    });
+
+    _isFavoriteStreamController.addStream(
+      new Stream.fromFuture(
+        imageDB.isFavoriteImage(imageModel.id),
+      ),
+    );
   }
 
   @override
   void dispose() {
     subscription.cancel();
+    subscription1.cancel();
+    _isFavoriteStreamController.close();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     super.dispose();
   }
@@ -59,7 +89,16 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     return new Scaffold(
       key: scaffoldKey,
       body: new Container(
-        decoration: _buildBoxDecoration(),
+        decoration: new BoxDecoration(
+          gradient: new LinearGradient(
+            colors: <Color>[
+              Theme.of(context).backgroundColor.withOpacity(0.8),
+              Theme.of(context).backgroundColor.withOpacity(0.9),
+            ],
+            begin: AlignmentDirectional.topStart,
+            end: AlignmentDirectional.bottomEnd,
+          ),
+        ),
         child: new Stack(
           children: <Widget>[
             _buildCenterImage(),
@@ -72,13 +111,52 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 
   Positioned _buildAppbar(BuildContext context) {
+    final favoriteIconButton = new StreamBuilder(
+      stream: _isFavoriteStreamController.stream.distinct(),
+      builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+        debugPrint('DEBUG ${snapshot.data}');
+
+        if (snapshot.hasError || !snapshot.hasData) {
+          return new Container();
+        }
+        final isFavorite = snapshot.data;
+        return new IconButton(
+          icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
+          onPressed: () => _changeFavoriteStatus(isFavorite),
+          tooltip: isFavorite ? 'Remove from favorites' : 'Add to favorites',
+        );
+      },
+    );
+
+    var closeButton = new ClipOval(
+      child: new Container(
+        color: Colors.black.withOpacity(0.2),
+        child: new IconButton(
+          icon: new Icon(Icons.close, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
+    );
+
+    var textName = new Expanded(
+      child: new Text(
+        imageModel.name,
+        maxLines: 2,
+        overflow: TextOverflow.ellipsis,
+        style: new TextStyle(color: Colors.white, fontSize: 16.0),
+      ),
+    );
+
     return new Positioned(
       child: new Container(
         child: new Row(
           children: <Widget>[
-            _buildCloseIcon(context),
+            closeButton,
             new SizedBox(width: 8.0),
-            _buildImageNameText(),
+            textName,
+            favoriteIconButton,
             new IconButton(
               icon: Icon(Icons.share),
               onPressed: _shareImageToFacebook,
@@ -90,43 +168,19 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         constraints: new BoxConstraints.expand(height: kToolbarHeight),
         decoration: new BoxDecoration(
           gradient: new LinearGradient(
-              colors: <Color>[
-                Colors.black,
-                Colors.black.withOpacity(0.2),
-              ],
-              begin: AlignmentDirectional.topCenter,
-              end: AlignmentDirectional.bottomCenter,
-              stops: [0.0, 0.9]),
+            colors: <Color>[
+              Colors.black,
+              Colors.transparent,
+            ],
+            begin: AlignmentDirectional.topCenter,
+            end: AlignmentDirectional.bottomCenter,
+            stops: [0.1, 0.9],
+          ),
         ),
       ),
       top: 0.0,
       left: 0.0,
       right: 0.0,
-    );
-  }
-
-  Expanded _buildImageNameText() {
-    return new Expanded(
-      child: new Text(
-        imageModel.name,
-        maxLines: 2,
-        overflow: TextOverflow.ellipsis,
-        style: new TextStyle(color: Colors.white, fontSize: 16.0),
-      ),
-    );
-  }
-
-  ClipOval _buildCloseIcon(BuildContext context) {
-    return new ClipOval(
-      child: new Container(
-        color: Colors.black.withOpacity(0.3),
-        child: new IconButton(
-          icon: new Icon(Icons.close, color: Colors.white),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
     );
   }
 
@@ -137,21 +191,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         child: new ZoomableImage(
           new NetworkImage(imageModel.imageUrl),
           placeholder: new Image.asset('assets/picture.png'),
-          backgroundColor: Colors.black.withOpacity(0.8),
         ),
-      ),
-    );
-  }
-
-  BoxDecoration _buildBoxDecoration() {
-    return new BoxDecoration(
-      gradient: new LinearGradient(
-        colors: <Color>[
-          Colors.black.withOpacity(0.8),
-          Colors.black.withOpacity(0.9),
-        ],
-        begin: AlignmentDirectional.topStart,
-        end: AlignmentDirectional.bottomEnd,
       ),
     );
   }
@@ -350,9 +390,42 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 
   _insertToRecent(ImageModel image) {
-    new ImageDB.getInstance()
-        .insert(image)
+    imageDB
+        .insertRecentImage(image)
         .then((i) => debugPrint("Inserted $i"))
         .catchError((e) => debugPrint("Inserted error $e"));
+  }
+
+  void _onListen(ImageModel newImage) {
+    debugPrint('onListen new $newImage');
+    debugPrint('onListen old $imageModel');
+    imageDB
+        .updateRecentImage(newImage..viewTime = imageModel.viewTime)
+        .then((i) => debugPrint('Updated recent $i'))
+        .catchError((e) => debugPrint('Updated recent error $e'));
+    setState(() => imageModel = newImage);
+  }
+
+  void _changeFavoriteStatus(bool isFavorite) {
+    var result = isFavorite
+        ? imageDB.deleteFavoriteImageById(imageModel.id).then((i) => i > 0)
+        : imageDB.insertFavoriteImage(imageModel).then((i) => i != -1);
+    result.then((b) {
+      final msg = isFavorite ? 'Remove from favorites' : 'Add to favorites';
+      if (b) {
+        _showSnackBar('$msg successfully');
+        _isFavoriteStreamController.add(!isFavorite);
+      } else {
+        _showSnackBar('$msg unsuccessfully');
+      }
+      _isFavoriteStreamController.addStream(
+        new Stream.fromFuture(
+          imageDB.isFavoriteImage(imageModel.id),
+        ),
+      );
+    }).catchError((e) {
+      debugPrint('DEBUG $e');
+      _showSnackBar(e.toString());
+    });
   }
 }

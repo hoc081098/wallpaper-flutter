@@ -2,29 +2,36 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/image_list.dart';
 import 'package:wallpaper/utils.dart';
-
-class TrendingPage extends StatefulWidget {
-  @override
-  _TrendingPageState createState() => new _TrendingPageState();
-}
 
 enum Trending { downloadCount, viewCount }
 
 String trendingToString(Trending trending) {
   switch (trending) {
     case Trending.downloadCount:
-      return "Download count";
+      return 'Download count';
     case Trending.viewCount:
-      return "View count";
+      return 'View count';
   }
-  return "";
+  return '';
 }
 
-class _TrendingPageState extends State<TrendingPage> {
-  Trending _selected = Trending.downloadCount;
+String trendingToFieldName(Trending trending) {
+  switch (trending) {
+    case Trending.downloadCount:
+      return 'downloadCount';
+    case Trending.viewCount:
+      return 'viewCount';
+  }
+  return '';
+}
+
+class TrendingPage extends StatelessWidget {
+  final _selected =
+      new BehaviorSubject<Trending>(seedValue: Trending.downloadCount);
   final imagesCollection = Firestore.instance.collection('images');
 
   @override
@@ -34,40 +41,35 @@ class _TrendingPageState extends State<TrendingPage> {
         title: Text('Trending images'),
         actions: _buildActions(),
       ),
-      body: new ImageList(stream(_selected)),
+      body: new StaggeredImageList(_selected.distinct().switchMap(stream)),
     );
   }
 
   List<Widget> _buildActions() {
     return <Widget>[
-      new DropdownButton<Trending>(
-        items: Trending.values.map((e) {
-          return new DropdownMenuItem(
-            child: new Text(trendingToString(e)),
-            value: e,
+      new StreamBuilder(
+        stream: _selected.distinct(),
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          return new DropdownButton<Trending>(
+            items: Trending.values.map((e) {
+              return new DropdownMenuItem(
+                child: new Text(trendingToString(e)),
+                value: e,
+              );
+            }).toList(),
+            value: snapshot.data,
+            onChanged: (newValue) => _selected.add(newValue),
           );
-        }).toList(),
-        value: _selected,
-        onChanged: (newValue) => setState(() => _selected = newValue),
+        },
       ),
     ];
   }
 
   Stream<List<ImageModel>> stream(Trending selected) {
-    switch (selected) {
-      case Trending.downloadCount:
-        return imagesCollection
-            .orderBy('downloadCount', descending: true)
-            .limit(15)
-            .snapshots()
-            .map(mapper);
-      case Trending.viewCount:
-        return imagesCollection
-            .orderBy('viewCount', descending: true)
-            .limit(15)
-            .snapshots()
-            .map(mapper);
-    }
-    return null;
+    return imagesCollection
+        .orderBy(trendingToFieldName(selected), descending: true)
+        .limit(15)
+        .snapshots()
+        .map(mapper);
   }
 }

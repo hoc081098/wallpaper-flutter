@@ -5,10 +5,10 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/screens/image_detail.dart';
 
-class ImageList extends StatelessWidget {
+class StaggeredImageList extends StatelessWidget {
   final Stream<List<ImageModel>> stream;
 
-  const ImageList(this.stream, {Key key}) : super(key: key);
+  const StaggeredImageList(this.stream, {Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -75,6 +75,32 @@ class ImageList extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
+      ),
+    );
+  }
+}
+
+class ImageItem extends StatelessWidget {
+  final ImageModel item;
+
+  const ImageItem(this.item, {Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return new GestureDetector(
+      onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => new ImageDetailPage(item),
+            ),
+          ),
+      child: new Hero(
+        child: new FadeInImage.assetNetwork(
+          fit: BoxFit.cover,
+          placeholder: '',
+          image: item.thumbnailUrl,
+        ),
+        tag: item.id,
       ),
     );
   }

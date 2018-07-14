@@ -3,11 +3,15 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:wallpaper/data/database.dart';
 import 'package:wallpaper/data/models/search_state.dart';
+import 'package:wallpaper/image_list.dart';
 import 'package:wallpaper/screens/all_images_page.dart';
 import 'package:wallpaper/screens/category_page.dart';
+import 'package:wallpaper/screens/favorites_page.dart';
 import 'package:wallpaper/screens/newest_image_page.dart';
 import 'package:wallpaper/screens/recent_images_page.dart';
+import 'package:wallpaper/screens/settings_page.dart';
 import 'package:wallpaper/screens/trending_images_page.dart';
 import 'package:wallpaper/screens/upload_page.dart';
 import 'package:wallpaper/utils.dart' as utils;
@@ -44,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
   List<Map<String, dynamic>> nav;
-  Iterable<Widget> listTiles;
+  List<Widget> listTiles;
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   Widget _appBarTitle;
   Icon _actionIcon;
@@ -60,6 +64,10 @@ class _MyHomePageState extends State<MyHomePage>
   // clear history functionality
   final StreamController clearStreamController =
       new StreamController.broadcast();
+
+  // sort order favorites
+  final sortOrderController =
+      new BehaviorSubject<String>(seedValue: ImageDB.createdAtDesc);
 
   @override
   void initState() {
@@ -88,23 +96,45 @@ class _MyHomePageState extends State<MyHomePage>
               scaffoldKey: _scaffoldKey,
             ),
       },
+      {
+        'title': 'Favorites',
+        'icon': Icons.favorite,
+        'builder': (BuildContext context) =>
+            new FavoritesPage(sortOrderController.stream),
+      },
     ];
 
-    listTiles = nav.asMap().map((index, m) {
-      return MapEntry(
-        index,
-        ListTile(
-          title: Text(m['title']),
-          trailing: Icon(m['icon']),
-          onTap: () {
-            setState(() => _selectedIndex = index);
-            Navigator.pop(context);
-          },
-        ),
-      );
-    }).values;
+    listTiles = nav
+        .asMap()
+        .map((index, m) {
+          return MapEntry(
+            index,
+            ListTile(
+              title: Text(m['title']),
+              trailing: Icon(m['icon']),
+              onTap: () {
+                if (_isSearching) {
+                  _handleCloseSearch().whenComplete(() {
+                    setState(() {
+                      _selectedIndex = index;
+                      _appBarTitle = Text(nav[_selectedIndex]['title']);
+                    });
+                  });
+                } else {
+                  setState(() {
+                    _selectedIndex = index;
+                    _appBarTitle = Text(nav[_selectedIndex]['title']);
+                  });
+                }
+                Navigator.pop(context);
+              },
+            ),
+          );
+        })
+        .values
+        .toList();
 
-    _appBarTitle = Text(nav[_selectedIndex]['title']);
+    _appBarTitle = Text(nav[0]['title']);
     _actionIcon = Icon(Icons.search, color: Colors.white);
 
     _opacityController = new AnimationController(
@@ -148,6 +178,7 @@ class _MyHomePageState extends State<MyHomePage>
     super.dispose();
     clearStreamController.close();
     _opacityController.dispose();
+    sortOrderController.close();
   }
 
   Drawer _buildDrawer(BuildContext context) {
@@ -183,7 +214,9 @@ class _MyHomePageState extends State<MyHomePage>
               borderRadius: BorderRadius.all(Radius.circular(8.0)),
             ),
           ),
-          listTiles,
+          listTiles[0],
+          listTiles[1],
+          listTiles[2],
           ListTile(
             title: Text('Trending image'),
             trailing: new Icon(Icons.trending_up),
@@ -204,12 +237,26 @@ class _MyHomePageState extends State<MyHomePage>
               );
             },
           ),
+          new Divider(),
+          listTiles[3],
+          listTiles[4],
+          ListTile(
+            title: Text('Settings'),
+            trailing: new Icon(Icons.settings),
+            onTap: () {
+              Navigator.push(
+                context,
+                new MaterialPageRoute(builder: (context) => new SettingsPage()),
+              );
+            },
+          ),
+          new Divider(),
           new AboutListTile(
             applicationName: 'Flutter wallpaper HD',
             applicationIcon: new FlutterLogo(),
             applicationVersion: '1.0.0',
           ),
-        ].expand<Widget>((i) => i is Iterable ? i : [i]).toList(),
+        ],
       ),
     );
   }
@@ -223,25 +270,48 @@ class _MyHomePageState extends State<MyHomePage>
       ),
     ];
 
-    if (_selectedIndex == 3 && !_isSearching) {
-      actions.add(
-        new PopupMenuButton(
-          onSelected: (_) {
-            debugPrint('onSelected');
-            clearStreamController.add(null);
-          },
-          itemBuilder: (BuildContext context) {
-            return [
-              PopupMenuItem(
-                value: '',
-                child: Text('Clear history'),
-              )
-            ];
-          },
-        ),
-      );
+    if (!_isSearching) {
+      if (_selectedIndex == 3) {
+        //History page
+        actions.add(
+          new PopupMenuButton(
+            onSelected: (_) {
+              debugPrint('onSelected');
+              clearStreamController.add(null);
+            },
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  value: '',
+                  child: Text('Clear history'),
+                )
+              ];
+            },
+          ),
+        );
+      } else if (_selectedIndex == 4) {
+        //Favorite page
+        actions.add(
+          new PopupMenuButton<String>(
+            onSelected: (v) => sortOrderController.add(v),
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem<String>(
+                  value: ImageDB.createdAtDesc,
+                  child: Text('Time descending'),
+                ),
+                PopupMenuItem<String>(
+                  value: ImageDB.nameAsc,
+                  child: Text('Name ascending'),
+                ),
+              ];
+            },
+          ),
+        );
+      }
     }
 
+    debugPrint('_appBarTitle $_appBarTitle');
     return new AppBar(
       title: _appBarTitle,
       actions: actions,
@@ -277,14 +347,20 @@ class _MyHomePageState extends State<MyHomePage>
         _opacityController.forward();
       });
     } else {
-      _opacityController.reverse(from: _opacityController.upperBound).then((_) {
-        setState(() {
-          _isSearching = false;
-          _appBarTitle = Text(nav[_selectedIndex]['title']);
-          _actionIcon = Icon(Icons.search, color: Colors.white);
-        });
-      });
+      _handleCloseSearch();
     }
+  }
+
+  Future<Null> _handleCloseSearch() {
+    return _opacityController
+        .reverse(from: _opacityController.upperBound)
+        .whenComplete(() {
+      setState(() {
+        _isSearching = false;
+        _appBarTitle = Text(nav[_selectedIndex]['title']);
+        _actionIcon = Icon(Icons.search, color: Colors.white);
+      });
+    });
   }
 
   Stream<SearchImageState> _searchImage(String value) async* {
@@ -292,8 +368,8 @@ class _MyHomePageState extends State<MyHomePage>
     Stream<QuerySnapshot> stream = value.isEmpty
         ? _imageCollection.snapshots()
         : _imageCollection
-        .orderBy('name')
-        .startAt([value]).endAt(["$value" + "\u{f8ff}"]).snapshots();
+            .orderBy('name')
+            .startAt([value]).endAt(["$value" + "\u{f8ff}"]).snapshots();
     yield LoadingState();
     try {
       await for (var result in stream
@@ -310,9 +386,7 @@ class _MyHomePageState extends State<MyHomePage>
     return new FadeTransition(
       child: Container(
         decoration: BoxDecoration(
-          color: Theme
-              .of(context)
-              .backgroundColor,
+          color: Theme.of(context).backgroundColor,
         ),
         child: _buildStreamBuilder(),
       ),
@@ -329,10 +403,7 @@ class _MyHomePageState extends State<MyHomePage>
           return Center(
             child: Text(
               'Search somthing...',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subhead,
+              style: Theme.of(context).textTheme.subhead,
             ),
           );
         }
@@ -344,10 +415,7 @@ class _MyHomePageState extends State<MyHomePage>
           return Center(
             child: Text(
               data.error.toString(),
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .subhead,
+              style: Theme.of(context).textTheme.subhead,
             ),
           );
         }
@@ -376,12 +444,7 @@ class _MyHomePageState extends State<MyHomePage>
                     childAspectRatio: 9 / 16,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    final item = images[index];
-                    return new FadeInImage.assetNetwork(
-                      fit: BoxFit.cover,
-                      placeholder: '',
-                      image: item.thumbnailUrl,
-                    );
+                    return new ImageItem(images[index]);
                   },
                   itemCount: images.length,
                 ),

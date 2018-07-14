@@ -57,5 +57,5 @@ class ImageModel {
 
   @override
   String toString() => 'ImageModel{id: $id, name: $name, imageUrl: $imageUrl,'
-      ' thumbnailUrl: $thumbnailUrl, categoryId: $categoryId, uploadedTime: $uploadedTime}';
+      ' thumbnailUrl: $thumbnailUrl, categoryId: $categoryId, uploadedTime: $uploadedTime, viewTime: $viewTime}';
 }

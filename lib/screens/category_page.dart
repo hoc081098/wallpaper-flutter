@@ -107,7 +107,7 @@ class ImagesByCategoryPage extends StatelessWidget {
       appBar: new AppBar(
         title: new Text(category.name),
       ),
-      body: new ImageList(
+      body: new StaggeredImageList(
         imagesCollection
             .where('categoryId', isEqualTo: category.id)
             .orderBy('name')
