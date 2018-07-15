@@ -94,13 +94,44 @@ class ImageItem extends StatelessWidget {
               builder: (context) => new ImageDetailPage(item),
             ),
           ),
-      child: new Hero(
-        child: new FadeInImage.assetNetwork(
-          fit: BoxFit.cover,
-          placeholder: '',
-          image: item.thumbnailUrl,
-        ),
-        tag: item.id,
+      child: new Stack(
+        children: <Widget>[
+          new Hero(
+            child: new FadeInImage.assetNetwork(
+              fit: BoxFit.cover,
+              placeholder: '',
+              image: item.thumbnailUrl,
+            ),
+            tag: item.id,
+          ),
+          new Positioned(
+            left: 0.0,
+            right: 0.0,
+            bottom: 0.0,
+            child: new Container(
+              padding: const EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: <Color>[Colors.black, Colors.transparent],
+                  begin: AlignmentDirectional.bottomCenter,
+                  end: AlignmentDirectional.topCenter,
+                ),
+              ),
+              alignment: AlignmentDirectional.center,
+              child: new Text(
+                item.name,
+                maxLines: 1,
+                textAlign: TextAlign.center,
+                overflow: TextOverflow.ellipsis,
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .subhead
+                    .copyWith(fontSize: 14.0),
+              ),
+            ),
+          )
+        ],
       ),
     );
   }

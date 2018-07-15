@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:rxdart/src/observable.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:wallpaper/data/database.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/image_list.dart';
@@ -49,10 +49,11 @@ class FavoritesPage extends StatelessWidget {
           }
 
           return new GridView.builder(
+            padding: const EdgeInsets.all(8.0),
             gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: 2.0,
-              mainAxisSpacing: 2.0,
+              crossAxisCount: 2,
+              crossAxisSpacing: 8.0,
+              mainAxisSpacing: 8.0,
               childAspectRatio: 9 / 16,
             ),
             itemBuilder: (BuildContext context, int index) {

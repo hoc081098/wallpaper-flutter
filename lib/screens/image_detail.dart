@@ -57,11 +57,20 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     _insertToRecent(imageModel);
 
     subscription1 = Observable
-        .combineLatest2<ImageModel, bool, ImageModel>(imageStream,
-            _isFavoriteStreamController.stream.where((b) => b), (img, _) => img)
+        .combineLatest2<ImageModel, bool, Map<String, dynamic>>(
+          imageStream,
+          _isFavoriteStreamController.stream.distinct(),
+          (img, isFav) => {
+                'image': img,
+                'isFavorite': isFav,
+              },
+        )
+        .where((map) => map['isFavorite'])
+        .map<ImageModel>((map) => map['image'])
         .listen((ImageModel newImage) {
       debugPrint('onListen fav new $newImage');
       debugPrint('onListen fav old $imageModel');
+
       imageDB
           .updateFavoriteImage(newImage)
           .then((i) => debugPrint('Updated fav $i'))
@@ -418,11 +427,11 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       } else {
         _showSnackBar('$msg unsuccessfully');
       }
-      _isFavoriteStreamController.addStream(
-        new Stream.fromFuture(
-          imageDB.isFavoriteImage(imageModel.id),
-        ),
-      );
+       _isFavoriteStreamController.addStream(
+      new Stream.fromFuture(
+        imageDB.isFavoriteImage(imageModel.id),
+      ),
+    );
     }).catchError((e) {
       debugPrint('DEBUG $e');
       _showSnackBar(e.toString());

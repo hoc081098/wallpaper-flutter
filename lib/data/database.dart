@@ -163,12 +163,12 @@ class ImageDB {
       UPDATE $tableFavorites
       SET name = ?, imageUrl = ?, thumbnailUrl = ?, categoryId = ?, uploadedTime = ?
       WHERE id = ?
-    ''', [
+    ''', <String>[
       image.name,
       image.imageUrl,
       image.thumbnailUrl,
       image.categoryId,
-      image.uploadedTime,
+      image.uploadedTime.toIso8601String(),
       image.id,
     ]);
   }
