@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:wallpaper/data/models/image_model.dart';
@@ -21,8 +22,8 @@ class StaggeredImageList extends StatelessWidget {
   Widget _buildImageList(
       BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot) {
     if (snapshot.hasError) {
-      debugPrint('Error: ${snapshot.error}');
-      return new Center(
+      debugPrint('>>> Error: ${snapshot.error}');
+      return Center(
         child: Text(
           'An error occurred',
           style: Theme.of(context).textTheme.body1,
@@ -37,7 +38,7 @@ class StaggeredImageList extends StatelessWidget {
     final images = snapshot.data;
 
     if (images.isEmpty) {
-      return new Center(
+      return Center(
         child: Text(
           'Image list is empty!',
           style: Theme.of(context).textTheme.body1,
@@ -45,7 +46,7 @@ class StaggeredImageList extends StatelessWidget {
       );
     }
 
-    return new StaggeredGridView.countBuilder(
+    return StaggeredGridView.countBuilder(
       crossAxisCount: 4,
       itemCount: images.length,
       itemBuilder: (context, index) => _buildImageItem(context, images[index]),
@@ -62,17 +63,35 @@ class StaggeredImageList extends StatelessWidget {
       elevation: 3.0,
       child: InkWell(
         onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => new ImageDetailPage(image),
-              ),
-            ),
+          context,
+          MaterialPageRoute(
+            builder: (context) => ImageDetailPage(image),
+          ),
+        ),
         child: Hero(
           tag: image.id,
-          child: new FadeInImage.assetNetwork(
-            placeholder: 'assets/picture.png',
-            image: image.thumbnailUrl,
+          child: CachedNetworkImage(
+            imageUrl: image.thumbnailUrl,
             fit: BoxFit.cover,
+            placeholder: (context, url) =>
+                Container(
+                  constraints: BoxConstraints.expand(),
+                  child: Stack(
+                    children: <Widget>[
+                      Positioned.fill(
+                        child: Image.asset(
+                          'assets/picture.png',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      Positioned.fill(
+                        child: Center(
+                          child: CircularProgressIndicator(strokeWidth: 2,),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
           ),
         ),
       ),
@@ -87,28 +106,46 @@ class ImageItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new GestureDetector(
+    return GestureDetector(
       onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => new ImageDetailPage(item),
-            ),
-          ),
-      child: new Stack(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ImageDetailPage(item),
+        ),
+      ),
+      child: Stack(
         children: <Widget>[
-          new Hero(
-            child: new FadeInImage.assetNetwork(
+          Hero(
+            child: CachedNetworkImage(
+              imageUrl: item.thumbnailUrl,
               fit: BoxFit.cover,
-              placeholder: '',
-              image: item.thumbnailUrl,
+              placeholder: (context, url) =>
+                  Container(
+                    constraints: BoxConstraints.expand(),
+                    child: Stack(
+                      children: <Widget>[
+                        Positioned.fill(
+                          child: Image.asset(
+                            'assets/picture.png',
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                        Positioned.fill(
+                          child: Center(
+                            child: CircularProgressIndicator(strokeWidth: 2,),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
             ),
             tag: item.id,
           ),
-          new Positioned(
+          Positioned(
             left: 0.0,
             right: 0.0,
             bottom: 0.0,
-            child: new Container(
+            child: Container(
               padding: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 gradient: LinearGradient(
@@ -118,7 +155,7 @@ class ImageItem extends StatelessWidget {
                 ),
               ),
               alignment: AlignmentDirectional.center,
-              child: new Text(
+              child: Text(
                 item.name,
                 maxLines: 1,
                 textAlign: TextAlign.center,

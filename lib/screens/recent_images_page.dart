@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:wallpaper/data/database.dart';
@@ -14,7 +15,7 @@ class RecentPage extends StatefulWidget {
       : super(key: key);
 
   @override
-  _RecentPageState createState() => new _RecentPageState();
+  _RecentPageState createState() => _RecentPageState();
 }
 
 class _RecentPageState extends State<RecentPage> {
@@ -59,8 +60,8 @@ class _RecentPageState extends State<RecentPage> {
     if (_imagesWithHeaders.isEmpty) {
       return Container(
         padding: const EdgeInsets.all(8.0),
-        child: new Center(
-          child: new Text(
+        child: Center(
+          child: Text(
             'Your list of history is empty',
             style: Theme.of(context).textTheme.title,
           ),
@@ -69,7 +70,7 @@ class _RecentPageState extends State<RecentPage> {
       );
     }
 
-    final child = new ListView.builder(
+    final child = ListView.builder(
       itemBuilder: (BuildContext context, int index) {
         final item = _imagesWithHeaders[index];
 
@@ -104,6 +105,8 @@ class _RecentPageState extends State<RecentPage> {
         if (item['type'] == 'image') {
           return _buildItem(item['image'], item['index']);
         }
+
+        return null;
       },
       itemCount: _imagesWithHeaders.length,
     );
@@ -127,7 +130,7 @@ class _RecentPageState extends State<RecentPage> {
               prev.month != viewTime.month ||
               prev.day != viewTime.day)) {
         final dateTime =
-            new DateTime(viewTime.year, viewTime.month, viewTime.day);
+        DateTime(viewTime.year, viewTime.month, viewTime.day);
         result.add({
           'type': 'header',
           'date': dateTime,
@@ -145,10 +148,10 @@ class _RecentPageState extends State<RecentPage> {
   }
 
   Widget _buildItem(ImageModel image, int index) {
-    var background = new Container(
-      child: new Padding(
+    var background = Container(
+      child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: new Row(
+        child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             Text(
@@ -166,9 +169,19 @@ class _RecentPageState extends State<RecentPage> {
     );
 
     var listTile = ListTile(
-      leading: new FadeInImage.assetNetwork(
-        image: image.thumbnailUrl,
-        placeholder: '',
+      leading: CachedNetworkImage(
+        imageUrl: image.thumbnailUrl,
+        fit: BoxFit.cover,
+        placeholder: (context, url) =>
+            Container(
+              constraints: BoxConstraints.expand(),
+              child: Positioned.fill(
+                child: Image.asset(
+                  'assets/picture.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
       ),
       title: Text(
         image.name,
@@ -186,13 +199,13 @@ class _RecentPageState extends State<RecentPage> {
       ),
     );
 
-    return new Dismissible(
+    return Dismissible(
       background: background,
       key: Key(image.id),
       onDismissed: (_) => _remove(image.id, index),
-      child: new GestureDetector(
+      child: GestureDetector(
         onTap: () => _onTap(image),
-        child: new Container(
+        child: Container(
           color: Theme.of(context).primaryColorLight,
           child: listTile,
         ),
@@ -206,7 +219,7 @@ class _RecentPageState extends State<RecentPage> {
       _imagesWithHeaders = [];
     });
     widget.scaffoldKey.currentState.showSnackBar(
-      new SnackBar(content: new Text('Delete successfully')),
+      SnackBar(content: Text('Delete successfully')),
     );
   }
 
@@ -214,7 +227,7 @@ class _RecentPageState extends State<RecentPage> {
     imageDB.deleteRecentImageById(id).then((i) {
       if (i > 0) {
         widget.scaffoldKey.currentState.showSnackBar(
-          new SnackBar(content: new Text('Delete successfully')),
+          SnackBar(content: Text('Delete successfully')),
         );
 
         setState(() {
@@ -223,19 +236,19 @@ class _RecentPageState extends State<RecentPage> {
         });
       } else {
         widget.scaffoldKey.currentState.showSnackBar(
-          new SnackBar(content: new Text('Delete failed')),
+          SnackBar(content: Text('Delete failed')),
         );
       }
     }).catchError(
       (e) => widget.scaffoldKey.currentState.showSnackBar(
-            new SnackBar(content: new Text('Delete error: $e')),
+        SnackBar(content: Text('Delete error: $e')),
           ),
     );
   }
 
   _onTap(ImageModel image) async {
-    final route = new MaterialPageRoute(
-      builder: (context) => new ImageDetailPage(image),
+    final route = MaterialPageRoute(
+      builder: (context) => ImageDetailPage(image),
     );
     await Navigator.push(context, route);
     _getRecentImages();

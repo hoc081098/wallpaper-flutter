@@ -16,11 +16,12 @@ ImageModel mapperImageModel(DocumentSnapshot documentSnapshot) {
 
 bool saveImage(Map<String, dynamic> map) {
   try {
-    new File(map['filePath'])
+    File(map['filePath'])
       ..createSync(recursive: true)
       ..writeAsBytesSync(map['bytes']);
     return true;
   } catch (e) {
+    print('Saved image error: $e');
     return false;
   }
 }

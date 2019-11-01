@@ -63,11 +63,11 @@ class _MyHomePageState extends State<MyHomePage>
 
   // clear history functionality
   final StreamController clearStreamController =
-      new StreamController.broadcast();
+  StreamController.broadcast();
 
   // sort order favorites
   final sortOrderController =
-      new BehaviorSubject<String>(seedValue: ImageDB.createdAtDesc);
+  BehaviorSubject<String>.seeded(ImageDB.createdAtDesc);
 
   @override
   void initState() {
@@ -76,22 +76,23 @@ class _MyHomePageState extends State<MyHomePage>
       {
         'title': 'Categories',
         'icon': Icons.category,
-        'builder': (BuildContext context) => new CategoryPage(),
+        'builder': (BuildContext context) => CategoryPage(),
       },
       {
         'title': 'All images',
         'icon': Icons.image,
-        'builder': (BuildContext context) => new AllPage(),
+        'builder': (BuildContext context) => AllPage(),
       },
       {
         'title': 'Newest images',
         'icon': Icons.update,
-        'builder': (BuildContext context) => new NewestPage(),
+        'builder': (BuildContext context) => NewestPage(),
       },
       {
         'title': 'Recent images',
         'icon': Icons.history,
-        'builder': (BuildContext context) => new RecentPage(
+        'builder': (BuildContext context) =>
+            RecentPage(
               clearStream: clearStreamController.stream,
               scaffoldKey: _scaffoldKey,
             ),
@@ -100,7 +101,7 @@ class _MyHomePageState extends State<MyHomePage>
         'title': 'Favorites',
         'icon': Icons.favorite,
         'builder': (BuildContext context) =>
-            new FavoritesPage(sortOrderController.stream),
+            FavoritesPage(sortOrderController.stream),
       },
     ];
 
@@ -137,11 +138,11 @@ class _MyHomePageState extends State<MyHomePage>
     _appBarTitle = Text(nav[0]['title']);
     _actionIcon = Icon(Icons.search, color: Colors.white);
 
-    _opacityController = new AnimationController(
+    _opacityController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 1500),
     );
-    _opacityAnim = new Tween<double>(begin: 0.0, end: 1.0).animate(
+    _opacityAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
         parent: _opacityController,
         curve: Interval(
@@ -152,7 +153,7 @@ class _MyHomePageState extends State<MyHomePage>
       ),
     )..addListener(() => setState(() {}));
     _searchStream = _streamController
-        .debounce(Duration(milliseconds: 300))
+        .debounceTime(Duration(milliseconds: 300))
         .map((s) => s.trim())
         .distinct()
         .switchMap(_searchImage);
@@ -160,7 +161,7 @@ class _MyHomePageState extends State<MyHomePage>
 
   @override
   Widget build(BuildContext context) {
-    return new WillPopScope(
+    return WillPopScope(
       child: Scaffold(
         key: _scaffoldKey,
         drawer: _buildDrawer(context),
@@ -196,10 +197,10 @@ class _MyHomePageState extends State<MyHomePage>
                   .copyWith(color: Colors.white),
             ),
             decoration: BoxDecoration(
-              image: new DecorationImage(
-                image: new AssetImage('assets/drawer_header_image.jpg'),
+              image: DecorationImage(
+                image: AssetImage('assets/drawer_header_image.jpg'),
                 fit: BoxFit.cover,
-                colorFilter: new ColorFilter.mode(
+                colorFilter: ColorFilter.mode(
                   Colors.black26,
                   BlendMode.darken,
                 ),
@@ -219,41 +220,41 @@ class _MyHomePageState extends State<MyHomePage>
           listTiles[2],
           ListTile(
             title: Text('Trending image'),
-            trailing: new Icon(Icons.trending_up),
+            trailing: Icon(Icons.trending_up),
             onTap: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new TrendingPage()),
+                MaterialPageRoute(builder: (context) => TrendingPage()),
               );
             },
           ),
           ListTile(
             title: Text('Upload image'),
-            trailing: new Icon(Icons.cloud_upload),
+            trailing: Icon(Icons.cloud_upload),
             onTap: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new UploadPage()),
+                MaterialPageRoute(builder: (context) => UploadPage()),
               );
             },
           ),
-          new Divider(),
+          Divider(),
           listTiles[3],
           listTiles[4],
           ListTile(
             title: Text('Settings'),
-            trailing: new Icon(Icons.settings),
+            trailing: Icon(Icons.settings),
             onTap: () {
               Navigator.push(
                 context,
-                new MaterialPageRoute(builder: (context) => new SettingsPage()),
+                MaterialPageRoute(builder: (context) => SettingsPage()),
               );
             },
           ),
-          new Divider(),
-          new AboutListTile(
+          Divider(),
+          AboutListTile(
             applicationName: 'Flutter wallpaper HD',
-            applicationIcon: new FlutterLogo(),
+            applicationIcon: FlutterLogo(),
             applicationVersion: '1.0.0',
           ),
         ],
@@ -274,7 +275,7 @@ class _MyHomePageState extends State<MyHomePage>
       if (_selectedIndex == 3) {
         //History page
         actions.add(
-          new PopupMenuButton(
+          PopupMenuButton(
             onSelected: (_) {
               debugPrint('onSelected');
               clearStreamController.add(null);
@@ -292,7 +293,7 @@ class _MyHomePageState extends State<MyHomePage>
       } else if (_selectedIndex == 4) {
         //Favorite page
         actions.add(
-          new PopupMenuButton<String>(
+          PopupMenuButton<String>(
             onSelected: (v) => sortOrderController.add(v),
             itemBuilder: (BuildContext context) {
               return [
@@ -312,7 +313,7 @@ class _MyHomePageState extends State<MyHomePage>
     }
 
     debugPrint('_appBarTitle $_appBarTitle');
-    return new AppBar(
+    return AppBar(
       title: _appBarTitle,
       actions: actions,
     );
@@ -322,7 +323,7 @@ class _MyHomePageState extends State<MyHomePage>
     if (!_isSearching) {
       setState(() {
         _actionIcon = Icon(Icons.close, color: Colors.white);
-        _appBarTitle = new FadeTransition(
+        _appBarTitle = FadeTransition(
           child: TextField(
             keyboardType: TextInputType.text,
             maxLines: 1,
@@ -331,7 +332,7 @@ class _MyHomePageState extends State<MyHomePage>
               color: Colors.white,
             ),
             decoration: InputDecoration(
-              prefixIcon: new Padding(
+              prefixIcon: Padding(
                 padding: const EdgeInsets.only(right: 8.0),
                 child: Icon(Icons.search),
               ),
@@ -383,7 +384,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Widget _buildSearchList(BuildContext context) {
-    return new FadeTransition(
+    return FadeTransition(
       child: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).backgroundColor,
@@ -395,7 +396,7 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   Widget _buildStreamBuilder() {
-    return new StreamBuilder<SearchImageState>(
+    return StreamBuilder<SearchImageState>(
       stream: _searchStream.distinct(),
       builder:
           (BuildContext context, AsyncSnapshot<SearchImageState> snapshot) {
@@ -429,22 +430,22 @@ class _MyHomePageState extends State<MyHomePage>
         if (data is SuccessState) {
           var images = data.images;
           debugPrint('Length: ${images.length}');
-          return new Column(
+          return Column(
             children: <Widget>[
-              new Padding(
+              Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: new Text('Found ${images.length} results'),
+                child: Text('Found ${images.length} results'),
               ),
-              new Expanded(
-                child: new GridView.builder(
-                  gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     crossAxisSpacing: 2.0,
                     mainAxisSpacing: 2.0,
                     childAspectRatio: 9 / 16,
                   ),
                   itemBuilder: (BuildContext context, int index) {
-                    return new ImageItem(images[index]);
+                    return ImageItem(images[index]);
                   },
                   itemCount: images.length,
                 ),
@@ -452,6 +453,8 @@ class _MyHomePageState extends State<MyHomePage>
             ],
           );
         }
+
+        return null;
       },
     );
   }
@@ -460,7 +463,7 @@ class _MyHomePageState extends State<MyHomePage>
     return showDialog<bool>(
         context: context,
         builder: (context) {
-          return new AlertDialog(
+          return AlertDialog(
             title: Text('Exit app'),
             content: Text('Do you want to exit app?'),
             actions: <Widget>[

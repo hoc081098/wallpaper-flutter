@@ -15,7 +15,7 @@ import 'package:wallpaper/data/models/image_category_model.dart';
 
 class UploadPage extends StatefulWidget {
   @override
-  _UploadPageState createState() => new _UploadPageState();
+  _UploadPageState createState() => _UploadPageState();
 }
 
 class _UploadPageState extends State<UploadPage> {
@@ -23,9 +23,9 @@ class _UploadPageState extends State<UploadPage> {
   List<ImageCategory> _imageCategories;
   ImageCategory _selectedCategory;
   StreamSubscription<List<ImageCategory>> subscription;
-  TextEditingController _textController = new TextEditingController();
+  TextEditingController _textController = TextEditingController();
 
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   final imagesCollection = Firestore.instance.collection('images');
   final categoriesCollection = Firestore.instance.collection('categories');
   final firebaseStorage = FirebaseStorage.instance;
@@ -51,10 +51,10 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       key: scaffoldKey,
-      body: new Container(
-        child: new Column(
+      body: Container(
+        child: Column(
           children: <Widget>[
             _buildImagePreview(),
             _buildCategoryDropDownButton(),
@@ -68,18 +68,18 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildImagePreview() {
-    var placeholder = new Stack(
+    var placeholder = Stack(
       children: <Widget>[
-        new Container(
-          constraints: new BoxConstraints.expand(),
-          child: new Image.asset(
+        Container(
+          constraints: BoxConstraints.expand(),
+          child: Image.asset(
             'assets/drawer_header_image.jpg',
             fit: BoxFit.cover,
             colorBlendMode: BlendMode.darken,
             color: Colors.black38,
           ),
         ),
-        new Align(
+        Align(
           child: Text(
             'No selected image',
             textScaleFactor: 1.2,
@@ -90,8 +90,8 @@ class _UploadPageState extends State<UploadPage> {
         ),
       ],
     );
-    return new Flexible(
-      child: new Padding(
+    return Flexible(
+      child: Padding(
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).padding.top + 8,
           left: 8.0,
@@ -104,7 +104,7 @@ class _UploadPageState extends State<UploadPage> {
           elevation: 4.0,
           child: _imageFile == null
               ? placeholder
-              : new Image.file(
+              : Image.file(
                   _imageFile,
                   fit: BoxFit.cover,
                 ),
@@ -115,24 +115,24 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildCategoryDropDownButton() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: new Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _imageCategories.isEmpty
               ? Text("Loading categories...")
-              : new DropdownButton<ImageCategory>(
+              : DropdownButton<ImageCategory>(
                   items: _imageCategories.map((c) {
-                    return new DropdownMenuItem<ImageCategory>(
-                        child: new Text(c.name), value: c);
+                    return DropdownMenuItem<ImageCategory>(
+                        child: Text(c.name), value: c);
                   }).toList(),
                   onChanged: (c) => setState(() => _selectedCategory = c),
                   hint: Text('Select category'),
                   value: _selectedCategory,
                 ),
-          new IconButton(
-            tooltip: 'Add new category',
+          IconButton(
+            tooltip: 'Add category',
             icon: Icon(Icons.add),
             onPressed: _showDialogAddCategory,
           ),
@@ -142,11 +142,11 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildTextFieldName() {
-    return new Padding(
+    return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: new TextField(
+      child: TextField(
         controller: _textController,
-        decoration: new InputDecoration(
+        decoration: InputDecoration(
           labelText: 'Image name',
           filled: true,
           contentPadding: const EdgeInsets.all(8.0),
@@ -159,11 +159,11 @@ class _UploadPageState extends State<UploadPage> {
   Widget _buildButtons() {
     var color = Theme.of(context).primaryColor;
 
-    return new Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        new Flexible(
-          child: new FlatButton(
+        Flexible(
+          child: FlatButton(
             padding: const EdgeInsets.all(20.0),
             onPressed: _chooseImage,
             child: Text(
@@ -174,8 +174,8 @@ class _UploadPageState extends State<UploadPage> {
           ),
           fit: FlexFit.tight,
         ),
-        new Flexible(
-          child: new FlatButton(
+        Flexible(
+          child: FlatButton(
             padding: const EdgeInsets.all(20.0),
             onPressed: _uploadImage,
             child: Text(
@@ -202,8 +202,8 @@ class _UploadPageState extends State<UploadPage> {
 
   _showSnackBar(String text,
       {Duration duration = const Duration(seconds: 1, milliseconds: 500)}) {
-    return scaffoldKey.currentState.showSnackBar(
-        new SnackBar(content: new Text(text), duration: duration));
+    return scaffoldKey.currentState
+        .showSnackBar(SnackBar(content: Text(text), duration: duration));
   }
 
   bool _validate() {
@@ -230,17 +230,17 @@ class _UploadPageState extends State<UploadPage> {
         context: context,
         barrierDismissible: false,
         builder: (context) {
-          return new Dialog(
-            child: new Padding(
+          return Dialog(
+            child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 32.0),
-              child: new Column(
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  new CircularProgressIndicator(),
-                  new Padding(
+                  CircularProgressIndicator(),
+                  Padding(
                     padding: const EdgeInsets.only(top: 16.0),
-                    child: new Text('Uploading...'),
+                    child: Text('Uploading...'),
                   ),
                 ],
               ),
@@ -251,20 +251,16 @@ class _UploadPageState extends State<UploadPage> {
     try {
       //upload file
       final extension = path.extension(_imageFile.path);
-      final uploadPath = 'uploadImages/${new Uuid().v1()}${
-          extension.isEmpty
-              ? '.png'
-              : extension
-      }';
-      final task1 =
-          firebaseStorage.ref().child(uploadPath).putFile(_imageFile).future;
+      final uploadPath =
+          'uploadImages/${Uuid().v1()}${extension.isEmpty ? '.png' : extension}';
+      var imageReference = firebaseStorage.ref().child(uploadPath);
+      final task1 = imageReference.putFile(_imageFile).onComplete;
+
+      var thumbnailReference =
+          firebaseStorage.ref().child('uploadImages/${Uuid().v1()}.png');
 
       final uploadThumbnail = (thumbnailBytes) {
-        return firebaseStorage
-            .ref()
-            .child('uploadImages/${new Uuid().v1()}.png')
-            .putData(thumbnailBytes)
-            .future;
+        return thumbnailReference.putData(thumbnailBytes).onComplete;
       };
 
       final task2 = _imageFile
@@ -272,22 +268,27 @@ class _UploadPageState extends State<UploadPage> {
           .then((bytes) => Uint8List.fromList(bytes))
           .then(
             (bytes) => methodChannel.invokeMethod(
-                  resizeImage,
-                  <String, dynamic>{
-                    'bytes': bytes,
-                    'width': 360,
-                    'height': 640,
-                  },
-                ),
+              resizeImage,
+              <String, dynamic>{
+                'bytes': bytes,
+                'width': 360,
+                'height': 640,
+              },
+            ),
           )
           .then(uploadThumbnail);
 
-      final urls = await Future.wait([task1, task2]);
+      await Future.wait([task1, task2]);
+
+      final urls = await Future.wait([
+        imageReference.getDownloadURL(),
+        thumbnailReference.getDownloadURL(),
+      ]);
 
       await imagesCollection.add(<String, dynamic>{
         'name': _textController.text,
-        'imageUrl': urls[0].downloadUrl.toString(),
-        'thumbnailUrl': urls[1].downloadUrl.toString(),
+        'imageUrl': urls[0].toString(),
+        'thumbnailUrl': urls[1].toString(),
         'categoryId': _selectedCategory.id,
         'uploadedTime': DateTime.now(),
         'viewCount': 0,
@@ -307,7 +308,16 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   _showDialogAddCategory() => scaffoldKey.currentState?.showBottomSheet(
-        (BuildContext context) => AddCategoryBottomSheet(),
+        (context) => AddCategoryBottomSheet(),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+            bottomLeft: Radius.zero,
+            bottomRight: Radius.zero,
+          ),
+        ),
+        backgroundColor: Theme.of(context).primaryColorLight,
       );
 }
 
@@ -317,12 +327,12 @@ class _UploadPageState extends State<UploadPage> {
 
 class AddCategoryBottomSheet extends StatefulWidget {
   @override
-  _AddCategoryState createState() => new _AddCategoryState();
+  _AddCategoryState createState() => _AddCategoryState();
 }
 
 class _AddCategoryState extends State<AddCategoryBottomSheet>
     with SingleTickerProviderStateMixin {
-  final _textController = new TextEditingController();
+  final _textController = TextEditingController();
   final categoriesCollection = Firestore.instance.collection('categories');
   final firebaseStorage = FirebaseStorage.instance;
 
@@ -336,14 +346,14 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
   void initState() {
     super.initState();
 
-    _animController = new AnimationController(
+    _animController = AnimationController(
       vsync: this,
       duration: Duration(seconds: 2),
     );
-    _anim = new Tween(begin: 360.0, end: 48.0).animate(
-      new CurvedAnimation(
+    _anim = Tween(begin: 360.0, end: 48.0).animate(
+      CurvedAnimation(
         parent: _animController,
-        curve: new Interval(0.1, 1.0, curve: Curves.ease),
+        curve: Interval(0.1, 1.0, curve: Curves.ease),
       ),
     )..addListener(() => setState(() {}));
   }
@@ -356,53 +366,47 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
 
   @override
   Widget build(BuildContext context) {
-    return new Material(
+    return Material(
       color: Theme.of(context).primaryColorLight,
-      shape: new RoundedRectangleBorder(
-        borderRadius: new BorderRadius.only(
-          topLeft: new Radius.circular(16.0),
-          topRight: new Radius.circular(16.0),
-        ),
-      ),
-      child: new Column(
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          new Padding(
+          Padding(
             padding: const EdgeInsets.all(8.0),
-            child: new Text('Add new category'),
+            child: Text('Add category'),
           ),
-          new Padding(
+          Padding(
             padding: const EdgeInsets.all(8.0),
             child: _buildTextField(),
           ),
           _buildImagePreview(),
-          new Padding(
+          Padding(
             padding: const EdgeInsets.all(12.0),
             child: _buildMsgTextOrButtonChooseImage(),
           ),
-          new Padding(
+          Padding(
             padding: const EdgeInsets.all(8.0),
-            child: new Container(
-              constraints: new BoxConstraints.expand(
+            child: Container(
+              constraints: BoxConstraints.expand(
                 height: 48.0,
                 width: _anim.value,
               ),
-              child: new Material(
+              child: Material(
                 elevation: 4.0,
                 shadowColor: Theme.of(context).accentColor,
-                borderRadius: new BorderRadius.all(
-                  new Radius.circular(32.0),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(32.0),
                 ),
                 child: _anim.value > 96.0
-                    ? new MaterialButton(
+                    ? MaterialButton(
                         splashColor: Theme.of(context).accentColor,
                         onPressed: _addCategory,
                         child: Text('Add'),
                       )
-                    : new Center(
-                        child: new CircularProgressIndicator(),
+                    : Center(
+                        child: CircularProgressIndicator(),
                       ),
               ),
             ),
@@ -413,31 +417,31 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
   }
 
   Widget _buildMsgTextOrButtonChooseImage() => _msg != null
-      ? new Padding(
+      ? Padding(
           padding: const EdgeInsets.all(8.0),
           child: Text(_msg),
         )
-      : new FlatButton.icon(
+      : FlatButton.icon(
           onPressed: _chooseImage,
           icon: Icon(Icons.image),
           label: Text('Choose image'),
         );
 
   Widget _buildImagePreview() => _imageFile != null
-      ? new Padding(
+      ? Padding(
           padding: const EdgeInsets.all(8.0),
-          child: new Image.file(
+          child: Image.file(
             _imageFile,
             width: 64.0,
             height: 64.0,
             fit: BoxFit.cover,
           ),
         )
-      : new Container();
+      : Container();
 
-  TextField _buildTextField() => new TextField(
+  TextField _buildTextField() => TextField(
         controller: _textController,
-        decoration: new InputDecoration(
+        decoration: InputDecoration(
           labelText: 'Category name',
         ),
         maxLines: 1,
@@ -449,31 +453,29 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
 
     //upload file
     final extension = path.extension(_imageFile.path);
-    final uploadPath = 'uploadImages/${new Uuid().v1()}${
-        extension.isEmpty
-            ? '.png'
-            : extension
-    }';
+    final uploadPath =
+        'uploadImages/${Uuid().v1()}${extension.isEmpty ? '.png' : extension}';
 
-    final task = await _imageFile
+    var imageReference = firebaseStorage.ref().child(uploadPath);
+
+    await _imageFile
         .readAsBytes()
         .then((bytes) => Uint8List.fromList(bytes))
         .then(
           (bytes) => methodChannel.invokeMethod(
-                resizeImage,
-                <String, dynamic>{
-                  'bytes': bytes,
-                  'width': 360,
-                  'height': 360,
-                },
-              ),
+            resizeImage,
+            <String, dynamic>{
+              'bytes': bytes,
+              'width': 360,
+              'height': 360,
+            },
+          ),
         )
-        .then((bytes) =>
-            firebaseStorage.ref().child(uploadPath).putData(bytes).future);
+        .then((bytes) => imageReference.putData(bytes).onComplete);
 
     await categoriesCollection.add(<String, String>{
       'name': _textController.text,
-      'imageUrl': task.downloadUrl.toString(),
+      'imageUrl': (await imageReference.getDownloadURL()).toString(),
     });
     await _animController.reverse();
     await _showMessage('New category added successfully');
@@ -510,7 +512,7 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
       {Duration duration =
           const Duration(seconds: 1, milliseconds: 500)}) async {
     if (mounted) setState(() => _msg = text);
-    await new Future.delayed(duration, () {
+    await Future.delayed(duration, () {
       if (mounted) setState(() => _msg = null);
     });
   }

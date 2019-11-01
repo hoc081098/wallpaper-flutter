@@ -8,7 +8,7 @@ class NewestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new StaggeredImageList(
+    return StaggeredImageList(
       imagesCollection
           .orderBy('uploadedTime', descending: true)
           .limit(15)

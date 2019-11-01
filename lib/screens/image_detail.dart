@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -9,13 +10,12 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:simple_permissions/simple_permissions.dart';
 import 'package:wallpaper/constants.dart';
 import 'package:wallpaper/data/database.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/utils.dart';
-import 'package:zoomable_image/zoomable_image.dart';
 
 class ImageDetailPage extends StatefulWidget {
   final ImageModel imageModel;
@@ -28,8 +28,8 @@ class ImageDetailPage extends StatefulWidget {
 
 class _ImageDetailPageState extends State<ImageDetailPage> {
   final imagesCollection = Firestore.instance.collection('images');
-  final scaffoldKey = new GlobalKey<ScaffoldState>();
-  final imageDB = new ImageDB.getInstance();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final imageDB = ImageDB.getInstance();
 
   StreamSubscription subscription;
   StreamSubscription subscription1;
@@ -37,7 +37,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   bool isLoading;
 
   StreamController<bool> _isFavoriteStreamController =
-      new StreamController.broadcast();
+  StreamController.broadcast();
 
   @override
   void initState() {
@@ -56,19 +56,20 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     _increaseCount('viewCount', imageModel.id);
     _insertToRecent(imageModel);
 
-    subscription1 = Observable
-        .combineLatest2<ImageModel, bool, Map<String, dynamic>>(
+    subscription1 =
+        Observable.combineLatest2<ImageModel, bool, Map<String, dynamic>>(
           imageStream,
           _isFavoriteStreamController.stream.distinct(),
-          (img, isFav) => {
-                'image': img,
-                'isFavorite': isFav,
-              },
+              (img, isFav) =>
+          {
+            'image': img,
+            'isFavorite': isFav,
+          },
         )
-        .where((map) => map['isFavorite'])
-        .map<ImageModel>((map) => map['image'])
-        .listen((ImageModel newImage) {
-      debugPrint('onListen fav new $newImage');
+            .where((map) => map['isFavorite'])
+            .map<ImageModel>((map) => map['image'])
+            .listen((ImageModel newImage) {
+          debugPrint('onListen fav $newImage');
       debugPrint('onListen fav old $imageModel');
 
       imageDB
@@ -78,7 +79,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     });
 
     _isFavoriteStreamController.addStream(
-      new Stream.fromFuture(
+      Stream.fromFuture(
         imageDB.isFavoriteImage(imageModel.id),
       ),
     );
@@ -95,11 +96,11 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
+    return Scaffold(
       key: scaffoldKey,
-      body: new Container(
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
             colors: <Color>[
               Theme.of(context).backgroundColor.withOpacity(0.8),
               Theme.of(context).backgroundColor.withOpacity(0.9),
@@ -108,7 +109,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
             end: AlignmentDirectional.bottomEnd,
           ),
         ),
-        child: new Stack(
+        child: Stack(
           children: <Widget>[
             _buildCenterImage(),
             _buildAppbar(context),
@@ -120,16 +121,16 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 
   Positioned _buildAppbar(BuildContext context) {
-    final favoriteIconButton = new StreamBuilder(
+    final favoriteIconButton = StreamBuilder(
       stream: _isFavoriteStreamController.stream.distinct(),
       builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
         debugPrint('DEBUG ${snapshot.data}');
 
         if (snapshot.hasError || !snapshot.hasData) {
-          return new Container();
+          return Container();
         }
         final isFavorite = snapshot.data;
-        return new IconButton(
+        return IconButton(
           icon: Icon(isFavorite ? Icons.favorite : Icons.favorite_border),
           onPressed: () => _changeFavoriteStatus(isFavorite),
           tooltip: isFavorite ? 'Remove from favorites' : 'Add to favorites',
@@ -137,11 +138,11 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       },
     );
 
-    var closeButton = new ClipOval(
-      child: new Container(
+    var closeButton = ClipOval(
+      child: Container(
         color: Colors.black.withOpacity(0.2),
-        child: new IconButton(
-          icon: new Icon(Icons.close, color: Colors.white),
+        child: IconButton(
+          icon: Icon(Icons.close, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -149,24 +150,24 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       ),
     );
 
-    var textName = new Expanded(
-      child: new Text(
+    var textName = Expanded(
+      child: Text(
         imageModel.name,
         maxLines: 2,
         overflow: TextOverflow.ellipsis,
-        style: new TextStyle(color: Colors.white, fontSize: 16.0),
+        style: TextStyle(color: Colors.white, fontSize: 16.0),
       ),
     );
 
-    return new Positioned(
-      child: new Container(
-        child: new Row(
+    return Positioned(
+      child: Container(
+        child: Row(
           children: <Widget>[
             closeButton,
-            new SizedBox(width: 8.0),
+            SizedBox(width: 8.0),
             textName,
             favoriteIconButton,
-            new IconButton(
+            IconButton(
               icon: Icon(Icons.share),
               onPressed: _shareImageToFacebook,
               tooltip: 'Share to facebook',
@@ -174,9 +175,9 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           ],
         ),
         height: kToolbarHeight,
-        constraints: new BoxConstraints.expand(height: kToolbarHeight),
-        decoration: new BoxDecoration(
-          gradient: new LinearGradient(
+        constraints: BoxConstraints.expand(height: kToolbarHeight),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
             colors: <Color>[
               Colors.black,
               Colors.transparent,
@@ -194,12 +195,33 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 
   Center _buildCenterImage() {
-    return new Center(
-      child: new Hero(
+    return Center(
+      child: Hero(
         tag: imageModel.id,
-        child: new ZoomableImage(
-          new NetworkImage(imageModel.imageUrl),
-          placeholder: new Image.asset('assets/picture.png'),
+        child: CachedNetworkImage(
+          imageUrl: imageModel.imageUrl,
+          fit: BoxFit.cover,
+          placeholder: (context, url) =>
+              Container(
+                constraints: BoxConstraints.expand(),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: Image.asset(
+                        'assets/picture.png',
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned.fill(
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
         ),
       ),
     );
@@ -212,8 +234,8 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   _showSnackBar(String text,
       {Duration duration = const Duration(seconds: 1, milliseconds: 500)}) {
-    return scaffoldKey.currentState.showSnackBar(
-        new SnackBar(content: new Text(text), duration: duration));
+    return scaffoldKey.currentState?.showSnackBar(
+        SnackBar(content: Text(text), duration: duration));
   }
 
   Future _downloadImage() async {
@@ -221,26 +243,44 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       setState(() => isLoading = true);
 
       // request runtime permission
-      if (!(await SimplePermissions
-          .checkPermission(Permission.WriteExternalStorage))) {
-        final requestRes = await SimplePermissions
-            .requestPermission(Permission.WriteExternalStorage);
-        if (!requestRes) {
+      final permissionHandler = PermissionHandler();
+      final status = await permissionHandler
+          .checkPermissionStatus(PermissionGroup.storage);
+      if (status != PermissionStatus.granted) {
+        final requestRes = await permissionHandler
+            .requestPermissions([PermissionGroup.storage]);
+        if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
           _showSnackBar('Permission denined. Go to setting to granted!');
           return _done();
         }
       }
 
       // get external directory
-      final externalDir = await getExternalStorageDirectory();
+      Directory externalDir;
+
+      switch (Theme
+          .of(context)
+          .platform) {
+        case TargetPlatform.android:
+          externalDir = await getExternalStorageDirectory();
+          break;
+        case TargetPlatform.fuchsia:
+          _showSnackBar('Not support fuchsia');
+          return _done();
+        case TargetPlatform.iOS:
+          externalDir = await getApplicationDocumentsDirectory();
+          break;
+      }
 
       // check file is exists, if exists then delete file
       final filePath =
           path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
-      final file = new File(filePath);
-      if (await file.exists()) {
-        await file.delete();
+      final file = File(filePath);
+      if (file.existsSync()) {
+        file.deleteSync();
       }
+
+      print(file);
 
       // increase download count
       _increaseCount('downloadCount', imageModel.id);
@@ -261,11 +301,10 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       );
 
       //save image to storage
-      final message = await compute<Map<String, dynamic>, bool>(
+      final message = (await compute<Map<String, dynamic>, bool>(
         saveImage,
         <String, dynamic>{'filePath': filePath, 'bytes': outBytes},
-      )
-          ? 'Image downloaded successfully'
+      )) ? 'Image downloaded successfully'
           : 'Failed to download image';
 
       _showSnackBar(message);
@@ -275,6 +314,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         'flutterImages',
         '${imageModel.id}.png'
       ]).then((scanFileRes) => debugPrint("Scan file: $scanFileRes"));
+
     } on PlatformException catch (e) {
       _showSnackBar(e.message);
     } catch (e) {
@@ -295,17 +335,17 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     return showDialog<bool>(
         context: context,
         builder: (context) {
-          return new AlertDialog(
+          return AlertDialog(
             title: Text('Set wallpaper'),
-            content: new Text('Set this image as wallpaper?'),
+            content: Text('Set this image as wallpaper?'),
             actions: <Widget>[
-              new FlatButton(
-                child: new Text('Cancel'),
+              FlatButton(
+                child: Text('Cancel'),
                 onPressed: () => Navigator.pop(context, false),
               ),
-              new FlatButton(
+              FlatButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: new Text('Yes'),
+                child: Text('Yes'),
               ),
             ],
           );
@@ -315,19 +355,19 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   Widget _buildButtons() {
     final onPressedWhileLoading =
         () => _showSnackBar("Downloading...Please wait");
-    return new Positioned(
-      child: new Column(
+    return Positioned(
+      child: Column(
         children: <Widget>[
-          new Padding(
+          Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
             child:
-                isLoading ? new CircularProgressIndicator() : new Container(),
+            isLoading ? CircularProgressIndicator() : Container(),
           ),
-          new Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              new Flexible(
-                child: new FlatButton(
+              Flexible(
+                child: FlatButton(
                   padding: const EdgeInsets.all(16.0),
                   onPressed: isLoading ? onPressedWhileLoading : _downloadImage,
                   child: Text(
@@ -338,8 +378,8 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
                 ),
                 fit: FlexFit.tight,
               ),
-              new Flexible(
-                child: new FlatButton(
+              Flexible(
+                child: FlatButton(
                   padding: const EdgeInsets.all(16.0),
                   onPressed: isLoading ? onPressedWhileLoading : _setWallpaper,
                   child: Text(
@@ -368,7 +408,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
 
       // check image is exists
-      if (!(await new File(filePath).exists())) {
+      if (!(await File(filePath).exists())) {
         return _showSnackBar('You need donwload image before');
       }
 
@@ -406,7 +446,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 
   void _onListen(ImageModel newImage) {
-    debugPrint('onListen new $newImage');
+    debugPrint('onListen $newImage');
     debugPrint('onListen old $imageModel');
     imageDB
         .updateRecentImage(newImage..viewTime = imageModel.viewTime)
@@ -427,11 +467,11 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       } else {
         _showSnackBar('$msg unsuccessfully');
       }
-       _isFavoriteStreamController.addStream(
-      new Stream.fromFuture(
-        imageDB.isFavoriteImage(imageModel.id),
-      ),
-    );
+      _isFavoriteStreamController.addStream(
+        Stream.fromFuture(
+          imageDB.isFavoriteImage(imageModel.id),
+        ),
+      );
     }).catchError((e) {
       debugPrint('DEBUG $e');
       _showSnackBar(e.toString());

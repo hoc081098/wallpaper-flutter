@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:wallpaper/data/models/image_category_model.dart';
@@ -23,7 +24,7 @@ class CategoryPage extends StatelessWidget {
         .snapshots()
         .map((QuerySnapshot querySnapshot) {
       return querySnapshot.documents.map((DocumentSnapshot documentSnapshot) {
-        return new ImageCategory.fromJson(
+        return ImageCategory.fromJson(
           id: documentSnapshot.documentID,
           json: documentSnapshot.data,
         );
@@ -39,8 +40,8 @@ class CategoryPage extends StatelessWidget {
 
     final categories = snapshot.data;
 
-    return new GridView.builder(
-      gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+    return GridView.builder(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisSpacing: 8.0,
         mainAxisSpacing: 8.0,
         crossAxisCount: 2,
@@ -57,29 +58,36 @@ class CategoryPage extends StatelessWidget {
       elevation: 3.0,
       child: InkWell(
         onTap: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
-                return new ImagesByCategoryPage(category);
-              }),
-            ),
-        child: new Stack(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return ImagesByCategoryPage(category);
+          }),
+        ),
+        child: Stack(
           children: <Widget>[
-            FadeInImage(
-              height: 400.0,
-              placeholder: AssetImage('assets/picture.png'),
-              image: NetworkImage(category.imageUrl),
+            CachedNetworkImage(
+              imageUrl: category.imageUrl,
               fit: BoxFit.cover,
+              height: 400,
+              placeholder: (context, url) =>
+                  Container(
+                    constraints: BoxConstraints.expand(),
+                    child: Image.asset(
+                      'assets/picture.png',
+                      fit: BoxFit.cover,
+                    ),
+                  ),
             ),
-            new Align(
-              child: new Container(
-                padding: new EdgeInsets.all(4.0),
-                decoration: new BoxDecoration(
+            Align(
+              child: Container(
+                padding: EdgeInsets.all(4.0),
+                decoration: BoxDecoration(
                   color: Colors.black54,
                 ),
-                child: new Text(
+                child: Text(
                   category.name,
                   textAlign: TextAlign.center,
-                  style: new TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
                     fontSize: 16.0,
                   ),
@@ -103,11 +111,11 @@ class ImagesByCategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(category.name),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(category.name),
       ),
-      body: new StaggeredImageList(
+      body: StaggeredImageList(
         imagesCollection
             .where('categoryId', isEqualTo: category.id)
             .orderBy('name')

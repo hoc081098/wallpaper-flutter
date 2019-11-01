@@ -168,7 +168,7 @@ class ImageDB {
       image.imageUrl,
       image.thumbnailUrl,
       image.categoryId,
-      image.uploadedTime.toIso8601String(),
+      image.uploadedTime.toDate().toIso8601String(),
       image.id,
     ]);
   }

@@ -13,12 +13,12 @@ class FavoritesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return new Container(
+    return Container(
       color: Theme.of(context).backgroundColor,
-      child: new StreamBuilder(
+      child: StreamBuilder(
         stream: sortOrderStream.switchMap(
           (order) => Stream.fromFuture(
-                new ImageDB.getInstance().getFavoriteImages(orderBy: order),
+            ImageDB.getInstance().getFavoriteImages(orderBy: order),
               ),
         ),
         builder:
@@ -48,9 +48,9 @@ class FavoritesPage extends StatelessWidget {
             );
           }
 
-          return new GridView.builder(
+          return GridView.builder(
             padding: const EdgeInsets.all(8.0),
-            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 8.0,
               mainAxisSpacing: 8.0,

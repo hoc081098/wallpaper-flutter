@@ -31,29 +31,29 @@ String trendingToFieldName(Trending trending) {
 
 class TrendingPage extends StatelessWidget {
   final _selected =
-      new BehaviorSubject<Trending>(seedValue: Trending.downloadCount);
+  BehaviorSubject<Trending>.seeded(Trending.downloadCount);
   final imagesCollection = Firestore.instance.collection('images');
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
+    return Scaffold(
+      appBar: AppBar(
         title: Text('Trending images'),
         actions: _buildActions(),
       ),
-      body: new StaggeredImageList(_selected.distinct().switchMap(stream)),
+      body: StaggeredImageList(_selected.distinct().switchMap(stream)),
     );
   }
 
   List<Widget> _buildActions() {
     return <Widget>[
-      new StreamBuilder(
+      StreamBuilder(
         stream: _selected.distinct(),
         builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return new DropdownButton<Trending>(
+          return DropdownButton<Trending>(
             items: Trending.values.map((e) {
-              return new DropdownMenuItem(
-                child: new Text(trendingToString(e)),
+              return DropdownMenuItem(
+                child: Text(trendingToString(e)),
                 value: e,
               );
             }).toList(),
