@@ -96,25 +96,33 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: <Color>[
-              Theme.of(context).backgroundColor.withOpacity(0.8),
-              Theme.of(context).backgroundColor.withOpacity(0.9),
-            ],
-            begin: AlignmentDirectional.topStart,
-            end: AlignmentDirectional.bottomEnd,
+    return SafeArea(
+      child: Scaffold(
+        key: scaffoldKey,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: <Color>[
+                Theme
+                    .of(context)
+                    .backgroundColor
+                    .withOpacity(0.8),
+                Theme
+                    .of(context)
+                    .backgroundColor
+                    .withOpacity(0.9),
+              ],
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.bottomEnd,
+            ),
           ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            _buildCenterImage(),
-            _buildAppbar(context),
-            _buildButtons(),
-          ],
+          child: Stack(
+            children: <Widget>[
+              _buildCenterImage(),
+              _buildAppbar(context),
+              _buildButtons(),
+            ],
+          ),
         ),
       ),
     );
@@ -234,33 +242,36 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   _showSnackBar(String text,
       {Duration duration = const Duration(seconds: 1, milliseconds: 500)}) {
-    return scaffoldKey.currentState?.showSnackBar(
-        SnackBar(content: Text(text), duration: duration));
+    return scaffoldKey.currentState
+        ?.showSnackBar(SnackBar(content: Text(text), duration: duration));
   }
 
   Future _downloadImage() async {
     try {
       setState(() => isLoading = true);
 
-      // request runtime permission
-      final permissionHandler = PermissionHandler();
-      final status = await permissionHandler
-          .checkPermissionStatus(PermissionGroup.storage);
-      if (status != PermissionStatus.granted) {
-        final requestRes = await permissionHandler
-            .requestPermissions([PermissionGroup.storage]);
-        if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
-          _showSnackBar('Permission denined. Go to setting to granted!');
-          return _done();
+      final targetPlatform = Theme
+          .of(context)
+          .platform;
+
+      if (targetPlatform == TargetPlatform.android) {
+        // request runtime permission
+        final permissionHandler = PermissionHandler();
+        final status = await permissionHandler
+            .checkPermissionStatus(PermissionGroup.storage);
+        if (status != PermissionStatus.granted) {
+          final requestRes = await permissionHandler
+              .requestPermissions([PermissionGroup.storage]);
+          if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
+            _showSnackBar('Permission denined. Go to setting to granted!');
+            return _done();
+          }
         }
       }
 
       // get external directory
       Directory externalDir;
-
-      switch (Theme
-          .of(context)
-          .platform) {
+      switch (targetPlatform) {
         case TargetPlatform.android:
           externalDir = await getExternalStorageDirectory();
           break;
@@ -271,55 +282,53 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           externalDir = await getApplicationDocumentsDirectory();
           break;
       }
+      print('externalDir=$externalDir');
 
-      // check file is exists, if exists then delete file
       final filePath =
           path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
+
       final file = File(filePath);
       if (file.existsSync()) {
         file.deleteSync();
       }
 
-      print(file);
+      print('Start...');
+      final bytes = await http.readBytes(imageModel.imageUrl);
+      print('Done...');
 
-      // increase download count
-      _increaseCount('downloadCount', imageModel.id);
-
-      // after that, download and resize image
-      final Uint8List bytes = await http.readBytes(imageModel.imageUrl);
-      // resize image ??
       final queryData = MediaQuery.of(context);
+      final width =
+      (queryData.size.shortestSide * queryData.devicePixelRatio).toInt();
+      final height =
+      (queryData.size.longestSide * queryData.devicePixelRatio).toInt();
+
       final Uint8List outBytes = await methodChannel.invokeMethod(
         resizeImage,
         <String, dynamic>{
           'bytes': bytes,
-          'width': (queryData.size.shortestSide * queryData.devicePixelRatio)
-              .toInt(),
-          'height':
-              (queryData.size.longestSide * queryData.devicePixelRatio).toInt(),
+          'width': width,
+          'height': height,
         },
       );
 
       //save image to storage
-      final message = (await compute<Map<String, dynamic>, bool>(
-        saveImage,
-        <String, dynamic>{'filePath': filePath, 'bytes': outBytes},
-      )) ? 'Image downloaded successfully'
+      final message = saveImage({'filePath': filePath, 'bytes': outBytes})
+          ? 'Image downloaded successfully'
           : 'Failed to download image';
 
       _showSnackBar(message);
 
       // call scanFile method, to show image in gallery
-      methodChannel.invokeMethod(scanFile, <String>[
-        'flutterImages',
-        '${imageModel.id}.png'
-      ]).then((scanFileRes) => debugPrint("Scan file: $scanFileRes"));
+      methodChannel.invokeMethod(
+          scanFile, <String>['flutterImages', '${imageModel.id}.png']);
 
+      // increase download count
+      _increaseCount('downloadCount', imageModel.id);
     } on PlatformException catch (e) {
       _showSnackBar(e.message);
-    } catch (e) {
+    } catch (e, s) {
       _showSnackBar('An error occurred');
-      debugPrint("Download image: $e");
+      debugPrint("Download image: $e, $s");
     }
 
     return _done();
@@ -360,8 +369,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child:
-            isLoading ? CircularProgressIndicator() : Container(),
+            child: isLoading ? CircularProgressIndicator() : Container(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -402,23 +410,45 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   _setWallpaper() async {
     try {
+      var targetPlatform = Theme
+          .of(context)
+          .platform;
+
       // get external directory
-      final externalDir = await getExternalStorageDirectory();
+      Directory externalDir;
+      switch (targetPlatform) {
+        case TargetPlatform.android:
+          externalDir = await getExternalStorageDirectory();
+          break;
+        case TargetPlatform.fuchsia:
+          _showSnackBar('Not support fuchsia');
+          return _done();
+        case TargetPlatform.iOS:
+          externalDir = await getApplicationDocumentsDirectory();
+          break;
+      }
       final filePath =
-          path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
+      path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
 
       // check image is exists
-      if (!(await File(filePath).exists())) {
+      if (!File(filePath).existsSync()) {
         return _showSnackBar('You need donwload image before');
       }
 
-      // set image as wallpaper
-      if (await _showDialogSetImageAsWallpaper()) {
-        final String res = await methodChannel.invokeMethod(
+      if (targetPlatform == TargetPlatform.android) {
+        // set image as wallpaper
+        if (await _showDialogSetImageAsWallpaper()) {
+          final String res = await methodChannel.invokeMethod(
+            setWallpaper,
+            <String>['flutterImages', '${imageModel.id}.png'],
+          );
+          _showSnackBar(res);
+        }
+      } else if (targetPlatform == TargetPlatform.iOS) {
+        await methodChannel.invokeMethod(
           setWallpaper,
           <String>['flutterImages', '${imageModel.id}.png'],
         );
-        _showSnackBar(res);
       }
     } on PlatformException catch (e) {
       _showSnackBar(e.message);
