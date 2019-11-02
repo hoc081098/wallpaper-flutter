@@ -12,55 +12,28 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ios/Podfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_SDK.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/main_dart.xml" afterDir="false" />
+    <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="Fix. Make working again">
+      <change afterPath="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/app/src/profile/AndroidManifest.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Flutter/Generated.xcconfig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/AppDelegate.swift" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/GeneratedPluginRegistrant.m" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ios/Runner/Runner-Bridging-Header.h" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/wallpaper_flutter.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/caches/build_file_checksums.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/codeStyles/Project.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/codeStyles/Project.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/gradle.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle/wrapper/gradle-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/gradlew" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradlew" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/hs_err_pid10616.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/hs_err_pid2212.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/replay_pid10616.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/replay_pid2212.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_01.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flutter_02.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid11028.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid6428.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/models/image_model.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/models/image_model.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/image_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/image_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/all_images_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/all_images_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/category_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/category_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/favorites_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/favorites_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/image_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/image_detail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/newest_image_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/newest_image_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/AppFrameworkInfo.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/AppFrameworkInfo.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/AppDelegate.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/AppDelegate.m" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/main.m" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/settings_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/settings_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/trending_images_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/trending_images_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/upload_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/upload_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wallpaper.iml" beforeDir="false" afterPath="$PROJECT_DIR$/wallpaper.iml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -78,11 +51,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_One_API_23" />
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/main.dart">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="125">
-              <caret line="186" column="22" lean-forward="true" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
+            <state relative-caret-position="60">
+              <caret line="192" column="26" selection-start-line="192" selection-start-column="26" selection-end-line="192" selection-end-column="26" />
               <folding>
                 <element signature="e#878#1430#0" />
                 <element signature="e#979#1428#0" />
@@ -122,7 +95,6 @@
                 <element signature="e#4475#4619#0" />
                 <element signature="e#4536#4610#0" />
                 <element signature="e#4732#4751#0" />
-                <element signature="e#5262#5390#0" />
                 <element signature="e#7779#9203#0" />
                 <element signature="e#7827#7923#0" />
                 <element signature="e#7956#9075#0" />
@@ -182,6 +154,15 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/lib/screens/recent_images_page.dart">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="230">
+              <caret line="181" column="29" lean-forward="true" selection-start-line="181" selection-start-column="29" selection-end-line="181" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -194,7 +175,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Value</find>
       <find>_scaffoldKey</find>
       <find>onSelected</find>
       <find>clearStreamController</find>
@@ -224,6 +204,7 @@
       <find>Error:</find>
       <find>getExternalStorageDirectory</find>
       <find>new</find>
+      <find>com.hoc.wallpaper_flutter</find>
     </findStrings>
     <replaceStrings>
       <replace>final</replace>
@@ -231,10 +212,12 @@
       <replace>///</replace>
       <replace>onListen</replace>
       <replace />
+      <replace>com.hoc.wallpaper</replace>
     </replaceStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/lib/screens</dir>
       <dir>$PROJECT_DIR$/lib</dir>
+      <dir>$PROJECT_DIR$/android</dir>
     </dirStrings>
   </component>
   <component name="FlutterView" splitter-proportion="0.5783784" />
@@ -277,10 +260,11 @@
         <option value="$PROJECT_DIR$/lib/utils.dart" />
         <option value="$PROJECT_DIR$/lib/screens/image_detail.dart" />
         <option value="$PROJECT_DIR$/lib/image_list.dart" />
-        <option value="$PROJECT_DIR$/lib/screens/recent_images_page.dart" />
         <option value="$PROJECT_DIR$/lib/screens/upload_page.dart" />
         <option value="$PROJECT_DIR$/pubspec.yaml" />
         <option value="$PROJECT_DIR$/lib/main.dart" />
+        <option value="$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/lib/screens/recent_images_page.dart" />
       </list>
     </option>
   </component>
@@ -295,44 +279,25 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="wallpaper-flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaper-flutter" type="462c0819:PsiDirectoryNode" />
+              <item name="wallpaper_flutter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper_flutter" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="wallpaper-flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaper-flutter" type="462c0819:PsiDirectoryNode" />
+              <item name="wallpaper_flutter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wallpaper_flutter" type="462c0819:PsiDirectoryNode" />
               <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wallpaper-flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaper-flutter" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wallpaper-flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaper-flutter" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="data" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wallpaper-flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaper-flutter" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-              <item name="screens" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="AndroidView" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -484,7 +449,14 @@
       <option name="project" value="LOCAL" />
       <updated>1531417818822</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Fix. Make working again">
+      <created>1572625196761</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1572625196761</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TodoView">
@@ -512,7 +484,7 @@
       <window_info id="Resources Explorer" order="9" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32838285" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49919224" weight="0.5483871" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49919224" visible="true" weight="0.19516128" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -521,7 +493,7 @@
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50080776" side_tool="true" weight="0.7" />
       <window_info anchor="bottom" id="Logcat" order="10" weight="0.36612904" />
-      <window_info anchor="bottom" id="Version Control" order="11" weight="0.6483871" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.7580645" />
       <window_info anchor="bottom" id="Terminal" order="12" weight="0.78104573" />
       <window_info anchor="bottom" id="Messages" order="13" weight="0.3516129" />
       <window_info anchor="bottom" id="Flutter Performance" order="14" side_tool="true" />
@@ -616,7 +588,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
-    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_NEW_TODO" value="false" />
     <MESSAGE value="Write MethodChannel to set wallpaper&#10;Split main.dart into many files&#10;And other updates" />
     <MESSAGE value="Many changes...!!" />
@@ -625,16 +596,10 @@
     <MESSAGE value="Split to many files" />
     <MESSAGE value="Add search and clear history functionality" />
     <MESSAGE value="Change search functionality&#10;Change upload page&#10;Change recent page (history)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change search functionality&#10;Change upload page&#10;Change recent page (history)" />
-    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Fix. Make working again" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix. Make working again" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/flutter/packages/flutter/lib/src/animation/tween.dart" />
-    <entry file="file://C:/flutter/packages/flutter/lib/src/animation/animation.dart" />
-    <entry file="file://C:/flutter/packages/flutter/lib/src/material/progress_indicator.dart" />
-    <entry file="file://$USER_HOME$/AppData/Roaming/Pub/Cache/hosted/pub.dartlang.org/collection-1.14.6/lib/src/equality.dart" />
     <entry file="file://C:/flutter/packages/flutter/lib/src/material/colors.dart" />
     <entry file="file://$PROJECT_DIR$/lib/screens/newest_image_page.dart">
       <provider selected="true" editor-type-id="text-editor">
@@ -849,31 +814,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screens/recent_images_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="177" column="26" selection-start-line="177" selection-start-column="26" selection-end-line="177" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/screens/favorites_page.dart">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="349">
           <caret line="59" column="23" selection-start-line="59" selection-start-column="23" selection-end-line="59" selection-end-column="23" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/image_list.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-550">
-          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-            <element signature="e#2065#2846#0" />
-            <element signature="e#3344#4125#0" />
           </folding>
         </state>
       </provider>
@@ -892,20 +838,53 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/../flutter/packages/flutter/lib/src/material/list_tile.dart">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/image_list.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
+            <element signature="e#2065#2846#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-99" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/src/main/kotlin/com/hoc/wallpaper_flutter/MainActivity.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="88">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/android/app/src/debug/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="22">
+          <caret line="1" column="30" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pubspec.yaml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="87">
+        <state relative-caret-position="308">
           <caret line="14" selection-start-line="14" selection-end-line="14" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../flutter/packages/flutter/lib/src/material/list_tile.dart">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/main.dart">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="186" column="22" lean-forward="true" selection-start-line="186" selection-start-column="22" selection-end-line="186" selection-end-column="22" />
+        <state relative-caret-position="60">
+          <caret line="192" column="26" selection-start-line="192" selection-start-column="26" selection-end-line="192" selection-end-column="26" />
           <folding>
             <element signature="e#878#1430#0" />
             <element signature="e#979#1428#0" />
@@ -945,7 +924,6 @@
             <element signature="e#4475#4619#0" />
             <element signature="e#4536#4610#0" />
             <element signature="e#4732#4751#0" />
-            <element signature="e#5262#5390#0" />
             <element signature="e#7779#9203#0" />
             <element signature="e#7827#7923#0" />
             <element signature="e#7956#9075#0" />
@@ -1001,6 +979,13 @@
             <element signature="e#13643#13650#0" />
             <element signature="e#13698#13713#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/screens/recent_images_page.dart">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="230">
+          <caret line="181" column="29" lean-forward="true" selection-start-line="181" selection-start-column="29" selection-end-line="181" selection-end-column="29" />
         </state>
       </provider>
     </entry>
