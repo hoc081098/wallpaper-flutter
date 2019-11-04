@@ -1,14 +1,17 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:wallpaper/data/models/downloaded_image.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 
 class ImageDB {
   static const dbName = 'images.db';
   static const tableRecent = 'recents';
   static const tableFavorites = 'favorites';
+  static const tableDownloads = 'downloads';
   static const createdAtDesc = 'datetime(createdAt) DESC';
   static const nameAsc = 'name ASC';
 
@@ -24,9 +27,11 @@ class ImageDB {
   Future<Database> open() async {
     final directory = await getApplicationDocumentsDirectory();
     final String path = join(directory.path, dbName);
-    return await openDatabase(path, version: 1,
-        onCreate: (Database db, int version) async {
-      await db.execute('''CREATE TABLE $tableRecent( 
+    return await openDatabase(
+      path,
+      version: 2,
+      onCreate: (Database db, int version) async {
+        await db.execute('''CREATE TABLE $tableRecent( 
         id TEXT PRIMARY KEY UNIQUE NOT NULL, 
         name TEXT NOT NULL,
         imageUrl TEXT NOT NULL,
@@ -35,7 +40,7 @@ class ImageDB {
         uploadedTime TEXT NOT NULL,
         viewTime TEXT NOT NULL
       )''');
-      await db.execute('''CREATE TABLE $tableFavorites(
+        await db.execute('''CREATE TABLE $tableFavorites(
         id TEXT PRIMARY KEY UNIQUE NOT NULL, 
         name TEXT NOT NULL,
         imageUrl TEXT NOT NULL,
@@ -44,7 +49,20 @@ class ImageDB {
         uploadedTime TEXT NOT NULL,
         createdAt TEXT NOT NULL
       )''');
-    });
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        print('[DEBUG] onUpgrade from $oldVersion to $newVersion');
+
+        if (oldVersion == 1) {
+          await db.execute('''CREATE TABLE $tableDownloads(
+            id TEXT PRIMARY KEY UNIQUE NOT NULL, 
+            name TEXT NOT NULL,
+            imageUrl TEXT NOT NULL,
+            createdAt TEXT NOT NULL
+          )''');
+        }
+      },
+    );
   }
 
   Future<Null> close() async {
@@ -53,7 +71,7 @@ class ImageDB {
   }
 
   ///
-  /// Recent imags
+  /// Recent images
   ///
 
   Future<int> insertRecentImage(ImageModel image) async {
@@ -192,5 +210,45 @@ class ImageDB {
     return maps.isNotEmpty &&
         (values = maps[0].values).isNotEmpty &&
         values.first == 1;
+  }
+
+  ///
+  /// Downloaded images
+  ///
+
+  Future<List<DownloadedImage>> getDownloadedImages(
+      {String orderBy = createdAtDesc, int limit}) async {
+    final dbClient = await db;
+    final maps = limit != null
+        ? await dbClient.query(
+            tableDownloads,
+            orderBy: orderBy,
+            limit: limit,
+          )
+        : await dbClient.query(
+            tableDownloads,
+            orderBy: orderBy,
+          );
+    return maps.map((json) => DownloadedImage.fromJson(json)).toList();
+  }
+
+  Future<bool> insertDownloadedImage(DownloadedImage image) async {
+    final dbClient = await db;
+    final id = await dbClient.insert(
+      tableDownloads,
+      image.toJson(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+    return id != -1;
+  }
+
+  Future<bool> deleteDownloadedImageById({@required int id}) async {
+    final dbClient = await db;
+    final rows = await dbClient.delete(
+      tableDownloads,
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return rows > 0;
   }
 }

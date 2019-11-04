@@ -11,7 +11,7 @@ import 'package:wallpaper/screens/category_page.dart';
 import 'package:wallpaper/screens/favorites_page.dart';
 import 'package:wallpaper/screens/newest_image_page.dart';
 import 'package:wallpaper/screens/recent_images_page.dart';
-import 'package:wallpaper/screens/settings_page.dart';
+import 'package:wallpaper/screens/downloads_page.dart';
 import 'package:wallpaper/screens/trending_images_page.dart';
 import 'package:wallpaper/screens/upload_page.dart';
 import 'package:wallpaper/utils.dart' as utils;

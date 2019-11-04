@@ -15,6 +15,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:wallpaper/constants.dart';
 import 'package:wallpaper/data/database.dart';
+import 'package:wallpaper/data/models/downloaded_image.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/utils.dart';
 
@@ -303,11 +304,25 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       );
 
       //save image to storage
-      final message = saveImage({'filePath': filePath, 'bytes': outBytes})
-          ? 'Image downloaded successfully'
-          : 'Failed to download image';
+      final saveFileResult =
+          saveImage({'filePath': filePath, 'bytes': outBytes});
 
-      _showSnackBar(message);
+      if (saveFileResult) {
+        await ImageDB.getInstance().insertDownloadedImage(
+          DownloadedImage(
+            imageModel.id,
+            imageModel.name,
+            path.join('flutterImages', imageModel.id + '.png'),
+            DateTime.now(),
+          ),
+        );
+      }
+
+      _showSnackBar(
+        saveFileResult
+            ? 'Image downloaded successfully'
+            : 'Failed to download image',
+      );
 
       // call scanFile method, to show image in gallery
       unawaited(
