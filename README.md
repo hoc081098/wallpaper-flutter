@@ -4,6 +4,8 @@ Simple wallpaper flutter
 
 This is a very simple app created for the begginers.
 
+Flutter + Method channel
+
 ## Getting Started
 
 For help getting started with Flutter, view our online
