@@ -1,5 +1,7 @@
 import UIKit
 import Flutter
+import FBSDKCoreKit
+import FBSDKShareKit
 
 let CHANNEL = "my_flutter_wallpaper"
 let SET_WALLPAPER = "setWallpaper"
@@ -15,6 +17,8 @@ let RESIZE_IMAGE = "resizeImage"
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
+
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
 
         let controller = window?.rootViewController as! FlutterViewController
         let channel = FlutterMethodChannel.init(name: CHANNEL, binaryMessenger: controller.binaryMessenger)
@@ -33,7 +37,10 @@ let RESIZE_IMAGE = "resizeImage"
                 }
                 scanFile(result: result, path: arguments)
             case SHARE_IMAGE_TO_FACEBOOK:
-                result("Share to facebook done")
+                self?.shareImageToFacebook(
+                    result: result,
+                    imageUrl: methodCall.arguments as? String
+                )
             case RESIZE_IMAGE:
                 guard let arguments = methodCall.arguments as? [String: Any] else {
                     return result(FlutterError.init(code: "error", message: "Arguments error", details: nil))
@@ -57,8 +64,50 @@ let RESIZE_IMAGE = "resizeImage"
         GeneratedPluginRegistrant.register(with: self)
         return super.application(application, didFinishLaunchingWithOptions: launchOptions)
     }
+
+    override func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        return ApplicationDelegate.shared.application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
+    }
+
+
+
+    func shareImageToFacebook(result: FlutterResult, imageUrl: String?) {
+        guard let imageUrl = imageUrl, let url = URL.init(string: imageUrl) else {
+            return result(FlutterError(code: "error", message: "imageUrl cannot be null", details: nil))
+        }
+
+        let photo = SharePhoto.init(imageURL: url, userGenerated: true)
+        let shareContent = SharePhotoContent.init()
+        shareContent.photos = [photo]
+
+        guard let vc = self.window.rootViewController else {
+            return result(FlutterError(code: "error", message: "An error occurred", details: nil))
+        }
+        let shareDialog = ShareDialog.init(fromViewController: vc, content: shareContent, delegate: self)
+        if shareDialog.canShow {
+            shareDialog.show()
+        } else {
+            let alertVC = UIAlertController.init(title: "Error", message: "It looks like you don't have the Facebook mobile app on your phone", preferredStyle: .alert)
+            alertVC.addAction(.init(title: "OK", style: .default, handler: nil))
+            vc.present(alertVC, animated: true, completion: nil)
+        }
+    }
+
 }
 
+extension AppDelegate: SharingDelegate {
+    func sharer(_ sharer: Sharing, didCompleteWithResults results: [String : Any]) {
+        print("Fb share completed")
+    }
+    
+    func sharer(_ sharer: Sharing, didFailWithError error: Error) {
+        print("Fb share error: \(error)")
+    }
+    
+    func sharerDidCancel(_ sharer: Sharing) {
+        print("Fb share cancel")
+    }
+}
 
 func resizeImage(
     result: (Any?) -> (),
