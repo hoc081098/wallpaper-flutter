@@ -1,10 +1,10 @@
 # wallpaper
 
-Simple wallpaper flutter
+ - Simple wallpaper flutter
 
-This is a very simple app created for the begginers.
+ - This is a very simple app created for the begginers.
 
-Flutter + Method channel
+ - Flutter + Method channel
 
 ## Getting Started
 
