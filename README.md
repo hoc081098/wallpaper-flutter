@@ -4,7 +4,7 @@
 
  - This is a very simple app created for the begginers.
 
- - Flutter + Method channel
+ - Flutter + Method channel (Kotlin/Swift)
 
 ## Getting Started
 
