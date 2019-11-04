@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 
-class SettingsPage extends StatefulWidget {
+class DownloadedPage extends StatefulWidget {
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  _DownloadedPageState createState() => _DownloadedPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _DownloadedPageState extends State<DownloadedPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Settings'),
-      ),
-      body: Container(
-        child: Center(
-          child: Text('settings'),
-        ),
+    return Container(
+      child: Center(
+        child: Text('D'),
       ),
     );
   }

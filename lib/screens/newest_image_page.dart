@@ -8,12 +8,15 @@ class NewestPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StaggeredImageList(
-      imagesCollection
-          .orderBy('uploadedTime', descending: true)
-          .limit(15)
-          .snapshots()
-          .map(mapper),
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: StaggeredImageList(
+        imagesCollection
+            .orderBy('uploadedTime', descending: true)
+            .limit(15)
+            .snapshots()
+            .map(mapper),
+      ),
     );
   }
 }

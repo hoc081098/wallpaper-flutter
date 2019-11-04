@@ -12,9 +12,12 @@ class CategoryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<ImageCategory>>(
-      stream: categoriesStream,
-      builder: _buildCategoryList,
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: StreamBuilder<List<ImageCategory>>(
+        stream: categoriesStream,
+        builder: _buildCategoryList,
+      ),
     );
   }
 
@@ -115,12 +118,15 @@ class ImagesByCategoryPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(category.name),
       ),
-      body: StaggeredImageList(
-        imagesCollection
-            .where('categoryId', isEqualTo: category.id)
-            .orderBy('name')
-            .snapshots()
-            .map(mapper),
+      body: Container(
+        color: Theme.of(context).backgroundColor,
+        child: StaggeredImageList(
+          imagesCollection
+              .where('categoryId', isEqualTo: category.id)
+              .orderBy('name')
+              .snapshots()
+              .map(mapper),
+        ),
       ),
     );
   }
