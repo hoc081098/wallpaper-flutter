@@ -147,7 +147,7 @@ class _RecentPageState extends State<RecentPage> {
   }
 
   Widget _buildItem(ImageModel image, int index) {
-    var background = Container(
+    final background = Container(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -167,7 +167,7 @@ class _RecentPageState extends State<RecentPage> {
       ),
     );
 
-    var listTile = ListTile(
+    final listTile = ListTile(
       leading: CachedNetworkImage(
         imageUrl: image.thumbnailUrl,
         fit: BoxFit.cover,
