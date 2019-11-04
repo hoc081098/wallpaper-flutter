@@ -6,10 +6,11 @@ import 'package:wallpaper/data/database.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/image_list.dart';
 
+@immutable
 class FavoritesPage extends StatelessWidget {
   final Observable<String> sortOrderStream;
 
-  FavoritesPage(this.sortOrderStream);
+  const FavoritesPage(this.sortOrderStream);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +38,7 @@ class FavoritesPage extends StatelessWidget {
               child: CircularProgressIndicator(),
             );
           }
-          var images = snapshot.data;
+          final images = snapshot.data;
 
           if (images.isEmpty) {
             return Center(

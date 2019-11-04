@@ -1,7 +1,7 @@
 import 'package:flutter/services.dart';
 
 /// only Android platform, because i don't have MacOS :)
-const String channel = "my_flutter_wallpaper";
+const String channel = 'my_flutter_wallpaper';
 const methodChannel = MethodChannel(channel);
 
 /// Set image as wallpaper
@@ -13,7 +13,7 @@ const methodChannel = MethodChannel(channel);
 ///      setWallpaper,
 ///      <String>['flutterImages', 'image.png'],
 ///   );
-const String setWallpaper = "setWallpaper";
+const String setWallpaper = 'setWallpaper';
 
 /// Scan image file, after scan, we can see image in gallery
 /// Arguments: [List] of [String]s, is path of image file, start from folder in external storage directory
@@ -24,7 +24,7 @@ const String setWallpaper = "setWallpaper";
 ///     'flutterImages',
 ///     'image.png'
 ///   ]);
-const String scanFile = "scanFile";
+const String scanFile = 'scanFile';
 
 /// Share image to facebook
 /// Arguments: [String], it is image url
@@ -45,4 +45,4 @@ const String shareImageToFacebook = 'shareImageToFacebook';
 ///     'height': 1280,
 ///   },
 /// );
-const String resizeImage = "resizeImage";
+const String resizeImage = 'resizeImage';

@@ -62,12 +62,11 @@ class _MyHomePageState extends State<MyHomePage>
   Animation<double> _opacityAnim;
 
   // clear history functionality
-  final StreamController clearStreamController =
-  StreamController.broadcast();
+  final StreamController clearStreamController = StreamController.broadcast();
 
   // sort order favorites
   final sortOrderController =
-  BehaviorSubject<String>.seeded(ImageDB.createdAtDesc);
+      BehaviorSubject<String>.seeded(ImageDB.createdAtDesc);
 
   @override
   void initState() {
@@ -91,8 +90,7 @@ class _MyHomePageState extends State<MyHomePage>
       {
         'title': 'Recent images',
         'icon': Icons.history,
-        'builder': (BuildContext context) =>
-            RecentPage(
+        'builder': (BuildContext context) => RecentPage(
               clearStream: clearStreamController.stream,
               scaffoldKey: _scaffoldKey,
             ),
@@ -102,6 +100,11 @@ class _MyHomePageState extends State<MyHomePage>
         'icon': Icons.favorite,
         'builder': (BuildContext context) =>
             FavoritesPage(sortOrderController.stream),
+      },
+      {
+        'title': 'Downloaded',
+        'icon': Icons.cloud_done,
+        'builder': (BuildContext context) => DownloadedPage(),
       },
     ];
 
@@ -140,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage>
 
     _opacityController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 1500),
+      duration: Duration(milliseconds: 1000),
     );
     _opacityAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(
@@ -184,80 +187,73 @@ class _MyHomePageState extends State<MyHomePage>
 
   Drawer _buildDrawer(BuildContext context) {
     return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          DrawerHeader(
-            child: Text(
-              'Wallpaper HD Flutter',
-              style: Theme
-                  .of(context)
-                  .textTheme
-                  .title
-                  .copyWith(color: Colors.white),
-            ),
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/drawer_header_image.jpg'),
-                fit: BoxFit.cover,
-                colorFilter: ColorFilter.mode(
-                  Colors.black26,
-                  BlendMode.darken,
-                ),
+      child: Container(
+        color: Theme.of(context).backgroundColor,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              child: Text(
+                'Wallpaper HD Flutter',
+                style: Theme.of(context)
+                    .textTheme
+                    .title
+                    .copyWith(color: Colors.white),
               ),
-              boxShadow: <BoxShadow>[
-                BoxShadow(
-                  color: Colors.black.withOpacity(0.5),
-                  blurRadius: 4.0,
-                  spreadRadius: 4.0,
-                )
-              ],
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/drawer_header_image.jpg'),
+                  fit: BoxFit.cover,
+                  colorFilter: ColorFilter.mode(
+                    Colors.black26,
+                    BlendMode.darken,
+                  ),
+                ),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.5),
+                    blurRadius: 4.0,
+                    spreadRadius: 4.0,
+                  )
+                ],
+                borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              ),
             ),
-          ),
-          listTiles[0],
-          listTiles[1],
-          listTiles[2],
-          ListTile(
-            title: Text('Trending image'),
-            trailing: Icon(Icons.trending_up),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TrendingPage()),
-              );
-            },
-          ),
-          ListTile(
-            title: Text('Upload image'),
-            trailing: Icon(Icons.cloud_upload),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => UploadPage()),
-              );
-            },
-          ),
-          Divider(),
-          listTiles[3],
-          listTiles[4],
-          ListTile(
-            title: Text('Settings'),
-            trailing: Icon(Icons.settings),
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => SettingsPage()),
-              );
-            },
-          ),
-          Divider(),
-          AboutListTile(
-            applicationName: 'Flutter wallpaper HD',
-            applicationIcon: FlutterLogo(),
-            applicationVersion: '1.0.0',
-          ),
-        ],
+            listTiles[0],
+            listTiles[1],
+            listTiles[2],
+            ListTile(
+              title: Text('Trending image'),
+              trailing: Icon(Icons.trending_up),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => TrendingPage()),
+                );
+              },
+            ),
+            ListTile(
+              title: Text('Upload image'),
+              trailing: Icon(Icons.cloud_upload),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => UploadPage()),
+                );
+              },
+            ),
+            Divider(),
+            listTiles[3],
+            listTiles[4],
+            listTiles[5],
+            Divider(),
+            AboutListTile(
+              applicationName: 'Flutter wallpaper HD',
+              applicationIcon: FlutterLogo(),
+              applicationVersion: '1.0.0',
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -366,11 +362,11 @@ class _MyHomePageState extends State<MyHomePage>
 
   Stream<SearchImageState> _searchImage(String value) async* {
     debugPrint('Value = $value');
-    Stream<QuerySnapshot> stream = value.isEmpty
+    final Stream<QuerySnapshot> stream = value.isEmpty
         ? _imageCollection.snapshots()
         : _imageCollection
             .orderBy('name')
-            .startAt([value]).endAt(["$value" + "\u{f8ff}"]).snapshots();
+            .startAt([value]).endAt(['$value' + '\u{f8ff}']).snapshots();
     yield LoadingState();
     try {
       await for (var result in stream
@@ -428,7 +424,7 @@ class _MyHomePageState extends State<MyHomePage>
         }
 
         if (data is SuccessState) {
-          var images = data.images;
+          final images = data.images;
           debugPrint('Length: ${images.length}');
           return Column(
             children: <Widget>[

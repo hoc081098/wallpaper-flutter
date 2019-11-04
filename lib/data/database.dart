@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 
 class ImageDB {
-  static const dbName = "images.db";
+  static const dbName = 'images.db';
   static const tableRecent = 'recents';
   static const tableFavorites = 'favorites';
   static const createdAtDesc = 'datetime(createdAt) DESC';
@@ -23,7 +23,7 @@ class ImageDB {
 
   Future<Database> open() async {
     final directory = await getApplicationDocumentsDirectory();
-    String path = join(directory.path, dbName);
+    final String path = join(directory.path, dbName);
     return await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       await db.execute('''CREATE TABLE $tableRecent( 
@@ -71,7 +71,7 @@ class ImageDB {
     return await dbClient.update(
       tableRecent,
       image.toJson(),
-      where: "id = ?",
+      where: 'id = ?',
       whereArgs: [image.id],
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
@@ -81,7 +81,7 @@ class ImageDB {
     final dbClient = await db;
     return await dbClient.delete(
       tableRecent,
-      where: "id = ?",
+      where: 'id = ?',
       whereArgs: [id],
     );
   }
@@ -95,7 +95,7 @@ class ImageDB {
     final dbClient = await db;
     final maps = await dbClient.query(
       tableRecent,
-      where: "id = ?",
+      where: 'id = ?',
       whereArgs: [id],
       limit: 1,
     );
@@ -127,7 +127,7 @@ class ImageDB {
   ///
 
   Future<List<ImageModel>> getFavoriteImages(
-      {String orderBy: createdAtDesc, int limit}) async {
+      {String orderBy = createdAtDesc, int limit}) async {
     final dbClient = await db;
     final maps = await (limit != null
         ? dbClient.query(
@@ -177,7 +177,7 @@ class ImageDB {
     final dbClient = await db;
     return await dbClient.delete(
       tableFavorites,
-      where: "id = ?",
+      where: 'id = ?',
       whereArgs: [id],
     );
   }
