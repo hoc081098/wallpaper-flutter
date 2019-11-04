@@ -52,49 +52,73 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      body: Container(
-        child: Column(
-          children: <Widget>[
-            _buildImagePreview(),
-            _buildCategoryDropDownButton(),
-            _buildTextFieldName(),
-            _buildButtons(),
-          ],
+    return SafeArea(
+      child: Scaffold(
+        key: scaffoldKey,
+        appBar: AppBar(
+          title: Text('Upload image'),
         ),
-        color: Theme.of(context).backgroundColor,
+        body: Container(
+          child: Column(
+            children: <Widget>[
+              _buildImagePreview(),
+              _buildCategoryDropDownButton(),
+              _buildTextFieldName(),
+              _buildButtons(),
+            ],
+          ),
+          color: Theme
+              .of(context)
+              .backgroundColor,
+        ),
       ),
     );
   }
 
   Widget _buildImagePreview() {
-    final placeholder = Stack(
-      children: <Widget>[
-        Container(
-          constraints: BoxConstraints.expand(),
-          child: Image.asset(
-            'assets/drawer_header_image.jpg',
-            fit: BoxFit.cover,
-            colorBlendMode: BlendMode.darken,
-            color: Colors.black38,
-          ),
-        ),
-        Align(
-          child: Text(
-            'No selected image',
-            textScaleFactor: 1.2,
-            style: TextStyle(
-              fontStyle: FontStyle.italic,
+    final placeholder = Material(
+      color: Colors.red,
+      child: Stack(
+        children: <Widget>[
+          Positioned.fill(
+            child: Container(
+              constraints: BoxConstraints.expand(),
+              child: Image.asset(
+                'assets/drawer_header_image.jpg',
+                fit: BoxFit.cover,
+                colorBlendMode: BlendMode.darken,
+                color: Colors.black38,
+              ),
             ),
           ),
-        ),
-      ],
+          Align(
+            child: Text(
+              'No selected image',
+              textScaleFactor: 1.2,
+              style: TextStyle(
+                fontStyle: FontStyle.italic,
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                splashColor: Theme
+                    .of(context)
+                    .accentColor
+                    .withOpacity(0.5),
+                onTap: _chooseImage,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
     return Flexible(
       child: Padding(
         padding: EdgeInsets.only(
-          top: MediaQuery.of(context).padding.top + 8,
+          top: 8,
           left: 8.0,
           right: 8.0,
         ),

@@ -30,8 +30,7 @@ String trendingToFieldName(Trending trending) {
 }
 
 class TrendingPage extends StatelessWidget {
-  final _selected =
-  BehaviorSubject<Trending>.seeded(Trending.downloadCount);
+  final _selected = BehaviorSubject<Trending>.seeded(Trending.downloadCount);
   final imagesCollection = Firestore.instance.collection('images');
 
   @override
@@ -41,7 +40,12 @@ class TrendingPage extends StatelessWidget {
         title: Text('Trending images'),
         actions: _buildActions(),
       ),
-      body: StaggeredImageList(_selected.distinct().switchMap(stream)),
+      body: Container(
+        color: Theme.of(context).backgroundColor,
+        child: StaggeredImageList(
+          _selected.distinct().switchMap(stream),
+        ),
+      ),
     );
   }
 

@@ -8,6 +8,11 @@ class AllPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StaggeredImageList(imagesCollection.snapshots().map(mapper));
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: StaggeredImageList(
+        imagesCollection.snapshots().map(mapper),
+      ),
+    );
   }
 }
