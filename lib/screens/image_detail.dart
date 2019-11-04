@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart';
+import 'package:pedantic/pedantic.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:wallpaper/constants.dart';
@@ -36,8 +37,8 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   ImageModel imageModel;
   bool isLoading;
 
-  StreamController<bool> _isFavoriteStreamController =
-  StreamController.broadcast();
+  final StreamController<bool> _isFavoriteStreamController =
+      StreamController.broadcast();
 
   @override
   void initState() {
@@ -47,7 +48,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     isLoading = false;
     imageModel = widget.imageModel;
 
-    var imageStream = Observable(imagesCollection
+    final imageStream = Observable(imagesCollection
         .document(imageModel.id)
         .snapshots()
         .map(mapperImageModel));
@@ -58,18 +59,17 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
     subscription1 =
         Observable.combineLatest2<ImageModel, bool, Map<String, dynamic>>(
-          imageStream,
-          _isFavoriteStreamController.stream.distinct(),
-              (img, isFav) =>
-          {
-            'image': img,
-            'isFavorite': isFav,
-          },
-        )
+      imageStream,
+      _isFavoriteStreamController.stream.distinct(),
+      (img, isFav) => {
+        'image': img,
+        'isFavorite': isFav,
+      },
+    )
             .where((map) => map['isFavorite'])
             .map<ImageModel>((map) => map['image'])
             .listen((ImageModel newImage) {
-          debugPrint('onListen fav $newImage');
+      debugPrint('onListen fav $newImage');
       debugPrint('onListen fav old $imageModel');
 
       imageDB
@@ -96,25 +96,27 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      key: scaffoldKey,
-      body: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: <Color>[
-              Theme.of(context).backgroundColor.withOpacity(0.8),
-              Theme.of(context).backgroundColor.withOpacity(0.9),
-            ],
-            begin: AlignmentDirectional.topStart,
-            end: AlignmentDirectional.bottomEnd,
+    return SafeArea(
+      child: Scaffold(
+        key: scaffoldKey,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: <Color>[
+                Theme.of(context).backgroundColor.withOpacity(0.8),
+                Theme.of(context).backgroundColor.withOpacity(0.9),
+              ],
+              begin: AlignmentDirectional.topStart,
+              end: AlignmentDirectional.bottomEnd,
+            ),
           ),
-        ),
-        child: Stack(
-          children: <Widget>[
-            _buildCenterImage(),
-            _buildAppbar(context),
-            _buildButtons(),
-          ],
+          child: Stack(
+            children: <Widget>[
+              _buildCenterImage(),
+              _buildAppbar(context),
+              _buildButtons(),
+            ],
+          ),
         ),
       ),
     );
@@ -138,7 +140,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       },
     );
 
-    var closeButton = ClipOval(
+    final closeButton = ClipOval(
       child: Container(
         color: Colors.black.withOpacity(0.2),
         child: IconButton(
@@ -150,7 +152,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       ),
     );
 
-    var textName = Expanded(
+    final textName = Expanded(
       child: Text(
         imageModel.name,
         maxLines: 2,
@@ -184,7 +186,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
             ],
             begin: AlignmentDirectional.topCenter,
             end: AlignmentDirectional.bottomCenter,
-            stops: [0.1, 0.9],
+            stops: const [0.1, 0.9],
           ),
         ),
       ),
@@ -201,27 +203,26 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         child: CachedNetworkImage(
           imageUrl: imageModel.imageUrl,
           fit: BoxFit.cover,
-          placeholder: (context, url) =>
-              Container(
-                constraints: BoxConstraints.expand(),
-                child: Stack(
-                  children: <Widget>[
-                    Positioned.fill(
-                      child: Image.asset(
-                        'assets/picture.png',
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Positioned.fill(
-                      child: Center(
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                        ),
-                      ),
-                    )
-                  ],
+          placeholder: (context, url) => Container(
+            constraints: BoxConstraints.expand(),
+            child: Stack(
+              children: <Widget>[
+                Positioned.fill(
+                  child: Image.asset(
+                    'assets/picture.png',
+                    fit: BoxFit.cover,
+                  ),
                 ),
-              ),
+                Positioned.fill(
+                  child: Center(
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -234,33 +235,34 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   _showSnackBar(String text,
       {Duration duration = const Duration(seconds: 1, milliseconds: 500)}) {
-    return scaffoldKey.currentState?.showSnackBar(
-        SnackBar(content: Text(text), duration: duration));
+    return scaffoldKey.currentState
+        ?.showSnackBar(SnackBar(content: Text(text), duration: duration));
   }
 
   Future _downloadImage() async {
     try {
       setState(() => isLoading = true);
 
-      // request runtime permission
-      final permissionHandler = PermissionHandler();
-      final status = await permissionHandler
-          .checkPermissionStatus(PermissionGroup.storage);
-      if (status != PermissionStatus.granted) {
-        final requestRes = await permissionHandler
-            .requestPermissions([PermissionGroup.storage]);
-        if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
-          _showSnackBar('Permission denined. Go to setting to granted!');
-          return _done();
+      final targetPlatform = Theme.of(context).platform;
+
+      if (targetPlatform == TargetPlatform.android) {
+        // request runtime permission
+        final permissionHandler = PermissionHandler();
+        final status = await permissionHandler
+            .checkPermissionStatus(PermissionGroup.storage);
+        if (status != PermissionStatus.granted) {
+          final requestRes = await permissionHandler
+              .requestPermissions([PermissionGroup.storage]);
+          if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
+            _showSnackBar('Permission denined. Go to setting to granted!');
+            return _done();
+          }
         }
       }
 
       // get external directory
       Directory externalDir;
-
-      switch (Theme
-          .of(context)
-          .platform) {
+      switch (targetPlatform) {
         case TargetPlatform.android:
           externalDir = await getExternalStorageDirectory();
           break;
@@ -271,55 +273,57 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           externalDir = await getApplicationDocumentsDirectory();
           break;
       }
+      print('externalDir=$externalDir');
 
-      // check file is exists, if exists then delete file
       final filePath =
           path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
+
       final file = File(filePath);
       if (file.existsSync()) {
         file.deleteSync();
       }
 
-      print(file);
+      print('Start download...');
+      final bytes = await http.readBytes(imageModel.imageUrl);
+      print('Done download...');
 
-      // increase download count
-      _increaseCount('downloadCount', imageModel.id);
-
-      // after that, download and resize image
-      final Uint8List bytes = await http.readBytes(imageModel.imageUrl);
-      // resize image ??
       final queryData = MediaQuery.of(context);
+      final width =
+          (queryData.size.shortestSide * queryData.devicePixelRatio).toInt();
+      final height =
+          (queryData.size.longestSide * queryData.devicePixelRatio).toInt();
+
       final Uint8List outBytes = await methodChannel.invokeMethod(
         resizeImage,
         <String, dynamic>{
           'bytes': bytes,
-          'width': (queryData.size.shortestSide * queryData.devicePixelRatio)
-              .toInt(),
-          'height':
-              (queryData.size.longestSide * queryData.devicePixelRatio).toInt(),
+          'width': width,
+          'height': height,
         },
       );
 
       //save image to storage
-      final message = (await compute<Map<String, dynamic>, bool>(
-        saveImage,
-        <String, dynamic>{'filePath': filePath, 'bytes': outBytes},
-      )) ? 'Image downloaded successfully'
+      final message = saveImage({'filePath': filePath, 'bytes': outBytes})
+          ? 'Image downloaded successfully'
           : 'Failed to download image';
 
       _showSnackBar(message);
 
       // call scanFile method, to show image in gallery
-      methodChannel.invokeMethod(scanFile, <String>[
-        'flutterImages',
-        '${imageModel.id}.png'
-      ]).then((scanFileRes) => debugPrint("Scan file: $scanFileRes"));
+      unawaited(
+        methodChannel.invokeMethod(
+          scanFile,
+          <String>['flutterImages', '${imageModel.id}.png'],
+        ),
+      );
 
+      // increase download count
+      _increaseCount('downloadCount', imageModel.id);
     } on PlatformException catch (e) {
       _showSnackBar(e.message);
-    } catch (e) {
+    } catch (e, s) {
       _showSnackBar('An error occurred');
-      debugPrint("Download image: $e");
+      debugPrint('Download image: $e, $s');
     }
 
     return _done();
@@ -354,14 +358,13 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   Widget _buildButtons() {
     final onPressedWhileLoading =
-        () => _showSnackBar("Downloading...Please wait");
+        () => _showSnackBar('Downloading...Please wait');
     return Positioned(
       child: Column(
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.only(bottom: 8.0),
-            child:
-            isLoading ? CircularProgressIndicator() : Container(),
+            child: isLoading ? CircularProgressIndicator() : Container(),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -402,29 +405,49 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
   _setWallpaper() async {
     try {
+      final targetPlatform = Theme.of(context).platform;
+
       // get external directory
-      final externalDir = await getExternalStorageDirectory();
+      Directory externalDir;
+      switch (targetPlatform) {
+        case TargetPlatform.android:
+          externalDir = await getExternalStorageDirectory();
+          break;
+        case TargetPlatform.fuchsia:
+          _showSnackBar('Not support fuchsia');
+          return _done();
+        case TargetPlatform.iOS:
+          externalDir = await getApplicationDocumentsDirectory();
+          break;
+      }
       final filePath =
           path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
 
       // check image is exists
-      if (!(await File(filePath).exists())) {
+      if (!File(filePath).existsSync()) {
         return _showSnackBar('You need donwload image before');
       }
 
-      // set image as wallpaper
-      if (await _showDialogSetImageAsWallpaper()) {
-        final String res = await methodChannel.invokeMethod(
+      if (targetPlatform == TargetPlatform.android) {
+        // set image as wallpaper
+        if (await _showDialogSetImageAsWallpaper()) {
+          final String res = await methodChannel.invokeMethod(
+            setWallpaper,
+            <String>['flutterImages', '${imageModel.id}.png'],
+          );
+          _showSnackBar(res);
+        }
+      } else if (targetPlatform == TargetPlatform.iOS) {
+        await methodChannel.invokeMethod(
           setWallpaper,
           <String>['flutterImages', '${imageModel.id}.png'],
         );
-        _showSnackBar(res);
       }
     } on PlatformException catch (e) {
       _showSnackBar(e.message);
     } catch (e) {
       _showSnackBar('An error occurred');
-      debugPrint("Set wallpaper: $e");
+      debugPrint('Set wallpaper: $e');
     }
   }
 
@@ -441,8 +464,8 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   _insertToRecent(ImageModel image) {
     imageDB
         .insertRecentImage(image)
-        .then((i) => debugPrint("Inserted $i"))
-        .catchError((e) => debugPrint("Inserted error $e"));
+        .then((i) => debugPrint('Inserted $i'))
+        .catchError((e) => debugPrint('Inserted error $e'));
   }
 
   void _onListen(ImageModel newImage) {
@@ -456,7 +479,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
   }
 
   void _changeFavoriteStatus(bool isFavorite) {
-    var result = isFavorite
+    final result = isFavorite
         ? imageDB.deleteFavoriteImageById(imageModel.id).then((i) => i > 0)
         : imageDB.insertFavoriteImage(imageModel).then((i) => i != -1);
     result.then((b) {

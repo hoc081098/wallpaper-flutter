@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
+import 'package:pedantic/pedantic.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wallpaper/constants.dart';
 import 'package:wallpaper/data/models/image_category_model.dart';
@@ -23,7 +24,7 @@ class _UploadPageState extends State<UploadPage> {
   List<ImageCategory> _imageCategories;
   ImageCategory _selectedCategory;
   StreamSubscription<List<ImageCategory>> subscription;
-  TextEditingController _textController = TextEditingController();
+  final TextEditingController _textController = TextEditingController();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final imagesCollection = Firestore.instance.collection('images');
@@ -68,7 +69,7 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildImagePreview() {
-    var placeholder = Stack(
+    final placeholder = Stack(
       children: <Widget>[
         Container(
           constraints: BoxConstraints.expand(),
@@ -121,7 +122,7 @@ class _UploadPageState extends State<UploadPage> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           _imageCategories.isEmpty
-              ? Text("Loading categories...")
+              ? Text('Loading categories...')
               : DropdownButton<ImageCategory>(
                   items: _imageCategories.map((c) {
                     return DropdownMenuItem<ImageCategory>(
@@ -157,7 +158,7 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   Widget _buildButtons() {
-    var color = Theme.of(context).primaryColor;
+    final color = Theme.of(context).primaryColor;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -212,7 +213,7 @@ class _UploadPageState extends State<UploadPage> {
       return false;
     }
     if (_selectedCategory == null) {
-      _showSnackBar("Please select category");
+      _showSnackBar('Please select category');
       return false;
     }
     if (_textController.text.isEmpty) {
@@ -226,7 +227,8 @@ class _UploadPageState extends State<UploadPage> {
     if (!_validate()) {
       return;
     }
-    showDialog(
+    unawaited(
+      showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -236,27 +238,29 @@ class _UploadPageState extends State<UploadPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
+                children: const <Widget>[
                   CircularProgressIndicator(),
                   Padding(
-                    padding: const EdgeInsets.only(top: 16.0),
+                    padding: EdgeInsets.only(top: 16.0),
                     child: Text('Uploading...'),
                   ),
                 ],
               ),
             ),
           );
-        });
+        },
+      ),
+    );
 
     try {
       //upload file
       final extension = path.extension(_imageFile.path);
       final uploadPath =
           'uploadImages/${Uuid().v1()}${extension.isEmpty ? '.png' : extension}';
-      var imageReference = firebaseStorage.ref().child(uploadPath);
+      final imageReference = firebaseStorage.ref().child(uploadPath);
       final task1 = imageReference.putFile(_imageFile).onComplete;
 
-      var thumbnailReference =
+      final thumbnailReference =
           firebaseStorage.ref().child('uploadImages/${Uuid().v1()}.png');
 
       final uploadThumbnail = (thumbnailBytes) {
@@ -302,7 +306,7 @@ class _UploadPageState extends State<UploadPage> {
       _showSnackBar(e.message);
     } catch (e) {
       Navigator.pop(context); //pop dialog
-      _showSnackBar("An error occurred");
+      _showSnackBar('An error occurred');
       debugPrint('Error $e}');
     }
   }
@@ -456,7 +460,7 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
     final uploadPath =
         'uploadImages/${Uuid().v1()}${extension.isEmpty ? '.png' : extension}';
 
-    var imageReference = firebaseStorage.ref().child(uploadPath);
+    final imageReference = firebaseStorage.ref().child(uploadPath);
 
     await _imageFile
         .readAsBytes()

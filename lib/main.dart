@@ -366,11 +366,11 @@ class _MyHomePageState extends State<MyHomePage>
 
   Stream<SearchImageState> _searchImage(String value) async* {
     debugPrint('Value = $value');
-    Stream<QuerySnapshot> stream = value.isEmpty
+    final Stream<QuerySnapshot> stream = value.isEmpty
         ? _imageCollection.snapshots()
         : _imageCollection
             .orderBy('name')
-            .startAt([value]).endAt(["$value" + "\u{f8ff}"]).snapshots();
+            .startAt([value]).endAt(['$value' + '\u{f8ff}']).snapshots();
     yield LoadingState();
     try {
       await for (var result in stream
@@ -428,7 +428,7 @@ class _MyHomePageState extends State<MyHomePage>
         }
 
         if (data is SuccessState) {
-          var images = data.images;
+          final images = data.images;
           debugPrint('Length: ${images.length}');
           return Column(
             children: <Widget>[

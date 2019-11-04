@@ -129,8 +129,7 @@ class _RecentPageState extends State<RecentPage> {
           (prev.year != viewTime.year ||
               prev.month != viewTime.month ||
               prev.day != viewTime.day)) {
-        final dateTime =
-        DateTime(viewTime.year, viewTime.month, viewTime.day);
+        final dateTime = DateTime(viewTime.year, viewTime.month, viewTime.day);
         result.add({
           'type': 'header',
           'date': dateTime,
@@ -148,7 +147,7 @@ class _RecentPageState extends State<RecentPage> {
   }
 
   Widget _buildItem(ImageModel image, int index) {
-    var background = Container(
+    final background = Container(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
@@ -168,20 +167,10 @@ class _RecentPageState extends State<RecentPage> {
       ),
     );
 
-    var listTile = ListTile(
+    final listTile = ListTile(
       leading: CachedNetworkImage(
         imageUrl: image.thumbnailUrl,
         fit: BoxFit.cover,
-        placeholder: (context, url) =>
-            Container(
-              constraints: BoxConstraints.expand(),
-              child: Positioned.fill(
-                child: Image.asset(
-                  'assets/picture.png',
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
       ),
       title: Text(
         image.name,
@@ -242,7 +231,7 @@ class _RecentPageState extends State<RecentPage> {
     }).catchError(
       (e) => widget.scaffoldKey.currentState.showSnackBar(
         SnackBar(content: Text('Delete error: $e')),
-          ),
+      ),
     );
   }
 
