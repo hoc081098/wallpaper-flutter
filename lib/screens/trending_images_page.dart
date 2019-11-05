@@ -37,7 +37,7 @@ class TrendingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trending images'),
+        title: Text('Trendings'),
         actions: _buildActions(),
       ),
       body: Container(

@@ -56,7 +56,7 @@ class _UploadPageState extends State<UploadPage> {
       child: Scaffold(
         key: scaffoldKey,
         appBar: AppBar(
-          title: Text('Upload image'),
+          title: Text('Upload'),
         ),
         body: Container(
           child: Column(

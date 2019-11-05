@@ -13,12 +13,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="???">
-      <change afterPath="$PROJECT_DIR$/lib/data/models/downloaded_image.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/database.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/gradle.properties" beforeDir="false" afterPath="$PROJECT_DIR$/android/gradle.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/drawer_header_image.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/assets/drawer_header_image.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/image_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/image_detail.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/settings_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/downloads_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/all_images_page.dart" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/trending_images_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/trending_images_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/upload_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/upload_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,33 +51,42 @@
         <option value="Petrus Hoc &lt;hoc081098@gmail.com&gt;" />
       </list>
     </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1T9UiyyPX7CKSJUHB0yJW0JYrcF" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectReloadState">
+    <option name="STATE" value="1" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/assets" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.Dart" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\Admin\Documents\Android\wallpaper-flutter\assets" />
       <recent name="D:\Admin\Documents\Java\wallpaper\assets" />
       <recent name="D:\Admin\Documents\Java\wallpaper\android\app" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\Admin\Documents\Android\wallpaper-flutter\drawer_header" />
       <recent name="D:\Admin\Documents\Java\wallpaper\lib\screens" />
       <recent name="D:\Admin\Documents\Java\wallpaper\lib\data" />
       <recent name="D:\Admin\Documents\Java\wallpaper\lib\models" />
       <recent name="D:\Admin\Documents\Java\wallpaper\assets" />
-      <recent name="D:\Admin\Documents\Java\wallpaper\android\app" />
     </key>
   </component>
   <component name="RunDashboard">
