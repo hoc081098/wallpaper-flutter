@@ -8,7 +8,7 @@ import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/screens/image_detail.dart';
 
 class RecentPage extends StatefulWidget {
-  final Stream clearStream;
+  final Stream<void> clearStream;
   final GlobalKey<ScaffoldState> scaffoldKey;
 
   const RecentPage({Key key, this.clearStream, this.scaffoldKey})
@@ -25,14 +25,21 @@ class _RecentPageState extends State<RecentPage> {
 
   List<ImageModel> _images;
   List<Map<String, dynamic>> _imagesWithHeaders;
+  StreamSubscription subscription;
 
   @override
   void initState() {
     super.initState();
-    widget.clearStream
+    subscription = widget.clearStream
         .asyncMap((_) => imageDB.deleteAllRecentImages())
         .listen(_onData);
     _getRecentImages();
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    super.dispose();
   }
 
   void _getRecentImages() {

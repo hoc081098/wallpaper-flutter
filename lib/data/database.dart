@@ -32,33 +32,39 @@ class ImageDB {
       version: 2,
       onCreate: (Database db, int version) async {
         await db.execute('''CREATE TABLE $tableRecent( 
-        id TEXT PRIMARY KEY UNIQUE NOT NULL, 
-        name TEXT NOT NULL,
-        imageUrl TEXT NOT NULL,
-        thumbnailUrl TEXT NOT NULL,
-        categoryId TEXT NOT NULL,
-        uploadedTime TEXT NOT NULL,
-        viewTime TEXT NOT NULL
-      )''');
+            id TEXT PRIMARY KEY UNIQUE NOT NULL, 
+            name TEXT NOT NULL,
+            imageUrl TEXT NOT NULL,
+            thumbnailUrl TEXT NOT NULL,
+            categoryId TEXT NOT NULL,
+            uploadedTime TEXT NOT NULL,
+            viewTime TEXT NOT NULL
+        )''');
         await db.execute('''CREATE TABLE $tableFavorites(
-        id TEXT PRIMARY KEY UNIQUE NOT NULL, 
-        name TEXT NOT NULL,
-        imageUrl TEXT NOT NULL,
-        thumbnailUrl TEXT NOT NULL,
-        categoryId TEXT NOT NULL,
-        uploadedTime TEXT NOT NULL,
-        createdAt TEXT NOT NULL
-      )''');
+            id TEXT PRIMARY KEY UNIQUE NOT NULL, 
+            name TEXT NOT NULL,
+            imageUrl TEXT NOT NULL,
+            thumbnailUrl TEXT NOT NULL,
+            categoryId TEXT NOT NULL,
+            uploadedTime TEXT NOT NULL,
+            createdAt TEXT NOT NULL
+        )''');
+        await db.execute('''CREATE TABLE $tableDownloads(
+            id TEXT PRIMARY KEY UNIQUE NOT NULL, 
+            name TEXT NOT NULL,
+            imageUrl TEXT NOT NULL,
+            createdAt TEXT NOT NULL
+        )''');
       },
       onUpgrade: (db, oldVersion, newVersion) async {
         print('[DEBUG] onUpgrade from $oldVersion to $newVersion');
 
         if (oldVersion == 1) {
           await db.execute('''CREATE TABLE $tableDownloads(
-            id TEXT PRIMARY KEY UNIQUE NOT NULL, 
-            name TEXT NOT NULL,
-            imageUrl TEXT NOT NULL,
-            createdAt TEXT NOT NULL
+              id TEXT PRIMARY KEY UNIQUE NOT NULL, 
+              name TEXT NOT NULL,
+              imageUrl TEXT NOT NULL,
+              createdAt TEXT NOT NULL
           )''');
         }
       },

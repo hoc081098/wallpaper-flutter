@@ -45,20 +45,20 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  int _selectedIndex = 0;
+  /// Drawer related
+  int selectedIndex = 0;
   List<Map<String, dynamic>> nav;
   List<Widget> listTiles;
 
   /// search functionality
-  bool _isSearching = false;
-  final _searchS = PublishSubject<String>();
+  bool isSearching = false;
+  final searchTermS = PublishSubject<String>();
   Stream<SearchImageState> _searchState$;
 
   /// clear history functionality
-  final StreamController clearStreamController =
-      StreamController<void>.broadcast();
+  final clearStreamController = StreamController<void>.broadcast();
 
   /// sort order favorites
   final sortOrderS = BehaviorSubject.seeded(ImageDB.createdAtDesc);
@@ -81,10 +81,12 @@ class _MyHomePageState extends State<MyHomePage>
       {
         'title': 'Recent images',
         'icon': Icons.history,
-        'builder': (BuildContext context) => RecentPage(
-              clearStream: clearStreamController.stream,
-              scaffoldKey: _scaffoldKey,
-            ),
+        'builder': (BuildContext context) {
+          return RecentPage(
+            clearStream: clearStreamController.stream,
+            scaffoldKey: scaffoldKey,
+          );
+        },
       },
       {
         'title': 'Favorites',
@@ -107,13 +109,13 @@ class _MyHomePageState extends State<MyHomePage>
               title: Text(m['title']),
               trailing: Icon(m['icon']),
               onTap: () {
-                if (_isSearching) {
+                if (isSearching) {
                   setState(() {
-                    _isSearching = false;
-                    _selectedIndex = index;
+                    isSearching = false;
+                    selectedIndex = index;
                   });
                 } else {
-                  setState(() => _selectedIndex = index);
+                  setState(() => selectedIndex = index);
                 }
                 Navigator.pop(context);
               },
@@ -123,7 +125,7 @@ class _MyHomePageState extends State<MyHomePage>
         .values
         .toList();
 
-    _searchState$ = _searchS
+    _searchState$ = searchTermS
         .debounceTime(Duration(milliseconds: 500))
         .map((s) => s.trim())
         .distinct()
@@ -135,14 +137,14 @@ class _MyHomePageState extends State<MyHomePage>
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         drawer: _buildDrawer(context),
         appBar: _buildAppBar(context),
         body: AnimatedSwitcher(
           duration: const Duration(milliseconds: 600),
-          child: _isSearching
+          child: isSearching
               ? _buildSearchList(context)
-              : nav[_selectedIndex]['builder'](context),
+              : nav[selectedIndex]['builder'](context),
         ),
       ),
       onWillPop: () => _onWillPop(context),
@@ -230,11 +232,11 @@ class _MyHomePageState extends State<MyHomePage>
 
   AppBar _buildAppBar(BuildContext context) {
     return AppBar(
-      title: _isSearching
+      title: isSearching
           ? TextField(
               keyboardType: TextInputType.text,
               maxLines: 1,
-              onChanged: _searchS.add,
+              onChanged: searchTermS.add,
               style: TextStyle(
                 color: Colors.white,
               ),
@@ -247,16 +249,16 @@ class _MyHomePageState extends State<MyHomePage>
                 border: UnderlineInputBorder(),
               ),
             )
-          : Text(nav[_selectedIndex]['title']),
+          : Text(nav[selectedIndex]['title']),
       actions: <Widget>[
         IconButton(
-          onPressed: () => setState(() => _isSearching = !_isSearching),
-          icon: _isSearching
+          onPressed: () => setState(() => isSearching = !isSearching),
+          icon: isSearching
               ? Icon(Icons.close, color: Colors.white)
               : Icon(Icons.search, color: Colors.white),
           tooltip: 'Search',
         ),
-        if (!_isSearching && _selectedIndex == 2) //History page
+        if (!isSearching && selectedIndex == 2) //History page
           PopupMenuButton(
             onSelected: (_) => clearStreamController.add(null),
             itemBuilder: (BuildContext context) {
@@ -268,7 +270,7 @@ class _MyHomePageState extends State<MyHomePage>
               ];
             },
           ),
-        if (!_isSearching && _selectedIndex == 3) //Favorite page
+        if (!isSearching && selectedIndex == 3) //Favorite page
           PopupMenuButton<String>(
             onSelected: (v) => sortOrderS.add(v),
             itemBuilder: (BuildContext context) {
@@ -283,7 +285,7 @@ class _MyHomePageState extends State<MyHomePage>
                 ),
               ];
             },
-          )
+          ),
       ],
     );
   }

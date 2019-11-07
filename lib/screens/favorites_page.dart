@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:wallpaper/data/database.dart';
@@ -17,10 +15,13 @@ class FavoritesPage extends StatelessWidget {
     return Container(
       color: Theme.of(context).backgroundColor,
       child: StreamBuilder(
-        stream: sortOrderStream.switchMap(
-          (order) => Stream.fromFuture(
-            ImageDB.getInstance().getFavoriteImages(orderBy: order),
-              ),
+        stream: sortOrderStream.distinct().switchMap(
+          (order) async* {
+            final list =
+                await ImageDB.getInstance().getFavoriteImages(orderBy: order);
+            print('>>> $order $list');
+            yield list;
+          },
         ),
         builder:
             (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot) {
