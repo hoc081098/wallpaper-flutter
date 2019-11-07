@@ -6,12 +6,11 @@ import 'package:rxdart/rxdart.dart';
 import 'package:wallpaper/data/database.dart';
 import 'package:wallpaper/data/models/search_state.dart';
 import 'package:wallpaper/image_list.dart';
-import 'package:wallpaper/screens/all_images_page.dart';
 import 'package:wallpaper/screens/category_page.dart';
+import 'package:wallpaper/screens/downloads_page.dart';
 import 'package:wallpaper/screens/favorites_page.dart';
 import 'package:wallpaper/screens/newest_image_page.dart';
 import 'package:wallpaper/screens/recent_images_page.dart';
-import 'package:wallpaper/screens/downloads_page.dart';
 import 'package:wallpaper/screens/trending_images_page.dart';
 import 'package:wallpaper/screens/upload_page.dart';
 import 'package:wallpaper/utils.dart' as utils;
@@ -46,41 +45,33 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage>
     with SingleTickerProviderStateMixin {
-  int _selectedIndex = 0;
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
+  /// Drawer related
+  int selectedIndex = 0;
   List<Map<String, dynamic>> nav;
   List<Widget> listTiles;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
-  Widget _appBarTitle;
-  Icon _actionIcon;
 
-  // search functionality
-  bool _isSearching = false;
-  final _streamController = PublishSubject<String>();
-  Stream<SearchImageState> _searchStream;
-  final _imageCollection = Firestore.instance.collection('images');
-  AnimationController _opacityController;
-  Animation<double> _opacityAnim;
+  /// search functionality
+  bool isSearching = false;
+  final searchTermS = PublishSubject<String>();
+  Stream<SearchImageState> _searchState$;
 
-  // clear history functionality
-  final StreamController clearStreamController = StreamController.broadcast();
+  /// clear history functionality
+  final clearStreamController = StreamController<void>.broadcast();
 
-  // sort order favorites
-  final sortOrderController =
-      BehaviorSubject<String>.seeded(ImageDB.createdAtDesc);
+  /// sort order favorites
+  final sortOrderS = BehaviorSubject.seeded(ImageDB.createdAtDesc);
 
   @override
   void initState() {
     super.initState();
-    nav = <Map<String, dynamic>>[
+
+    nav = [
       {
         'title': 'Categories',
         'icon': Icons.category,
         'builder': (BuildContext context) => CategoryPage(),
-      },
-      {
-        'title': 'All images',
-        'icon': Icons.image,
-        'builder': (BuildContext context) => AllPage(),
       },
       {
         'title': 'Newest images',
@@ -90,16 +81,17 @@ class _MyHomePageState extends State<MyHomePage>
       {
         'title': 'Recent images',
         'icon': Icons.history,
-        'builder': (BuildContext context) => RecentPage(
-              clearStream: clearStreamController.stream,
-              scaffoldKey: _scaffoldKey,
-            ),
+        'builder': (BuildContext context) {
+          return RecentPage(
+            clearStream: clearStreamController.stream,
+            scaffoldKey: scaffoldKey,
+          );
+        },
       },
       {
         'title': 'Favorites',
         'icon': Icons.favorite,
-        'builder': (BuildContext context) =>
-            FavoritesPage(sortOrderController.stream),
+        'builder': (BuildContext context) => FavoritesPage(sortOrderS.stream),
       },
       {
         'title': 'Downloaded',
@@ -117,18 +109,13 @@ class _MyHomePageState extends State<MyHomePage>
               title: Text(m['title']),
               trailing: Icon(m['icon']),
               onTap: () {
-                if (_isSearching) {
-                  _handleCloseSearch().whenComplete(() {
-                    setState(() {
-                      _selectedIndex = index;
-                      _appBarTitle = Text(nav[_selectedIndex]['title']);
-                    });
+                if (isSearching) {
+                  setState(() {
+                    isSearching = false;
+                    selectedIndex = index;
                   });
                 } else {
-                  setState(() {
-                    _selectedIndex = index;
-                    _appBarTitle = Text(nav[_selectedIndex]['title']);
-                  });
+                  setState(() => selectedIndex = index);
                 }
                 Navigator.pop(context);
               },
@@ -138,40 +125,27 @@ class _MyHomePageState extends State<MyHomePage>
         .values
         .toList();
 
-    _appBarTitle = Text(nav[0]['title']);
-    _actionIcon = Icon(Icons.search, color: Colors.white);
-
-    _opacityController = AnimationController(
-      vsync: this,
-      duration: Duration(milliseconds: 1000),
-    );
-    _opacityAnim = Tween<double>(begin: 0.0, end: 1.0).animate(
-      CurvedAnimation(
-        parent: _opacityController,
-        curve: Interval(
-          0.2,
-          1.0,
-          curve: Curves.easeOut,
-        ),
-      ),
-    )..addListener(() => setState(() {}));
-    _searchStream = _streamController
-        .debounceTime(Duration(milliseconds: 300))
+    _searchState$ = searchTermS
+        .debounceTime(Duration(milliseconds: 500))
         .map((s) => s.trim())
         .distinct()
-        .switchMap(_searchImage);
+        .switchMap(_searchImage)
+        .shareValueSeeded(null);
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       child: Scaffold(
-        key: _scaffoldKey,
+        key: scaffoldKey,
         drawer: _buildDrawer(context),
         appBar: _buildAppBar(context),
-        body: _isSearching
-            ? _buildSearchList(context)
-            : nav[_selectedIndex]['builder'](context),
+        body: AnimatedSwitcher(
+          duration: const Duration(milliseconds: 600),
+          child: isSearching
+              ? _buildSearchList(context)
+              : nav[selectedIndex]['builder'](context),
+        ),
       ),
       onWillPop: () => _onWillPop(context),
     );
@@ -181,8 +155,7 @@ class _MyHomePageState extends State<MyHomePage>
   void dispose() {
     super.dispose();
     clearStreamController.close();
-    _opacityController.dispose();
-    sortOrderController.close();
+    sortOrderS.close();
   }
 
   Drawer _buildDrawer(BuildContext context) {
@@ -211,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage>
                 ),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black38,
                     blurRadius: 4.0,
                     spreadRadius: 4.0,
                   )
@@ -221,7 +194,6 @@ class _MyHomePageState extends State<MyHomePage>
             ),
             listTiles[0],
             listTiles[1],
-            listTiles[2],
             ListTile(
               title: Text('Trending image'),
               trailing: Icon(Icons.trending_up),
@@ -242,11 +214,11 @@ class _MyHomePageState extends State<MyHomePage>
                 );
               },
             ),
-            Divider(),
+            Divider(color: Colors.white30),
+            listTiles[2],
             listTiles[3],
             listTiles[4],
-            listTiles[5],
-            Divider(),
+            Divider(color: Colors.white30),
             AboutListTile(
               applicationName: 'Flutter wallpaper HD',
               applicationIcon: FlutterLogo(),
@@ -259,23 +231,36 @@ class _MyHomePageState extends State<MyHomePage>
   }
 
   AppBar _buildAppBar(BuildContext context) {
-    final actions = <Widget>[
-      IconButton(
-        onPressed: _onPressIcon,
-        icon: _actionIcon,
-        tooltip: 'Search',
-      ),
-    ];
-
-    if (!_isSearching) {
-      if (_selectedIndex == 3) {
-        //History page
-        actions.add(
+    return AppBar(
+      title: isSearching
+          ? TextField(
+              keyboardType: TextInputType.text,
+              maxLines: 1,
+              onChanged: searchTermS.add,
+              style: TextStyle(
+                color: Colors.white,
+              ),
+              decoration: InputDecoration(
+                prefixIcon: Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: Icon(Icons.search),
+                ),
+                hintText: 'Search image...',
+                border: UnderlineInputBorder(),
+              ),
+            )
+          : Text(nav[selectedIndex]['title']),
+      actions: <Widget>[
+        IconButton(
+          onPressed: () => setState(() => isSearching = !isSearching),
+          icon: isSearching
+              ? Icon(Icons.close, color: Colors.white)
+              : Icon(Icons.search, color: Colors.white),
+          tooltip: 'Search',
+        ),
+        if (!isSearching && selectedIndex == 2) //History page
           PopupMenuButton(
-            onSelected: (_) {
-              debugPrint('onSelected');
-              clearStreamController.add(null);
-            },
+            onSelected: (_) => clearStreamController.add(null),
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(
@@ -285,12 +270,9 @@ class _MyHomePageState extends State<MyHomePage>
               ];
             },
           ),
-        );
-      } else if (_selectedIndex == 4) {
-        //Favorite page
-        actions.add(
+        if (!isSearching && selectedIndex == 3) //Favorite page
           PopupMenuButton<String>(
-            onSelected: (v) => sortOrderController.add(v),
+            onSelected: (v) => sortOrderS.add(v),
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem<String>(
@@ -304,175 +286,122 @@ class _MyHomePageState extends State<MyHomePage>
               ];
             },
           ),
-        );
-      }
-    }
-
-    debugPrint('_appBarTitle $_appBarTitle');
-    return AppBar(
-      title: _appBarTitle,
-      actions: actions,
+      ],
     );
-  }
-
-  void _onPressIcon() {
-    if (!_isSearching) {
-      setState(() {
-        _actionIcon = Icon(Icons.close, color: Colors.white);
-        _appBarTitle = FadeTransition(
-          child: TextField(
-            keyboardType: TextInputType.text,
-            maxLines: 1,
-            onChanged: (query) => _streamController.add(query),
-            style: TextStyle(
-              color: Colors.white,
-            ),
-            decoration: InputDecoration(
-              prefixIcon: Padding(
-                padding: const EdgeInsets.only(right: 8.0),
-                child: Icon(Icons.search),
-              ),
-              hintText: 'Search image...',
-              border: UnderlineInputBorder(),
-            ),
-          ),
-          opacity: _opacityAnim,
-        );
-
-        _opacityController.reset();
-        _isSearching = true;
-        _opacityController.forward();
-      });
-    } else {
-      _handleCloseSearch();
-    }
-  }
-
-  Future<Null> _handleCloseSearch() {
-    return _opacityController
-        .reverse(from: _opacityController.upperBound)
-        .whenComplete(() {
-      setState(() {
-        _isSearching = false;
-        _appBarTitle = Text(nav[_selectedIndex]['title']);
-        _actionIcon = Icon(Icons.search, color: Colors.white);
-      });
-    });
-  }
-
-  Stream<SearchImageState> _searchImage(String value) async* {
-    debugPrint('Value = $value');
-    final Stream<QuerySnapshot> stream = value.isEmpty
-        ? _imageCollection.snapshots()
-        : _imageCollection
-            .orderBy('name')
-            .startAt([value]).endAt(['$value' + '\u{f8ff}']).snapshots();
-    yield LoadingState();
-    try {
-      await for (var result in stream
-          .map(utils.mapper)
-          .map<SearchImageState>((images) => SuccessState(images))) {
-        yield result;
-      }
-    } catch (e) {
-      yield ErrorState(e);
-    }
   }
 
   Widget _buildSearchList(BuildContext context) {
-    return FadeTransition(
-      child: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).backgroundColor,
-        ),
-        child: _buildStreamBuilder(),
+    return Container(
+      decoration: BoxDecoration(
+        color: Theme.of(context).backgroundColor,
       ),
-      opacity: _opacityAnim,
+      child: StreamBuilder<SearchImageState>(
+        stream: _searchState$,
+        builder:
+            (BuildContext context, AsyncSnapshot<SearchImageState> snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: Text(
+                'Search something...',
+                style: Theme.of(context).textTheme.subhead,
+              ),
+            );
+          }
+
+          final data = snapshot.data;
+          debugPrint('DEBUG $data');
+
+          if (data is ErrorState) {
+            return Center(
+              child: Text(
+                data.error.toString(),
+                style: Theme.of(context).textTheme.subhead,
+              ),
+            );
+          }
+
+          if (data is LoadingState) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          if (data is SuccessState) {
+            final images = data.images;
+            debugPrint('Length: ${images.length}');
+            return Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text('Found ${images.length} results'),
+                ),
+                Expanded(
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 2.0,
+                      mainAxisSpacing: 2.0,
+                      childAspectRatio: 9 / 16,
+                    ),
+                    itemBuilder: (BuildContext context, int index) {
+                      return ImageItem(images[index]);
+                    },
+                    itemCount: images.length,
+                  ),
+                ),
+              ],
+            );
+          }
+
+          return null;
+        },
+      ),
     );
   }
 
-  Widget _buildStreamBuilder() {
-    return StreamBuilder<SearchImageState>(
-      stream: _searchStream.distinct(),
-      builder:
-          (BuildContext context, AsyncSnapshot<SearchImageState> snapshot) {
-        if (!snapshot.hasData) {
-          return Center(
-            child: Text(
-              'Search somthing...',
-              style: Theme.of(context).textTheme.subhead,
+  static Future<bool> _onWillPop(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Exit app'),
+          content: Text('Do you want to exit app?'),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('No'),
+              onPressed: () => Navigator.pop(context, false),
             ),
-          );
-        }
-
-        final data = snapshot.data;
-        debugPrint('DEBUG $data');
-
-        if (data is ErrorState) {
-          return Center(
-            child: Text(
-              data.error.toString(),
-              style: Theme.of(context).textTheme.subhead,
+            FlatButton(
+              child: Text('Yes'),
+              onPressed: () => Navigator.pop(context, true),
             ),
-          );
-        }
-
-        if (data is LoadingState) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-
-        if (data is SuccessState) {
-          final images = data.images;
-          debugPrint('Length: ${images.length}');
-          return Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Text('Found ${images.length} results'),
-              ),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    crossAxisSpacing: 2.0,
-                    mainAxisSpacing: 2.0,
-                    childAspectRatio: 9 / 16,
-                  ),
-                  itemBuilder: (BuildContext context, int index) {
-                    return ImageItem(images[index]);
-                  },
-                  itemCount: images.length,
-                ),
-              ),
-            ],
-          );
-        }
-
-        return null;
+          ],
+        );
       },
     );
   }
+}
 
-  Future<bool> _onWillPop(BuildContext context) {
-    return showDialog<bool>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text('Exit app'),
-            content: Text('Do you want to exit app?'),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('No'),
-                onPressed: () => Navigator.pop(context, false),
-              ),
-              FlatButton(
-                child: Text('Yes'),
-                onPressed: () => Navigator.pop(context, true),
-              ),
-            ],
-          );
-        });
+Stream<SearchImageState> _searchImage(String searchTerm) async* {
+  print('searchTerm = $searchTerm');
+
+  yield LoadingState();
+  try {
+    final querySnapshot =
+        await Firestore.instance.collection('images').getDocuments();
+    final images = querySnapshot.documents
+        .map(utils.mapperImageModel)
+        .where(
+          (image) => searchTerm.isEmpty
+              ? true
+              : (image.name ?? '')
+                  .toLowerCase()
+                  .contains(searchTerm.toLowerCase()),
+        )
+        .toList();
+
+    yield SuccessState(images);
+  } catch (e) {
+    yield ErrorState(e);
   }
 }

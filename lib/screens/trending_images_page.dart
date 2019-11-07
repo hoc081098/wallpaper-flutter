@@ -29,22 +29,40 @@ String trendingToFieldName(Trending trending) {
   return '';
 }
 
-class TrendingPage extends StatelessWidget {
-  final _selected = BehaviorSubject<Trending>.seeded(Trending.downloadCount);
-  final imagesCollection = Firestore.instance.collection('images');
+class TrendingPage extends StatefulWidget {
+  @override
+  _TrendingPageState createState() => _TrendingPageState();
+}
+
+class _TrendingPageState extends State<TrendingPage> {
+  final selectedS = BehaviorSubject<Trending>.seeded(Trending.downloadCount);
+  ValueConnectableObservable<List<ImageModel>> images$;
+  StreamSubscription subscription;
+
+  @override
+  void initState() {
+    super.initState();
+    images$ = selectedS.distinct().switchMap(stream).publishValueSeeded(null);
+    subscription = images$.connect();
+  }
+
+  @override
+  void dispose() {
+    subscription.cancel();
+    selectedS.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Trending images'),
+        title: Text('Trendings'),
         actions: _buildActions(),
       ),
       body: Container(
         color: Theme.of(context).backgroundColor,
-        child: StaggeredImageList(
-          _selected.distinct().switchMap(stream),
-        ),
+        child: StaggeredImageList(images$),
       ),
     );
   }
@@ -52,7 +70,7 @@ class TrendingPage extends StatelessWidget {
   List<Widget> _buildActions() {
     return <Widget>[
       StreamBuilder(
-        stream: _selected.distinct(),
+        stream: selectedS,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           return DropdownButton<Trending>(
             items: Trending.values.map((e) {
@@ -62,15 +80,16 @@ class TrendingPage extends StatelessWidget {
               );
             }).toList(),
             value: snapshot.data,
-            onChanged: (newValue) => _selected.add(newValue),
+            onChanged: selectedS.add,
           );
         },
       ),
     ];
   }
 
-  Stream<List<ImageModel>> stream(Trending selected) {
-    return imagesCollection
+  static Stream<List<ImageModel>> stream(Trending selected) {
+    return Firestore.instance
+        .collection('images')
         .orderBy(trendingToFieldName(selected), descending: true)
         .limit(15)
         .snapshots()
