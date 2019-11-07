@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -19,16 +20,19 @@ class _DownloadedPageState extends State<DownloadedPage> {
   static final dateFormatYMd = DateFormat.yMd();
 
   _DownloadedBloc bloc;
+  StreamSubscription subscription;
 
   @override
   void initState() {
     super.initState();
     bloc = _DownloadedBloc();
+    subscription = bloc.event$.listen(_handleEvent);
     bloc.fetch();
   }
 
   @override
   void dispose() {
+    subscription.cancel();
     bloc.dispose();
     super.dispose();
   }
@@ -46,6 +50,19 @@ class _DownloadedPageState extends State<DownloadedPage> {
             if (data == null) {
               return Center(
                 child: CircularProgressIndicator(),
+              );
+            }
+
+            if (data.isEmpty) {
+              return Container(
+                padding: const EdgeInsets.all(8.0),
+                child: Center(
+                  child: Text(
+                    'Your downloaded images is empty',
+                    style: Theme.of(context).textTheme.title,
+                  ),
+                ),
+                color: Theme.of(context).backgroundColor,
               );
             }
 
@@ -97,7 +114,7 @@ class _DownloadedPageState extends State<DownloadedPage> {
                     trailing: IconButton(
                       icon: Icon(Icons.close),
                       tooltip: 'Delete',
-                      onPressed: () {},
+                      onPressed: () => showAlertDeleteImage(item),
                     ),
                   );
                 }
@@ -108,6 +125,43 @@ class _DownloadedPageState extends State<DownloadedPage> {
           }),
     );
   }
+
+  void showAlertDeleteImage(_ImageItem item) async {
+    final delete = await showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('Delete'),
+          content: Text('Delete image. This action cannot be undone!'),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () => Navigator.pop(context, false),
+              child: Text('Cancel'),
+            ),
+            FlatButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+    if (delete ?? false) {
+      bloc.delete(item);
+    }
+  }
+
+  void _handleEvent(_Event event) {
+    if (event is DeletedImage) {
+      _showSnackBar('Deleted ${event.item.name} successfully');
+    }
+    if (event is DeleteImageError) {
+      _showSnackBar('Error when deleting ${event.item.name}');
+    }
+  }
+
+  _showSnackBar(String message) =>
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
 }
 
 ///
@@ -136,21 +190,42 @@ class _HeaderItem implements _ListItem {
   _HeaderItem(this.date);
 }
 
+abstract class _Event {}
+
+class DeletedImage implements _Event {
+  final _ImageItem item;
+
+  DeletedImage(this.item);
+}
+
+class DeleteImageError implements _Event {
+  final _ImageItem item;
+  final error;
+
+  DeleteImageError(this.item, this.error);
+}
+
 class _DownloadedBloc {
   final void Function() fetch;
+  final void Function(_ImageItem item) delete;
 
   final ValueObservable<List<_ListItem>> listItems$;
+  final Stream<_Event> event$;
 
   final void Function() dispose;
 
   _DownloadedBloc._(
     this.fetch,
+    this.delete,
     this.listItems$,
+    this.event$,
     this.dispose,
   );
 
   factory _DownloadedBloc() {
+    // ignore_for_file: close_sinks
     final fetchS = PublishSubject<void>();
+    final deleteImageS = PublishSubject<_ImageItem>();
 
     ///
     ///
@@ -183,17 +258,37 @@ class _DownloadedBloc {
         .map(_groupByDate)
         .publishValueSeeded(null);
 
-    final connect = listItems$.connect();
+    final event$ = deleteImageS.groupBy((item) => item.id).flatMap((group$) {
+      return group$.throttleTime(const Duration(milliseconds: 500)).exhaustMap(
+        (item) async* {
+          try {
+            await item.imageFile.delete();
+            await ImageDB.getInstance().deleteDownloadedImageById(id: item.id);
+            yield DeletedImage(item);
+            fetchS.add(null);
+          } catch (e) {
+            yield DeleteImageError(item, e);
+          }
+        },
+      );
+    }).publish();
+
+    final subscriptions = [
+      listItems$.connect(),
+      event$.connect(),
+    ];
 
     ///
     ///
     ///
     return _DownloadedBloc._(
       () => fetchS.add(null),
+      deleteImageS.add,
       listItems$,
+      event$,
       () {
-        fetchS.close();
-        connect.cancel();
+        [fetchS, deleteImageS].forEach((s) => s.close());
+        subscriptions.forEach((s) => s.cancel());
       },
     );
   }

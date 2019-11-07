@@ -248,7 +248,7 @@ class ImageDB {
     return id != -1;
   }
 
-  Future<bool> deleteDownloadedImageById({@required int id}) async {
+  Future<bool> deleteDownloadedImageById({@required String id}) async {
     final dbClient = await db;
     final rows = await dbClient.delete(
       tableDownloads,
