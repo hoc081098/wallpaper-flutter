@@ -1,4 +1,4 @@
-# wallpaper
+# wallpaper-flutter
 
  - Simple wallpaper flutter
 
@@ -8,7 +8,7 @@
 
 
 
-## Screenshots
+# Screenshots
 
 |                                     |                                     |                                     |                               |
 |                    :---:            |                :---:                |                   :---:             |                :---:          |
@@ -16,12 +16,12 @@
 | ![](screenshots/Screenshot05.png) | ![](screenshots/Screenshot06.png) | ![](screenshots/Screenshot07.png) | ![](screenshots/Screenshot08.png) |
 | ![](screenshots/Screenshot09.png) | ![](screenshots/Screenshot10.png) | ![](screenshots/Screenshot11.png) | |
  
- ## Getting Started
+# Getting Started
 
 For help getting started with Flutter, view our online
 [documentation](https://flutter.io/).
  
-## Develop
+# Develop
 
 Make sure finish [install Flutter](https://flutter.io/get-started/install/) successfully
 
@@ -29,7 +29,7 @@ Make sure finish [install Flutter](https://flutter.io/get-started/install/) succ
 2. Install all the packages by: `flutter packages get`
 3. Run app on your simulator by: `flutter run`
 
-## Packages in using
+# Packages in using
 * cloud_firestore
 * flutter_staggered_grid_view
 * image_picker
