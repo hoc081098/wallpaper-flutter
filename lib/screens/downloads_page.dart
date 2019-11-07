@@ -9,6 +9,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:tuple/tuple.dart';
 import 'package:wallpaper/data/database.dart';
 import 'package:wallpaper/data/models/downloaded_image.dart';
+import 'package:wallpaper/screens/downloaded_image_detail_page.dart';
 
 class DownloadedPage extends StatefulWidget {
   @override
@@ -101,7 +102,10 @@ class _DownloadedPageState extends State<DownloadedPage> {
 
                 if (item is _ImageItem) {
                   return ListTile(
-                    leading: Image.file(item.imageFile),
+                    leading: Image.file(
+                      item.imageFile,
+                      fit: BoxFit.cover,
+                    ),
                     title: Text(
                       item.name,
                       maxLines: 1,
@@ -116,6 +120,25 @@ class _DownloadedPageState extends State<DownloadedPage> {
                       tooltip: 'Delete',
                       onPressed: () => showAlertDeleteImage(item),
                     ),
+                    onTap: () async {
+                      final shouldReload = await Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => DownloadedImageDetailPage(
+                            imageDetail: ImageDetail(
+                              id: item.id,
+                              name: item.name,
+                              imageFile: item.imageFile,
+                              createdAt: item.createdAt,
+                            ),
+                          ),
+                        ),
+                      );
+
+                      if (shouldReload == true) {
+                        bloc.fetch();
+                      }
+                    },
                   );
                 }
 
