@@ -33,11 +33,14 @@ Make sure finish [install Flutter](https://flutter.io/get-started/install/) succ
 * cloud_firestore
 * flutter_staggered_grid_view
 * image_picker
-* zoomable_image
 * path_provider
-* simple_permissions
+* permission_handler
 * sqflite
 * firebase_storage
 * uuid
 * rxdart
 * intl
+* http
+* cached_network_image
+* pedantic
+* tuple
