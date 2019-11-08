@@ -13,6 +13,7 @@ import 'package:pedantic/pedantic.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wallpaper/constants.dart';
 import 'package:wallpaper/data/models/image_category_model.dart';
+import 'package:wallpaper/utils.dart';
 
 class UploadPage extends StatefulWidget {
   @override
@@ -67,9 +68,7 @@ class _UploadPageState extends State<UploadPage> {
               _buildButtons(),
             ],
           ),
-          color: Theme
-              .of(context)
-              .backgroundColor,
+          color: Theme.of(context).backgroundColor,
         ),
       ),
     );
@@ -104,10 +103,7 @@ class _UploadPageState extends State<UploadPage> {
             child: Material(
               color: Colors.transparent,
               child: InkWell(
-                splashColor: Theme
-                    .of(context)
-                    .accentColor
-                    .withOpacity(0.5),
+                splashColor: Theme.of(context).accentColor.withOpacity(0.5),
                 onTap: _chooseImage,
               ),
             ),
@@ -251,30 +247,7 @@ class _UploadPageState extends State<UploadPage> {
     if (!_validate()) {
       return;
     }
-    unawaited(
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return Dialog(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 32.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: const <Widget>[
-                  CircularProgressIndicator(),
-                  Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                    child: Text('Uploading...'),
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      ),
-    );
+    showProgressDialog(context, 'Uploading...');
 
     try {
       //upload file

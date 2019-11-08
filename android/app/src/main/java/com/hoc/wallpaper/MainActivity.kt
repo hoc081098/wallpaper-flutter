@@ -1,19 +1,22 @@
 package com.hoc.wallpaper
 
 import android.app.WallpaperManager
+import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Bitmap.CompressFormat
 import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.graphics.drawable.Drawable
 import android.media.MediaScannerConnection
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import android.widget.Toast
-import com.facebook.CallbackManager.Factory
+import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.share.Sharer
@@ -27,77 +30,15 @@ import io.flutter.app.FlutterActivity
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.Result
 import io.flutter.plugins.GeneratedPluginRegistrant
+import kotlinx.coroutines.*
 import java.io.ByteArrayOutputStream
 import java.io.File
+import kotlin.coroutines.resume
+import kotlin.coroutines.suspendCoroutine
 
 class MainActivity : FlutterActivity() {
-  private val mainHandler = Handler(Looper.getMainLooper())
-
-  private val callback = object : FacebookCallback<Sharer.Result?> {
-    override fun onSuccess(r: Sharer.Result?) {
-      Toast.makeText(
-        this@MainActivity,
-        "Share image successfully",
-        Toast.LENGTH_SHORT
-      ).show()
-    }
-
-    override fun onCancel() {
-      Toast.makeText(
-        this@MainActivity,
-        "Share cancelled",
-        Toast.LENGTH_SHORT
-      ).show()
-    }
-
-    override fun onError(error: FacebookException?) {
-      Toast.makeText(
-        this@MainActivity,
-        "Error " + error?.message,
-        Toast.LENGTH_SHORT
-      ).show()
-    }
-  }
-
-  private val target = object : Target {
-    override fun onBitmapLoaded(bitmap: Bitmap?, from: LoadedFrom?) {
-      Log.d("MY_TAG", "onBitmapLoaded")
-
-      val photo = Builder()
-        .setBitmap(bitmap)
-        .build()
-
-      val content = SharePhotoContent.Builder()
-        .addPhoto(photo)
-        .build()
-
-      val shareDialog = ShareDialog(this@MainActivity)
-        .apply { registerCallback(Factory.create(), callback) }
-
-      if (shareDialog.canShow(content)) {
-        Log.d("MY_TAG", "can show and show")
-        shareDialog.show(content)
-      } else {
-        Log.d("MY_TAG", "can not show")
-      }
-    }
-
-    override fun onBitmapFailed(
-      e: Exception?,
-      errorDrawable: Drawable?
-    ) {
-      Log.d("MY_TAG", "onBitmapFailed $e")
-      Toast.makeText(
-        this@MainActivity,
-        "Loaded image failed",
-        Toast.LENGTH_SHORT
-      ).show()
-    }
-
-    override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-      Log.d("MY_TAG", "onPrepareLoad")
-    }
-  }
+  private val coroutineScope = MainScope()
+  private val callbackManager = CallbackManager.Factory.create()
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -138,9 +79,14 @@ class MainActivity : FlutterActivity() {
     GeneratedPluginRegistrant.registerWith(this)
   }
 
+  override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    super.onActivityResult(requestCode, resultCode, data)
+    callbackManager.onActivityResult(requestCode, resultCode, data)
+  }
+
   override fun onDestroy() {
     super.onDestroy()
-    Picasso.get().cancelRequest(target)
+    coroutineScope.cancel()
   }
 
   private fun resizeImage(
@@ -159,56 +105,136 @@ class MainActivity : FlutterActivity() {
       return result.error("error", "bytes cannot be null", null)
     }
 
-    val byteArray = ByteArrayOutputStream()
-      .also {
-        getResizedBitmap(
-          BitmapFactory.decodeByteArray(bytes, 0, bytes.size),
-          width,
-          height
-        ).compress(CompressFormat.PNG, 100, it)
+    coroutineScope.launch {
+      val byteArray = withContext(Dispatchers.IO) {
+        ByteArrayOutputStream()
+          .also {
+            getResizedBitmap(
+              BitmapFactory.decodeByteArray(bytes, 0, bytes.size),
+              width,
+              height
+            ).compress(CompressFormat.PNG, 100, it)
+          }
+          .toByteArray()
       }
-      .toByteArray()
-
-    result.success(byteArray)
+      result.success(byteArray)
+    }
   }
 
   private fun shareImageToFacebook(imageUrl: String?, result: Result) {
     if (imageUrl == null) {
-      return result.error("error", "Imageurl cannot be null", null)
+      return result.error("error", "imageUrl cannot be null", null)
     }
 
-    Log.d("MY_TAG", "imageUrl = $imageUrl")
-    Picasso.get().load(imageUrl).into(target)
+    Log.i(TAG, "imageUrl = $imageUrl")
+
+    Picasso
+      .get()
+      .load(imageUrl)
+      .into(object : Target {
+        override fun onBitmapLoaded(bitmap: Bitmap?, from: LoadedFrom?) {
+          Log.i(TAG, "onBitmapLoaded")
+
+          val photo = Builder()
+            .setBitmap(bitmap)
+            .build()
+
+          val content = SharePhotoContent.Builder()
+            .addPhoto(photo)
+            .build()
+
+          val shareDialog = ShareDialog(this@MainActivity)
+            .apply {
+              registerCallback(
+                callbackManager,
+                object : FacebookCallback<Sharer.Result?> {
+                  override fun onSuccess(r: Sharer.Result?) {
+                    Toast.makeText(
+                      this@MainActivity.applicationContext,
+                      "Share image successfully",
+                      Toast.LENGTH_SHORT
+                    ).show()
+
+                    Log.i(TAG, "Share image successfully")
+                  }
+
+                  override fun onCancel() {
+                    Toast.makeText(
+                      this@MainActivity.applicationContext,
+                      "Share cancelled",
+                      Toast.LENGTH_SHORT
+                    ).show()
+
+                    Log.i(TAG, "Share cancelled")
+                  }
+
+                  override fun onError(error: FacebookException?) {
+                    Toast.makeText(
+                      this@MainActivity.applicationContext,
+                      "Error ${error?.message}",
+                      Toast.LENGTH_SHORT
+                    ).show()
+
+                    Log.i(TAG, "Error ${error?.message}")
+                  }
+                }
+              )
+            }
+
+          if (shareDialog.canShow(content)) {
+            shareDialog.show(content)
+
+            Log.i(TAG, "can show and show")
+            result.success(null)
+          } else {
+            Log.i(TAG, "can not show")
+            result.error("error", "Cannot show share dialog", null)
+          }
+        }
+
+        override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
+          Log.i(TAG, "onBitmapFailed $e")
+
+          Toast.makeText(
+            this@MainActivity,
+            "Loaded image failed",
+            Toast.LENGTH_SHORT
+          ).show()
+
+          result.error("error", "Loaded image failed", null)
+        }
+
+        override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+          Log.i(TAG, "onPrepareLoad")
+        }
+      })
   }
 
   private fun scanImageFile(imagePath: List<Any>?, result: Result) {
-    try {
-      if (imagePath == null) {
-        return result.error("error", "Arguments must be a list and not null", null)
+    if (imagePath == null) {
+      return result.error("error", "Arguments must be a list and not null", null)
+    }
+
+    if (!isExternalStorageReadable) {
+      return result.error("error", "External storage is unavailable", null)
+    }
+
+    val absolutePath = getExternalFilesDir(null)!!.absolutePath
+    val imageFilePath = absolutePath + File.separator + joinPath(imagePath)
+    Log.i(TAG, "Start scan: $imageFilePath")
+
+    coroutineScope.launch {
+      try {
+        val (path, uri) = withContext(Dispatchers.IO) { scanFile(imageFilePath) }
+
+        Log.i(TAG, "Scan result Path: $path")
+        Log.i(TAG, "Scan result Uri: $uri")
+
+        result.success("Scan completed")
+      } catch (e: Exception) {
+        Log.i(TAG, "Scan file error: $e")
+        result.error("error", e.message, null)
       }
-
-      if (!isExternalStorageReadable) {
-        return result.error("error", "External storage is unavailable", null)
-      }
-
-      val absolutePath = getExternalFilesDir(null)!!.absolutePath
-      val imageFilePath = absolutePath + File.separator + joinPath(imagePath)
-      Log.d("MY_TAG", "Start scan: $imageFilePath")
-
-      MediaScannerConnection.scanFile(
-        this,
-        arrayOf(imageFilePath),
-        null
-      ) { path, uri ->
-
-        Log.d("MY_TAG", "Scan result Path: $path")
-        Log.d("MY_TAG", "Scan result Uri: $uri")
-
-        mainHandler.post { result.success("Scan completed") }
-      }
-
-    } catch (e: Exception) {
-      result.error("error", e.message, null)
     }
   }
 
@@ -224,22 +250,27 @@ class MainActivity : FlutterActivity() {
 
       val absolutePath = getExternalFilesDir(null)!!.absolutePath
       val imageFilePath = absolutePath + File.separator + joinPath(path)
-      val bitmap = BitmapFactory.decodeFile(imageFilePath)
 
-      WallpaperManager.getInstance(this).setBitmap(bitmap)
+      coroutineScope.launch {
+        withContext(Dispatchers.IO) {
+          val bitmap = BitmapFactory.decodeFile(imageFilePath)
+          WallpaperManager.getInstance(this@MainActivity).setBitmap(bitmap)
+        }
+        result.success("Set wallpaper successfully")
+      }
 
-      result.success("Set wallpaper successfully")
     } catch (e: Exception) {
       result.error("error", e.message, null)
     }
   }
 
-  private companion object {
+  companion object {
     const val CHANNEL = "my_flutter_wallpaper"
     const val SET_WALLPAPER = "setWallpaper"
     const val SCAN_FILE = "scanFile"
     const val SHARE_IMAGE_TO_FACEBOOK = "shareImageToFacebook"
     const val RESIZE_IMAGE = "resizeImage"
+    const val TAG = "flutter"
   }
 }
 
@@ -268,3 +299,16 @@ private val isExternalStorageReadable
   get() = Environment.getExternalStorageState().let { state ->
     Environment.MEDIA_MOUNTED == state || Environment.MEDIA_MOUNTED_READ_ONLY == state
   }
+
+
+private suspend fun Context.scanFile(imageFilePath: String): Pair<String?, Uri?> {
+  return suspendCoroutine { continuation ->
+    MediaScannerConnection.scanFile(
+      this,
+      arrayOf(imageFilePath),
+      null
+    ) { path, uri ->
+      continuation.resume(path to uri)
+    }
+  }
+}

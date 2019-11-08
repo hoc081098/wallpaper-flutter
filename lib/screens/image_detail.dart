@@ -229,13 +229,23 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     );
   }
 
-  _shareImageToFacebook() {
-    final url = imageModel.imageUrl;
-    methodChannel.invokeMethod(shareImageToFacebook, url);
+  _shareImageToFacebook() async {
+    showProgressDialog(context, 'Loading...');
+    try {
+      await methodChannel.invokeMethod(
+        shareImageToFacebook,
+        imageModel.imageUrl,
+      );
+    } catch (e) {
+      print('Share to fb error: $e');
+    } finally {
+      print('Share to fb done');
+      Navigator.pop(context);
+    }
   }
 
   _showSnackBar(String text,
-      {Duration duration = const Duration(seconds: 1, milliseconds: 500)}) {
+      {Duration duration = const Duration(seconds: 1)}) {
     return scaffoldKey.currentState
         ?.showSnackBar(SnackBar(content: Text(text), duration: duration));
   }
@@ -326,10 +336,13 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
       // call scanFile method, to show image in gallery
       unawaited(
-        methodChannel.invokeMethod(
-          scanFile,
-          <String>['flutterImages', '${imageModel.id}.png'],
-        ),
+        methodChannel
+            .invokeMethod(
+              scanFile,
+              <String>['flutterImages', '${imageModel.id}.png'],
+            )
+            .then((result) => print('Scan file: $result'))
+            .catchError((e) => print('Scan file error: $e')),
       );
 
       // increase download count
@@ -446,11 +459,16 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       if (targetPlatform == TargetPlatform.android) {
         // set image as wallpaper
         if (await _showDialogSetImageAsWallpaper()) {
-          final String res = await methodChannel.invokeMethod(
-            setWallpaper,
-            <String>['flutterImages', '${imageModel.id}.png'],
-          );
-          _showSnackBar(res);
+          showProgressDialog(context, 'Please wait...');
+          try {
+            final String res = await methodChannel.invokeMethod(
+              setWallpaper,
+              <String>['flutterImages', '${imageModel.id}.png'],
+            );
+            _showSnackBar(res);
+          } finally {
+            Navigator.pop(context);
+          }
         }
       } else if (targetPlatform == TargetPlatform.iOS) {
         await methodChannel.invokeMethod(
