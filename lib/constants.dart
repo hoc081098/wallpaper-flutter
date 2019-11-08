@@ -1,6 +1,5 @@
 import 'package:flutter/services.dart';
 
-/// only Android platform, because i don't have MacOS :)
 const String channel = 'my_flutter_wallpaper';
 const methodChannel = MethodChannel(channel);
 
