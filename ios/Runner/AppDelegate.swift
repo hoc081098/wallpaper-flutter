@@ -86,10 +86,12 @@ let RESIZE_IMAGE = "resizeImage"
         let shareDialog = ShareDialog.init(fromViewController: vc, content: shareContent, delegate: self)
         if shareDialog.canShow {
             shareDialog.show()
+            result("Show share dialog")
         } else {
             let alertVC = UIAlertController.init(title: "Error", message: "It looks like you don't have the Facebook mobile app on your phone", preferredStyle: .alert)
             alertVC.addAction(.init(title: "OK", style: .default, handler: nil))
             vc.present(alertVC, animated: true, completion: nil)
+            result(FlutterError(code: "error", message: "Cannot show share dialog", details: nil))
         }
     }
 
