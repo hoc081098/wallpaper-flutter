@@ -11,10 +11,12 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="Update Android side">
+    <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="Build apk">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/constants.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,20 +29,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_4_API_28" />
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lib/constants.dart">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="19">
-              <caret line="1" selection-start-line="1" selection-end-line="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -65,18 +53,6 @@
       </map>
     </option>
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/lib/utils.dart" />
-        <option value="$PROJECT_DIR$/lib/screens/upload_page.dart" />
-        <option value="$PROJECT_DIR$/android/app/build.gradle" />
-        <option value="$PROJECT_DIR$/lib/screens/image_detail.dart" />
-        <option value="$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.kt" />
-        <option value="$PROJECT_DIR$/lib/constants.dart" />
-      </list>
-    </option>
-  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-47" />
     <option name="y" value="261" />
@@ -87,42 +63,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectReloadState">
     <option name="STATE" value="1" />
-  </component>
-  <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView">
-        <subPane>
-          <expand>
-            <path>
-              <item name="wallpaper-flutter" type="1abcf292:AndroidViewProjectNode" />
-              <item name="wallpaper-flutter" type="e9137016:NonAndroidModuleNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="wallpaper-flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaper-flutter" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="wallpaper-flutter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="wallpaper-flutter" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -163,22 +103,6 @@
     </option>
   </component>
   <component name="RunManager">
-    <configuration default="true" type="JUnit" factoryName="JUnit">
-      <option name="TEST_OBJECT" value="class" />
-      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
-      <option name="PROGRAM_PARAMETERS" />
-      <predefined_log_file enabled="true" id="idea.log" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Applet">
       <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
       <method v="2">
@@ -195,11 +119,27 @@
       <option name="filePath" value="$PROJECT_DIR$/lib/main.dart" />
       <method v="2" />
     </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="TestNG">
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
       <properties />
       <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+      <option name="PROGRAM_PARAMETERS" />
+      <predefined_log_file enabled="true" id="idea.log" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -331,7 +271,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573227869858</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Build apk">
+      <created>1573228353007</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1573228353007</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TodoView">
@@ -343,56 +290,13 @@
       <is-autoscroll-to-source value="true" />
     </todo-panel>
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <layout>
-      <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info content_ui="combo" id="Project" order="1" visible="true" weight="0.1785174" />
-      <window_info id="Structure" order="2" side_tool="true" />
-      <window_info id="Build Variants" order="3" side_tool="true" />
-      <window_info id="Image Layers" order="4" />
-      <window_info id="Designer" order="5" />
-      <window_info id="Resources Explorer" order="6" />
-      <window_info id="Capture Tool" order="7" />
-      <window_info id="Favorites" order="8" side_tool="true" />
-      <window_info anchor="bottom" id="Run" sideWeight="0.49924356" weight="0.31260228" />
-      <window_info anchor="bottom" id="Dart Analysis" />
-      <window_info anchor="bottom" id="Debug" />
-      <window_info anchor="bottom" id="Flutter Performance" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="0" visible="true" weight="0.5450082" />
-      <window_info anchor="bottom" id="Logcat" order="1" weight="0.6661211" />
-      <window_info anchor="bottom" id="TODO" order="2" />
-      <window_info anchor="bottom" id="Android Profiler" order="3" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="4" weight="0.5188216" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.50075644" side_tool="true" weight="0.3289689" />
-      <window_info anchor="right" id="Flutter Inspector" />
-      <window_info anchor="right" id="Flutter Outline" />
-      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
-      <window_info anchor="right" id="Capture Analysis" order="1" />
-      <window_info anchor="right" id="Theme Preview" order="2" />
-      <window_info anchor="right" id="Palette&#9;" order="3" />
-    </layout>
-  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
-              <option name="COLUMN_ORDER">
-                <list>
-                  <option value="0" />
-                  <option value="1" />
-                  <option value="2" />
-                  <option value="3" />
-                </list>
-              </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -427,234 +331,8 @@
     <MESSAGE value="up" />
     <MESSAGE value="Release apk" />
     <MESSAGE value="Update Android side" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update Android side" />
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/android/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/app/tmp/kotlin-classes/release/com/hoc/wallpaper/MainActivityKt.class">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/app/tmp/kotlin-classes/release/com/hoc/wallpaper/MainActivity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="19" selection-start-line="5" selection-start-column="19" selection-end-line="5" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screens/trending_images_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-57">
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/analysis_options.yaml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1292" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/wallpaper.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screens/upload_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
-          <caret line="249" column="46" selection-start-line="249" selection-start-column="46" selection-end-line="249" selection-end-column="46" />
-          <folding>
-            <element signature="e#1279#1659#0" />
-            <element signature="e#9511#14629#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/android/app/src/main/java/com/hoc/wallpaper/MainActivity.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="148" column="16" selection-start-line="148" selection-start-column="16" selection-end-line="148" selection-end-column="16" />
-          <folding>
-            <element signature="e#4120#4833#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screens/image_detail.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="741">
-          <caret line="358" selection-start-line="358" selection-end-line="358" />
-          <folding>
-            <element signature="e#874#1059#0" />
-            <element signature="e#1178#1188#0" />
-            <element signature="e#1526#2768#0" />
-            <element signature="e#1594#1620#0" />
-            <element signature="e#1717#1820#0" />
-            <element signature="e#2048#2211#0" />
-            <element signature="e#2144#2204#0" />
-            <element signature="e#2699#2756#0" />
-            <element signature="e#2799#2990#0" />
-            <element signature="e#2940#2964#0" />
-            <element signature="e#3041#3745#0" />
-            <element signature="e#3062#3740#0" />
-            <element signature="e#3085#3733#0" />
-            <element signature="e#3136#3724#0" />
-            <element signature="e#3173#3526#0" />
-            <element signature="e#3211#3513#0" />
-            <element signature="e#3268#3277#0" />
-            <element signature="e#3336#3345#0" />
-            <element signature="e#3550#3713#0" />
-            <element signature="e#3795#5849#0" />
-            <element signature="e#3841#4424#0" />
-            <element signature="e#4073#4114#0" />
-            <element signature="e#4182#4408#0" />
-            <element signature="e#4204#4257#0" />
-            <element signature="e#4459#4714#0" />
-            <element signature="e#4483#4707#0" />
-            <element signature="e#4524#4529#0" />
-            <element signature="e#4556#4698#0" />
-            <element signature="e#4578#4612#0" />
-            <element signature="e#4665#4674#0" />
-            <element signature="e#4746#4931#0" />
-            <element signature="e#4765#4924#0" />
-            <element signature="e#4878#4915#0" />
-            <element signature="e#4955#5844#0" />
-            <element signature="e#4979#5786#0" />
-            <element signature="e#4999#5336#0" />
-            <element signature="e#5076#5088#0" />
-            <element signature="e#5166#5312#0" />
-            <element signature="e#5192#5205#0" />
-            <element signature="e#5412#5436#0" />
-            <element signature="e#5471#5777#0" />
-            <element signature="e#5507#5766#0" />
-            <element signature="e#5880#6702#0" />
-            <element signature="e#5899#6697#0" />
-            <element signature="e#5918#6690#0" />
-            <element signature="e#5981#6681#0" />
-            <element signature="e#6103#6670#0" />
-            <element signature="e#6179#6657#0" />
-            <element signature="e#6246#6405#0" />
-            <element signature="e#6284#6386#0" />
-            <element signature="e#6438#6626#0" />
-            <element signature="e#6471#6607#0" />
-            <element signature="e#6525#6586#0" />
-            <element signature="e#6730#7047#0" />
-            <element signature="e#7027#7036#0" />
-            <element signature="e#7222#7263#0" />
-            <element signature="e#7236#7242#0" />
-            <element signature="e#7297#10545#0" />
-            <element signature="e#7393#7402#0" />
-            <element signature="e#7466#8048#0" />
-            <element signature="e#7717#8040#0" />
-            <element signature="e#7913#8030#0" />
-            <element signature="e#8662#8672#0" />
-            <element signature="e#8703#8739#0" />
-            <element signature="e#8909#8918#0" />
-            <element signature="e#9213#9321#0" />
-            <element signature="e#9483#9750#0" />
-            <element signature="e#9569#9730#0" />
-            <element signature="e#10562#10633#0" />
-            <element signature="e#10581#10629#0" />
-            <element signature="e#10683#11262#0" />
-            <element signature="e#10797#11245#0" />
-            <element signature="e#10822#10839#0" />
-            <element signature="e#10866#10898#0" />
-            <element signature="e#10955#11075#0" />
-            <element signature="e#10984#10994#0" />
-            <element signature="e#11042#11058#0" />
-            <element signature="e#11101#11217#0" />
-            <element signature="e#11149#11164#0" />
-            <element signature="e#11193#11200#0" />
-            <element signature="e#11289#12756#0" />
-            <element signature="e#11404#12751#0" />
-            <element signature="e#11425#12690#0" />
-            <element signature="e#11472#11616#0" />
-            <element signature="e#11516#11529#0" />
-            <element signature="e#11631#12670#0" />
-            <element signature="e#11750#12182#0" />
-            <element signature="e#11785#12129#0" />
-            <element signature="e#11834#11840#0" />
-            <element signature="e#11952#12054#0" />
-            <element signature="e#12105#12110#0" />
-            <element signature="e#12206#12642#0" />
-            <element signature="e#12241#12589#0" />
-            <element signature="e#12290#12296#0" />
-            <element signature="e#12407#12514#0" />
-            <element signature="e#12565#12570#0" />
-            <element signature="e#12776#14427#0" />
-            <element signature="e#12831#12840#0" />
-            <element signature="e#13445#13455#0" />
-            <element signature="e#13470#13543#0" />
-            <element signature="e#13597#14052#0" />
-            <element signature="e#13685#14044#0" />
-            <element signature="e#14012#14021#0" />
-            <element signature="e#14100#14247#0" />
-            <element signature="e#14471#14820#0" />
-            <element signature="e#14510#14815#0" />
-            <element signature="e#14692#14774#0" />
-            <element signature="e#14801#14814#0" />
-            <element signature="e#14858#15018#0" />
-            <element signature="e#15058#15390#0" />
-            <element signature="e#15438#16141#0" />
-            <element signature="e#15730#15837#0" />
-            <element signature="e#15843#15898#0" />
-            <element signature="e#15969#16030#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/main.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-342">
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screens/downloads_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-228">
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/screens/downloaded_image_detail_page.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-741">
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/utils.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="931">
-          <caret line="49" column="6" selection-start-line="49" selection-start-column="6" selection-end-line="49" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/constants.dart">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
+    <MESSAGE value="Build apk" />
+    <option name="LAST_COMMIT_MESSAGE" value="Build apk" />
   </component>
   <component name="masterDetails">
     <states>

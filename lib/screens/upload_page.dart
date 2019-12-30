@@ -9,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart' as path;
-import 'package:pedantic/pedantic.dart';
 import 'package:uuid/uuid.dart';
 import 'package:wallpaper/constants.dart';
 import 'package:wallpaper/data/models/image_category_model.dart';
