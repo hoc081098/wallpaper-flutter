@@ -73,25 +73,26 @@ class StaggeredImageList extends StatelessWidget {
           child: CachedNetworkImage(
             imageUrl: image.thumbnailUrl,
             fit: BoxFit.cover,
-            placeholder: (context, url) =>
-                Container(
-                  constraints: BoxConstraints.expand(),
-                  child: Stack(
-                    children: <Widget>[
-                      Positioned.fill(
-                        child: Image.asset(
-                          'assets/picture.png',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      Positioned.fill(
-                        child: Center(
-                          child: CircularProgressIndicator(strokeWidth: 2,),
-                        ),
-                      )
-                    ],
+            placeholder: (context, url) => Container(
+              constraints: BoxConstraints.expand(),
+              child: Stack(
+                children: <Widget>[
+                  Positioned.fill(
+                    child: Image.asset(
+                      'assets/picture.png',
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                ),
+                  Positioned.fill(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -119,25 +120,26 @@ class ImageItem extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: item.thumbnailUrl,
               fit: BoxFit.cover,
-              placeholder: (context, url) =>
-                  Container(
-                    constraints: BoxConstraints.expand(),
-                    child: Stack(
-                      children: <Widget>[
-                        Positioned.fill(
-                          child: Image.asset(
-                            'assets/picture.png',
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        Positioned.fill(
-                          child: Center(
-                            child: CircularProgressIndicator(strokeWidth: 2,),
-                          ),
-                        )
-                      ],
+              placeholder: (context, url) => Container(
+                constraints: BoxConstraints.expand(),
+                child: Stack(
+                  children: <Widget>[
+                    Positioned.fill(
+                      child: Image.asset(
+                        'assets/picture.png',
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
+                    Positioned.fill(
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
             ),
             tag: item.id,
           ),
@@ -160,8 +162,7 @@ class ImageItem extends StatelessWidget {
                 maxLines: 1,
                 textAlign: TextAlign.center,
                 overflow: TextOverflow.ellipsis,
-                style: Theme
-                    .of(context)
+                style: Theme.of(context)
                     .textTheme
                     .subhead
                     .copyWith(fontSize: 14.0),

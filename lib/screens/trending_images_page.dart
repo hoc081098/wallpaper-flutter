@@ -36,7 +36,7 @@ class TrendingPage extends StatefulWidget {
 
 class _TrendingPageState extends State<TrendingPage> {
   final selectedS = BehaviorSubject<Trending>.seeded(Trending.downloadCount);
-  ValueConnectableObservable<List<ImageModel>> images$;
+  ValueConnectableStream<List<ImageModel>> images$;
   StreamSubscription subscription;
 
   @override

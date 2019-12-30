@@ -38,7 +38,7 @@ void showProgressDialog(BuildContext context, String message) {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
-            children:  <Widget>[
+            children: <Widget>[
               const CircularProgressIndicator(),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),

@@ -232,7 +232,7 @@ class _DownloadedBloc {
   final void Function() fetch;
   final void Function(_ImageItem item) delete;
 
-  final ValueObservable<List<_ListItem>> listItems$;
+  final ValueStream<List<_ListItem>> listItems$;
   final Stream<_Event> event$;
 
   final void Function() dispose;

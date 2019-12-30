@@ -50,20 +50,19 @@ class ImageModel {
   }
 
   Map<String, String> toJson() => {
-    'id': id,
-    'name': name,
-    'imageUrl': imageUrl,
-    'thumbnailUrl': thumbnailUrl,
-    'categoryId': categoryId,
-    'uploadedTime': uploadedTime.toDate().toIso8601String(),
-    'viewTime': viewTime.toIso8601String()
-  };
+        'id': id,
+        'name': name,
+        'imageUrl': imageUrl,
+        'thumbnailUrl': thumbnailUrl,
+        'categoryId': categoryId,
+        'uploadedTime': uploadedTime.toDate().toIso8601String(),
+        'viewTime': viewTime.toIso8601String()
+      };
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is ImageModel && runtimeType == other.runtimeType &&
-              id == other.id;
+      other is ImageModel && runtimeType == other.runtimeType && id == other.id;
 
   @override
   int get hashCode => id.hashCode;

@@ -49,17 +49,16 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     isLoading = false;
     imageModel = widget.imageModel;
 
-    final imageStream = Observable(imagesCollection
+    final imageStream = imagesCollection
         .document(imageModel.id)
         .snapshots()
-        .map(mapperImageModel));
+        .map(mapperImageModel);
     subscription = imageStream.listen(_onListen);
 
     _increaseCount('viewCount', imageModel.id);
     _insertToRecent(imageModel);
 
-    subscription1 =
-        Observable.combineLatest2<ImageModel, bool, Map<String, dynamic>>(
+    subscription1 = Rx.combineLatest2<ImageModel, bool, Map<String, dynamic>>(
       imageStream,
       _isFavoriteStreamController.stream.distinct(),
       (img, isFav) => {
@@ -67,9 +66,9 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         'isFavorite': isFav,
       },
     )
-            .where((map) => map['isFavorite'])
-            .map<ImageModel>((map) => map['image'])
-            .listen((ImageModel newImage) {
+        .where((map) => map['isFavorite'])
+        .map<ImageModel>((map) => map['image'])
+        .listen((ImageModel newImage) {
       debugPrint('onListen fav $newImage');
       debugPrint('onListen fav old $imageModel');
 
@@ -244,8 +243,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     }
   }
 
-  _showSnackBar(String text,
-      {Duration duration = const Duration(seconds: 1)}) {
+  _showSnackBar(String text, {Duration duration = const Duration(seconds: 1)}) {
     return scaffoldKey.currentState
         ?.showSnackBar(SnackBar(content: Text(text), duration: duration));
   }

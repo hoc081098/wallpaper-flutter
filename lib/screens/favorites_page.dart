@@ -6,7 +6,7 @@ import 'package:wallpaper/image_list.dart';
 
 @immutable
 class FavoritesPage extends StatelessWidget {
-  final Observable<String> sortOrderStream;
+  final Stream<String> sortOrderStream;
 
   const FavoritesPage(this.sortOrderStream);
 

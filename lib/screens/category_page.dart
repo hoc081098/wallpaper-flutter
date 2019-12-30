@@ -72,14 +72,13 @@ class CategoryPage extends StatelessWidget {
               imageUrl: category.imageUrl,
               fit: BoxFit.cover,
               height: 400,
-              placeholder: (context, url) =>
-                  Container(
-                    constraints: BoxConstraints.expand(),
-                    child: Image.asset(
-                      'assets/picture.png',
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+              placeholder: (context, url) => Container(
+                constraints: BoxConstraints.expand(),
+                child: Image.asset(
+                  'assets/picture.png',
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
             Align(
               child: Container(
