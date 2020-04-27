@@ -26,7 +26,7 @@ class ImageDB {
 
   Future<Database> open() async {
     final directory = await getApplicationDocumentsDirectory();
-    final String path = join(directory.path, dbName);
+    final path = join(directory.path, dbName);
     return await openDatabase(
       path,
       version: 2,

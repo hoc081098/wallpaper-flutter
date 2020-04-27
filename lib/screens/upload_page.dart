@@ -210,7 +210,7 @@ class _UploadPageState extends State<UploadPage> {
     );
   }
 
-  _chooseImage() async {
+  void _chooseImage() async {
     _imageFile = await ImagePicker.pickImage(
       source: ImageSource.gallery,
       maxWidth: 1080.0,
@@ -220,9 +220,11 @@ class _UploadPageState extends State<UploadPage> {
     setState(() {});
   }
 
-  _showSnackBar(String text,
-      {Duration duration = const Duration(seconds: 1, milliseconds: 500)}) {
-    return scaffoldKey.currentState
+  void _showSnackBar(
+    String text, {
+    Duration duration = const Duration(seconds: 1, milliseconds: 500),
+  }) {
+    scaffoldKey.currentState
         .showSnackBar(SnackBar(content: Text(text), duration: duration));
   }
 
@@ -242,7 +244,7 @@ class _UploadPageState extends State<UploadPage> {
     return true;
   }
 
-  _uploadImage() async {
+  void _uploadImage() async {
     if (!_validate()) {
       return;
     }
@@ -307,7 +309,7 @@ class _UploadPageState extends State<UploadPage> {
     }
   }
 
-  _showDialogAddCategory() => scaffoldKey.currentState?.showBottomSheet(
+  void _showDialogAddCategory() => scaffoldKey.currentState?.showBottomSheet(
         (context) => AddCategoryBottomSheet(),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
@@ -447,7 +449,7 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
         maxLines: 1,
       );
 
-  _addCategory() async {
+  void _addCategory() async {
     if (!_validate()) return;
     _animController.forward();
 
@@ -499,7 +501,7 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
     return true;
   }
 
-  _chooseImage() async {
+  void _chooseImage() async {
     _imageFile = await ImagePicker.pickImage(
       source: ImageSource.gallery,
       maxWidth: 720.0,
@@ -508,7 +510,7 @@ class _AddCategoryState extends State<AddCategoryBottomSheet>
     setState(() {});
   }
 
-  _showMessage(String text,
+  void _showMessage(String text,
       {Duration duration =
           const Duration(seconds: 1, milliseconds: 500)}) async {
     if (mounted) setState(() => _msg = text);

@@ -194,6 +194,15 @@ class _DownloadedImageDetailPageState extends State<DownloadedImageDetailPage> {
         case TargetPlatform.iOS:
           externalDir = await getApplicationDocumentsDirectory();
           break;
+        case TargetPlatform.linux:
+          // TODO: Handle this case.
+          break;
+        case TargetPlatform.macOS:
+          // TODO: Handle this case.
+          break;
+        case TargetPlatform.windows:
+          // TODO: Handle this case.
+          break;
       }
       final filePath =
           path.join(externalDir.path, 'flutterImages', imageDetail.id + '.png');
@@ -206,7 +215,7 @@ class _DownloadedImageDetailPageState extends State<DownloadedImageDetailPage> {
       if (targetPlatform == TargetPlatform.android) {
         // set image as wallpaper
         if (await _showDialogSetImageAsWallpaper()) {
-          final String res = await methodChannel.invokeMethod(
+          final res = await methodChannel.invokeMethod(
             setWallpaper,
             <String>['flutterImages', '${imageDetail.id}.png'],
           );

@@ -70,7 +70,7 @@ class _RecentPageState extends State<RecentPage> {
         child: Center(
           child: Text(
             'Your list of history is empty',
-            style: Theme.of(context).textTheme.title,
+            style: Theme.of(context).textTheme.headline6,
           ),
         ),
         color: Theme.of(context).backgroundColor,
@@ -162,7 +162,7 @@ class _RecentPageState extends State<RecentPage> {
           children: <Widget>[
             Text(
               'Delete',
-              style: Theme.of(context).textTheme.subhead,
+              style: Theme.of(context).textTheme.subtitle1,
             ),
             SizedBox(width: 16.0),
             Icon(
@@ -219,7 +219,7 @@ class _RecentPageState extends State<RecentPage> {
     );
   }
 
-  _remove(String id, int index) {
+  void _remove(String id, int index) {
     imageDB.deleteRecentImageById(id).then((i) {
       if (i > 0) {
         widget.scaffoldKey.currentState.showSnackBar(
@@ -242,7 +242,7 @@ class _RecentPageState extends State<RecentPage> {
     );
   }
 
-  _onTap(ImageModel image) async {
+  void _onTap(ImageModel image) async {
     final route = MaterialPageRoute(
       builder: (context) => ImageDetailPage(image),
     );

@@ -29,7 +29,7 @@ class FavoritesPage extends StatelessWidget {
             return Center(
               child: Text(
                 snapshot.error.toString(),
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
             );
           }
@@ -45,7 +45,7 @@ class FavoritesPage extends StatelessWidget {
             return Center(
               child: Text(
                 'Your favorites is empty',
-                style: Theme.of(context).textTheme.title,
+                style: Theme.of(context).textTheme.headline6,
               ),
             );
           }

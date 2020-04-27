@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage>
                 'Wallpaper HD Flutter',
                 style: Theme.of(context)
                     .textTheme
-                    .title
+                    .headline6
                     .copyWith(color: Colors.white),
               ),
               decoration: BoxDecoration(
@@ -303,7 +303,7 @@ class _MyHomePageState extends State<MyHomePage>
             return Center(
               child: Text(
                 'Search something...',
-                style: Theme.of(context).textTheme.subhead,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
             );
           }
@@ -315,7 +315,7 @@ class _MyHomePageState extends State<MyHomePage>
             return Center(
               child: Text(
                 data.error.toString(),
-                style: Theme.of(context).textTheme.subhead,
+                style: Theme.of(context).textTheme.subtitle1,
               ),
             );
           }

@@ -26,7 +26,7 @@ class StaggeredImageList extends StatelessWidget {
       return Center(
         child: Text(
           'An error occurred',
-          style: Theme.of(context).textTheme.body1,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       );
     }
@@ -41,7 +41,7 @@ class StaggeredImageList extends StatelessWidget {
       return Center(
         child: Text(
           'Image list is empty!',
-          style: Theme.of(context).textTheme.body1,
+          style: Theme.of(context).textTheme.bodyText2,
         ),
       );
     }
@@ -164,7 +164,7 @@ class ImageItem extends StatelessWidget {
                 overflow: TextOverflow.ellipsis,
                 style: Theme.of(context)
                     .textTheme
-                    .subhead
+                    .subtitle1
                     .copyWith(fontSize: 14.0),
               ),
             ),

@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -228,7 +227,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     );
   }
 
-  _shareImageToFacebook() async {
+  void _shareImageToFacebook() async {
     showProgressDialog(context, 'Loading...');
     try {
       await methodChannel.invokeMethod(
@@ -243,8 +242,9 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     }
   }
 
-  _showSnackBar(String text, {Duration duration = const Duration(seconds: 1)}) {
-    return scaffoldKey.currentState
+  void _showSnackBar(String text,
+      {Duration duration = const Duration(seconds: 1)}) {
+    scaffoldKey.currentState
         ?.showSnackBar(SnackBar(content: Text(text), duration: duration));
   }
 
@@ -256,14 +256,10 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
 
       if (targetPlatform == TargetPlatform.android) {
         // request runtime permission
-        final permissionHandler = PermissionHandler();
-        final status = await permissionHandler
-            .checkPermissionStatus(PermissionGroup.storage);
-        if (status != PermissionStatus.granted) {
-          final requestRes = await permissionHandler
-              .requestPermissions([PermissionGroup.storage]);
-          if (requestRes[PermissionGroup.storage] != PermissionStatus.granted) {
-            _showSnackBar('Permission denined. Go to setting to granted!');
+        if (!(await Permission.storage.isGranted)) {
+          if (!(await Permission.storage.request().isGranted)) {
+            _showSnackBar(
+                'Permission denied. Go to setting to granted storage permission!');
             return _done();
           }
         }
@@ -280,6 +276,15 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
           return _done();
         case TargetPlatform.iOS:
           externalDir = await getApplicationDocumentsDirectory();
+          break;
+        case TargetPlatform.linux:
+          // TODO: Handle this case.
+          break;
+        case TargetPlatform.macOS:
+          // TODO: Handle this case.
+          break;
+        case TargetPlatform.windows:
+          // TODO: Handle this case.
           break;
       }
       print('externalDir=$externalDir');
@@ -302,7 +307,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
       final height =
           (queryData.size.longestSide * queryData.devicePixelRatio).toInt();
 
-      final Uint8List outBytes = await methodChannel.invokeMethod(
+      final outBytes = await methodChannel.invokeMethod(
         resizeImage,
         <String, dynamic>{
           'bytes': bytes,
@@ -429,7 +434,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     );
   }
 
-  _setWallpaper() async {
+  Future<void> _setWallpaper() async {
     try {
       final targetPlatform = Theme.of(context).platform;
 
@@ -445,6 +450,15 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         case TargetPlatform.iOS:
           externalDir = await getApplicationDocumentsDirectory();
           break;
+        case TargetPlatform.linux:
+          // TODO: Handle this case.
+          break;
+        case TargetPlatform.macOS:
+          // TODO: Handle this case.
+          break;
+        case TargetPlatform.windows:
+          // TODO: Handle this case.
+          break;
       }
       final filePath =
           path.join(externalDir.path, 'flutterImages', imageModel.id + '.png');
@@ -459,7 +473,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
         if (await _showDialogSetImageAsWallpaper()) {
           showProgressDialog(context, 'Please wait...');
           try {
-            final String res = await methodChannel.invokeMethod(
+            final res = await methodChannel.invokeMethod(
               setWallpaper,
               <String>['flutterImages', '${imageModel.id}.png'],
             );
@@ -482,7 +496,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     }
   }
 
-  _increaseCount(String field, String id) {
+  void _increaseCount(String field, String id) {
     Firestore.instance.runTransaction((transaction) async {
       final document = imagesCollection.document(id);
       final documentSnapshot = await transaction.get(document);
@@ -492,7 +506,7 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     }, timeout: Duration(seconds: 10));
   }
 
-  _insertToRecent(ImageModel image) {
+  void _insertToRecent(ImageModel image) {
     imageDB
         .insertRecentImage(image)
         .then((i) => debugPrint('Inserted $i'))

@@ -60,7 +60,7 @@ class _DownloadedPageState extends State<DownloadedPage> {
                 child: Center(
                   child: Text(
                     'Your downloaded images is empty',
-                    style: Theme.of(context).textTheme.title,
+                    style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
                 color: Theme.of(context).backgroundColor,
@@ -183,7 +183,7 @@ class _DownloadedPageState extends State<DownloadedPage> {
     }
   }
 
-  _showSnackBar(String message) =>
+  void _showSnackBar(String message) =>
       Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
 }
 
@@ -254,7 +254,7 @@ class _DownloadedBloc {
     ///
     ///
     Directory _cachedStorageDir;
-    getStorageDir() async {
+    Future<Directory> getStorageDir() async {
       if (_cachedStorageDir != null) {
         return _cachedStorageDir;
       }
