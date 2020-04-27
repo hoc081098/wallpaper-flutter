@@ -35,20 +35,13 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="update libraries">
+    <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="update(deps)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/analysis_options.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/analysis_options.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/flutter_export_environment.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/data/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/database.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/image_list.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/image_list.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/downloaded_image_detail_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/downloaded_image_detail_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/downloads_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/downloads_page.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/favorites_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/favorites_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/image_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/image_detail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/upload_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/upload_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -302,17 +295,22 @@
       <option name="project" value="LOCAL" />
       <updated>1577682546249</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="update(deps)">
+      <created>1588007563487</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1588007563487</updated>
+    </task>
+    <task id="LOCAL-00020" summary="update(deps)">
+      <created>1588007947308</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1588007947308</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
-  </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -356,9 +354,34 @@
     <MESSAGE value="Build apk" />
     <MESSAGE value="up" />
     <MESSAGE value="update libraries" />
-    <option name="LAST_COMMIT_MESSAGE" value="update libraries" />
+    <MESSAGE value="update(deps)" />
+    <option name="LAST_COMMIT_MESSAGE" value="update(deps)" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="310" y="0" key="CommitChangelistDialog2" timestamp="1588007946410">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="310" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1588007946410" />
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1588007939507">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1588007939507" />
+    <state width="1323" height="141" key="GridCell.Tab.0.bottom" timestamp="1588009533265">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="141" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588009533265" />
+    <state width="1323" height="141" key="GridCell.Tab.0.center" timestamp="1588009533265">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="141" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588009533265" />
+    <state width="1323" height="141" key="GridCell.Tab.0.left" timestamp="1588009533264">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="141" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588009533264" />
+    <state width="1323" height="141" key="GridCell.Tab.0.right" timestamp="1588009533265">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="141" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588009533265" />
     <state x="385" y="152" key="git4idea.merge.GitPullDialog" timestamp="1588006506244">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

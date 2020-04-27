@@ -46,6 +46,7 @@ class FavoritesPage extends StatelessWidget {
               child: Text(
                 'Your favorites is empty',
                 style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
               ),
             );
           }

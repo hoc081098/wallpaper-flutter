@@ -61,6 +61,7 @@ class _DownloadedPageState extends State<DownloadedPage> {
                   child: Text(
                     'Your downloaded images is empty',
                     style: Theme.of(context).textTheme.headline6,
+                    textAlign: TextAlign.center,
                   ),
                 ),
                 color: Theme.of(context).backgroundColor,

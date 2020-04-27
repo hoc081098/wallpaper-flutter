@@ -71,6 +71,7 @@ class _RecentPageState extends State<RecentPage> {
           child: Text(
             'Your list of history is empty',
             style: Theme.of(context).textTheme.headline6,
+            textAlign: TextAlign.center,
           ),
         ),
         color: Theme.of(context).backgroundColor,
