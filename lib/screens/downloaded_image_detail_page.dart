@@ -189,20 +189,11 @@ class _DownloadedImageDetailPageState extends State<DownloadedImageDetailPage> {
         case TargetPlatform.android:
           externalDir = await getExternalStorageDirectory();
           break;
-        case TargetPlatform.fuchsia:
-          return _showSnackBar('Not support fuchsia');
         case TargetPlatform.iOS:
           externalDir = await getApplicationDocumentsDirectory();
           break;
-        case TargetPlatform.linux:
-          // TODO: Handle this case.
-          break;
-        case TargetPlatform.macOS:
-          // TODO: Handle this case.
-          break;
-        case TargetPlatform.windows:
-          // TODO: Handle this case.
-          break;
+        default:
+          return _showSnackBar('Not support target: $targetPlatform');
       }
       final filePath =
           path.join(externalDir.path, 'flutterImages', imageDetail.id + '.png');
