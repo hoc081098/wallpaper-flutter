@@ -14,17 +14,10 @@ class FavoritesPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Theme.of(context).backgroundColor,
-      child: StreamBuilder(
+      child: StreamBuilder<List<ImageModel>>(
         stream: sortOrderStream.distinct().switchMap(
-          (order) async* {
-            final list =
-                await ImageDB.getInstance().getFavoriteImages(orderBy: order);
-            print('>>> $order $list');
-            yield list;
-          },
-        ),
-        builder:
-            (BuildContext context, AsyncSnapshot<List<ImageModel>> snapshot) {
+            (order) => ImageDB.getInstance().getFavoriteImages(orderBy: order)),
+        builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Center(
               child: Text(

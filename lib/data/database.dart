@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqlbrite/sqlbrite.dart';
 import 'package:wallpaper/data/models/downloaded_image.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 
@@ -15,19 +16,20 @@ class ImageDB {
   static const createdAtDesc = 'datetime(createdAt) DESC';
   static const nameAsc = 'name ASC';
 
-  Database _db;
   static ImageDB _instance;
 
   ImageDB._internal();
 
   factory ImageDB.getInstance() => _instance ??= ImageDB._internal();
 
-  Future<Database> get db async => _db ??= await open();
+  BriteDatabase _db;
 
-  Future<Database> open() async {
+  Future<BriteDatabase> get db async => _db ??= await open();
+
+  static Future<BriteDatabase> open() async {
     final directory = await getApplicationDocumentsDirectory();
     final path = join(directory.path, dbName);
-    return await openDatabase(
+    final database = await openDatabase(
       path,
       version: 2,
       onCreate: (Database db, int version) async {
@@ -69,6 +71,7 @@ class ImageDB {
         }
       },
     );
+    return BriteDatabase(database);
   }
 
   Future<Null> close() async {
@@ -128,44 +131,33 @@ class ImageDB {
         : null;
   }
 
-  Future<List<ImageModel>> getRecentImages({int limit}) async {
+  Stream<List<ImageModel>> getRecentImages({int limit}) async* {
     final dbClient = await db;
-
-    final maps = await (limit != null
-        ? dbClient.query(
-            tableRecent,
-            orderBy: 'datetime(viewTime) DESC',
-            limit: limit,
-          )
-        : dbClient.query(
-            tableRecent,
-            orderBy: 'datetime(viewTime) DESC',
-          ));
-    return maps
-        .map((json) => ImageModel.fromJson(id: json['id'], json: json))
-        .toList();
+    final query$ = dbClient.createQuery(
+      tableRecent,
+      orderBy: 'datetime(viewTime) DESC',
+      limit: limit,
+    );
+    yield* query$
+        .mapToList((row) => ImageModel.fromJson(id: row['id'], json: row));
   }
 
   ///
   /// Favorite images
   ///
 
-  Future<List<ImageModel>> getFavoriteImages(
-      {String orderBy = createdAtDesc, int limit}) async {
+  Stream<List<ImageModel>> getFavoriteImages({
+    String orderBy = createdAtDesc,
+    int limit,
+  }) async* {
     final dbClient = await db;
-    final maps = await (limit != null
-        ? dbClient.query(
-            tableFavorites,
-            orderBy: orderBy,
-            limit: limit,
-          )
-        : dbClient.query(
-            tableFavorites,
-            orderBy: orderBy,
-          ));
-    return maps
-        .map((json) => ImageModel.fromJson(id: json['id'], json: json))
-        .toList();
+    yield* dbClient
+        .createQuery(
+          tableFavorites,
+          orderBy: orderBy,
+          limit: limit,
+        )
+        .mapToList((row) => ImageModel.fromJson(id: row['id'], json: row));
   }
 
   Future<int> insertFavoriteImage(ImageModel image) async {

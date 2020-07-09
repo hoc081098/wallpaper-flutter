@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:disposebag/disposebag.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:rxdart/rxdart.dart';
 import 'package:wallpaper/data/database.dart';
 import 'package:wallpaper/data/models/image_model.dart';
 import 'package:wallpaper/screens/image_detail.dart';
@@ -18,143 +20,141 @@ class RecentPage extends StatefulWidget {
   _RecentPageState createState() => _RecentPageState();
 }
 
+abstract class _RecentItem {}
+
+class _ImageItem implements _RecentItem {
+  final ImageModel image;
+
+  _ImageItem(this.image);
+}
+
+class _HeaderItem implements _RecentItem {
+  final DateTime dateTime;
+
+  _HeaderItem(this.dateTime);
+}
+
 class _RecentPageState extends State<RecentPage> {
   static final dateFormatYMdHms = DateFormat.yMd().add_Hms();
   static final dateFormatYMd = DateFormat.yMd();
-  final imageDB = ImageDB.getInstance();
 
-  List<ImageModel> _images;
-  List<Map<String, dynamic>> _imagesWithHeaders;
-  StreamSubscription subscription;
+  final disposeBag = DisposeBag();
+  ValueStream<List<_RecentItem>> items$;
 
   @override
   void initState() {
     super.initState();
-    subscription = widget.clearStream
-        .asyncMap((_) => imageDB.deleteAllRecentImages())
-        .listen(_onData);
-    _getRecentImages();
+
+    final onDeleted = (int rows) {
+      if (rows > 0) {
+        widget.scaffoldKey.currentState.showSnackBar(
+          SnackBar(
+            content: Text('Delete successfully'),
+          ),
+        );
+      }
+    };
+    widget.clearStream
+        .asyncMap((_) => ImageDB.getInstance().deleteAllRecentImages())
+        .listen(onDeleted)
+        .disposedBy(disposeBag);
+
+    items$ = ImageDB.getInstance()
+        .getRecentImages()
+        .map(createListWithHeader)
+        .publishValueSeeded(null)
+          ..connect().disposedBy(disposeBag);
   }
 
   @override
   void dispose() {
-    subscription.cancel();
+    disposeBag.dispose();
     super.dispose();
-  }
-
-  void _getRecentImages() {
-    imageDB
-        .getRecentImages()
-        .then((v) => _images = v)
-        .then(createListWithHeader)
-        .then((v) => setState(() => _imagesWithHeaders = v));
   }
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(':H: build');
+    return StreamBuilder<List<_RecentItem>>(
+      initialData: items$.value,
+      stream: items$,
+      builder: (context, snapshot) {
+        final items = snapshot.data;
 
-    if (_imagesWithHeaders == null) {
-      return Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
-        color: Theme.of(context).backgroundColor,
-      );
-    }
-
-    if (_imagesWithHeaders.isEmpty) {
-      return Container(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Text(
-            'Your list of history is empty',
-            style: Theme.of(context).textTheme.headline6,
-            textAlign: TextAlign.center,
-          ),
-        ),
-        color: Theme.of(context).backgroundColor,
-      );
-    }
-
-    final child = ListView.builder(
-      itemBuilder: (BuildContext context, int index) {
-        final item = _imagesWithHeaders[index];
-
-        if (item['type'] == 'header') {
-          final now = DateTime.now();
-          final date = item['date'];
-
-          if (now.difference(date).inDays < 1) {
-            return ListTile(
-              title: Text(
-                'Today',
-                textScaleFactor: 1.1,
-              ),
-            );
-          }
-          if (now.difference(date).inDays < 2) {
-            return ListTile(
-              title: Text(
-                'Yesterday',
-                textScaleFactor: 1.1,
-              ),
-            );
-          }
-          return ListTile(
-            title: Text(
-              dateFormatYMd.format(date),
-              textScaleFactor: 1.1,
+        if (items == null) {
+          return Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: CircularProgressIndicator(),
             ),
+            color: Theme.of(context).backgroundColor,
           );
         }
 
-        if (item['type'] == 'image') {
-          return _buildItem(item['image'], item['index']);
+        if (items.isEmpty) {
+          return Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Center(
+              child: Text(
+                'Your list of history is empty',
+                style: Theme.of(context).textTheme.headline6,
+                textAlign: TextAlign.center,
+              ),
+            ),
+            color: Theme.of(context).backgroundColor,
+          );
         }
 
-        return null;
+        final child = ListView.builder(
+          itemBuilder: (BuildContext context, int index) {
+            final item = items[index];
+
+            if (item is _HeaderItem) {
+              final now = DateTime.now();
+              final date = item.dateTime;
+
+              if (now.difference(date).inDays < 1) {
+                return ListTile(
+                  title: Text(
+                    'Today',
+                    textScaleFactor: 1.1,
+                  ),
+                );
+              }
+              if (now.difference(date).inDays < 2) {
+                return ListTile(
+                  title: Text(
+                    'Yesterday',
+                    textScaleFactor: 1.1,
+                  ),
+                );
+              }
+              return ListTile(
+                title: Text(
+                  dateFormatYMd.format(date),
+                  textScaleFactor: 1.1,
+                ),
+              );
+            }
+
+            if (item is _ImageItem) {
+              return buildImageItem(item.image);
+            }
+
+            return null;
+          },
+          itemCount: items.length,
+        );
+
+        return Container(
+          padding: const EdgeInsets.all(8.0),
+          child: child,
+          color: Theme.of(context).backgroundColor,
+        );
       },
-      itemCount: _imagesWithHeaders.length,
-    );
-
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      child: child,
-      color: Theme.of(context).backgroundColor,
     );
   }
 
-  List<Map<String, dynamic>> createListWithHeader(List<ImageModel> images) {
-    DateTime prev;
-    final result = <Map<String, dynamic>>[];
-
-    images.asMap().forEach((index, img) {
-      debugPrint('DEBUG: $prev');
-      final viewTime = img.viewTime;
-      if (prev == null ||
-          (prev.year != viewTime.year ||
-              prev.month != viewTime.month ||
-              prev.day != viewTime.day)) {
-        final dateTime = DateTime(viewTime.year, viewTime.month, viewTime.day);
-        result.add({
-          'type': 'header',
-          'date': dateTime,
-        });
-        prev = dateTime;
-      }
-
-      result.add({
-        'type': 'image',
-        'image': img,
-        'index': index,
-      });
-    });
-    return result;
-  }
-
-  Widget _buildItem(ImageModel image, int index) {
+  Widget buildImageItem(ImageModel image) {
     final background = Container(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -192,16 +192,16 @@ class _RecentPageState extends State<RecentPage> {
       trailing: IconButton(
         icon: Icon(Icons.close),
         tooltip: 'Remove history',
-        onPressed: () => _remove(image.id, index),
+        onPressed: () => removeImage(image.id),
       ),
     );
 
     return Dismissible(
       background: background,
       key: Key(image.id),
-      onDismissed: (_) => _remove(image.id, index),
+      onDismissed: (_) => removeImage(image.id),
       child: GestureDetector(
-        onTap: () => _onTap(image),
+        onTap: () => onTapImage(image),
         child: Container(
           color: Theme.of(context).primaryColorLight,
           child: listTile,
@@ -210,44 +210,49 @@ class _RecentPageState extends State<RecentPage> {
     );
   }
 
-  void _onData(int event) {
-    setState(() {
-      _images = [];
-      _imagesWithHeaders = [];
-    });
-    widget.scaffoldKey.currentState.showSnackBar(
-      SnackBar(content: Text('Delete successfully')),
-    );
-  }
-
-  void _remove(String id, int index) {
-    imageDB.deleteRecentImageById(id).then((i) {
-      if (i > 0) {
+  void removeImage(String id) async {
+    try {
+      final rows = await ImageDB.getInstance().deleteRecentImageById(id);
+      if (rows > 0) {
         widget.scaffoldKey.currentState.showSnackBar(
           SnackBar(content: Text('Delete successfully')),
         );
-
-        setState(() {
-          _images.removeAt(index);
-          _imagesWithHeaders = createListWithHeader(_images);
-        });
       } else {
         widget.scaffoldKey.currentState.showSnackBar(
           SnackBar(content: Text('Delete failed')),
         );
       }
-    }).catchError(
-      (e) => widget.scaffoldKey.currentState.showSnackBar(
+    } catch (e) {
+      widget.scaffoldKey.currentState.showSnackBar(
         SnackBar(content: Text('Delete error: $e')),
-      ),
-    );
+      );
+    }
   }
 
-  void _onTap(ImageModel image) async {
+  void onTapImage(ImageModel image) {
     final route = MaterialPageRoute(
       builder: (context) => ImageDetailPage(image),
     );
-    await Navigator.push(context, route);
-    _getRecentImages();
+    Navigator.push(context, route);
+  }
+
+  static List<_RecentItem> createListWithHeader(List<ImageModel> images) {
+    final items = <_RecentItem>[];
+
+    DateTime prev;
+    images.asMap().forEach((index, image) {
+      final viewTime = image.viewTime;
+      if (prev == null ||
+          (prev.year != viewTime.year ||
+              prev.month != viewTime.month ||
+              prev.day != viewTime.day)) {
+        final dateTime = DateTime(viewTime.year, viewTime.month, viewTime.day);
+        items.add(_HeaderItem(dateTime));
+        prev = dateTime;
+      }
+      items.add(_ImageItem(image));
+    });
+
+    return items;
   }
 }

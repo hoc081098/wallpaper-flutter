@@ -37,11 +37,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5a3b1eb1-2e6e-4409-8ffb-18d15ab38fd4" name="Default" comment="update(deps)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" beforeDir="false" afterPath="$PROJECT_DIR$/build/app/outputs/apk/app.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/downloads_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/downloads_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/data/database.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/data/database.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/favorites_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/favorites_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/screens/image_detail.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/image_detail.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/recent_images_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +54,7 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_4_API_26" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Nexus_S_API_26" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -95,7 +95,7 @@
     <property name="editor.config.ad.shown" value="true" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -309,7 +309,14 @@
       <option name="project" value="LOCAL" />
       <updated>1588007947308</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="update(deps)">
+      <created>1588009914146</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1588009914147</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -358,94 +365,49 @@
     <option name="LAST_COMMIT_MESSAGE" value="update(deps)" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="310" y="0" key="CommitChangelistDialog2" timestamp="1588007946410">
+    <state x="163" y="0" key="#Project_Structure" timestamp="1594311449544">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="310" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1588007946410" />
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1588007939507">
+    <state x="163" y="0" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1594311449544" />
+    <state x="92" y="92" width="1182" height="544" key="AVDManager" timestamp="1594304967792">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1588007939507" />
-    <state width="1323" height="141" key="GridCell.Tab.0.bottom" timestamp="1588009533265">
+    <state x="92" y="92" width="1182" height="544" key="AVDManager/0.0.1366.728@0.0.1366.728" timestamp="1594304967792" />
+    <state x="310" y="0" key="CommitChangelistDialog2" timestamp="1588009908196">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="141" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1588009533265" />
-    <state width="1323" height="141" key="GridCell.Tab.0.center" timestamp="1588009533265">
+    <state x="310" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1588009908196" />
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog" timestamp="1594304967792">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="141" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1588009533265" />
-    <state width="1323" height="141" key="GridCell.Tab.0.left" timestamp="1588009533264">
+    <state x="92" y="92" width="1182" height="544" key="DiffContextDialog/0.0.1366.728@0.0.1366.728" timestamp="1594304967792" />
+    <state width="1323" height="523" key="GridCell.Tab.0.bottom" timestamp="1594312981586">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="141" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1588009533264" />
-    <state width="1323" height="141" key="GridCell.Tab.0.right" timestamp="1588009533265">
+    <state width="1323" height="523" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1594312981586" />
+    <state width="1323" height="523" key="GridCell.Tab.0.center" timestamp="1594312981586">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="141" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1588009533265" />
+    <state width="1323" height="523" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1594312981586" />
+    <state width="1323" height="523" key="GridCell.Tab.0.left" timestamp="1594312981585">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="523" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1594312981585" />
+    <state width="1323" height="523" key="GridCell.Tab.0.right" timestamp="1594312981586">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="523" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1594312981586" />
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2" timestamp="1588009919051">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="96" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1588009919051" />
     <state x="385" y="152" key="git4idea.merge.GitPullDialog" timestamp="1588006506244">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="385" y="152" key="git4idea.merge.GitPullDialog/0.0.1366.728@0.0.1366.728" timestamp="1588006506244" />
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="GlobalLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="JdkListConfigurable.UI">
-        <settings>
-          <last-edited>Android API 26 Platform</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <settings>
-          <last-edited>1.8</last-edited>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ProjectLibrariesConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <settings>
-          <splitter-proportions>
-            <option name="proportions">
-              <list>
-                <option value="0.2" />
-              </list>
-            </option>
-          </splitter-proportions>
-        </settings>
-      </state>
-    </states>
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup" timestamp="1594306013317">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="339" y="17" width="672" height="676" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1594306013317" />
   </component>
 </project>

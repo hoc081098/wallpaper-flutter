@@ -478,14 +478,28 @@ class _ImageDetailPageState extends State<ImageDetailPage> {
     }
   }
 
-  void _increaseCount(String field, String id) {
-    Firestore.instance.runTransaction((transaction) async {
+  void _increaseCount(String field, String id) async {
+    try {
       final document = imagesCollection.document(id);
-      final documentSnapshot = await transaction.get(document);
-      await transaction.update(document, <String, dynamic>{
-        field: 1 + (documentSnapshot.data[field] ?? 0),
-      });
-    }, timeout: Duration(seconds: 10));
+
+      await Firestore.instance.runTransaction(
+        (transaction) async {
+          final documentSnapshot = await transaction.get(document);
+          await transaction.update(
+            document,
+            {
+              field: 1 + (documentSnapshot.data[field] ?? 0),
+            },
+          );
+        },
+        timeout: Duration(seconds: 10),
+      );
+      print('_increaseCount success');
+    } on PlatformException catch (e) {
+      print('_increaseCount error: ${e.message}');
+    } catch (e) {
+      print('_increaseCount error: $e');
+    }
   }
 
   void _insertToRecent(ImageModel image) {
