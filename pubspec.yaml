@@ -16,7 +16,7 @@ dependencies:
   rxdart: ^0.24.1
   intl: ^0.16.1
   http: ^0.12.1
-  cached_network_image: ^2.2.0+1
+  cached_network_image: ^3.0.0
   tuple: ^1.0.3
   sqlbrite: ^1.4.0
   disposebag: ^1.1.2
